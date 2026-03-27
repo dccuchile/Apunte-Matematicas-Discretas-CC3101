@@ -43,7 +43,6 @@ El apunte está escrito en LaTeX. Para compilarlo necesitas una distribución La
 
 ```bash
 pdflatex main_apunte.tex
-pdflatex main_apunte.tex   # segunda pasada para referencias e índice
 ```
 
 El PDF compilado `main_apunte.pdf` también está disponible directamente en el repositorio.
