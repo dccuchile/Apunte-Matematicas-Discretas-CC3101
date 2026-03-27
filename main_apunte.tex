@@ -1,0 +1,214 @@
+\documentclass[12pt]{book}
+
+\usepackage[utf8]{inputenc}
+
+\usepackage[spanish,es-tabla]{babel}
+
+\usepackage{geometry}
+\geometry{margin=2.5cm}
+
+\usepackage{amsmath,amssymb,amsthm,amsfonts}
+\usepackage{bm}
+\usepackage{centernot}
+
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{tkz-graph}
+\usetikzlibrary{graphs,graphs.standard,arrows.meta,bending,positioning,arrows,shapes,babel}
+
+\usepackage{multicol}
+\usepackage{enumitem}
+
+\usepackage{xcolor}
+\usepackage{color}
+
+\usepackage[most]{tcolorbox}
+\tcbuselibrary{theorems, breakable}
+
+\usepackage{booktabs}
+%\usepackage{proof}
+
+\usepackage{float}
+\usepackage{wrapfig}
+\usepackage{ifthen}
+
+\usepackage{hyperref}
+
+\definecolor{OliveGreen}{rgb}{0,0.6,0}
+\definecolor{Maroon}{rgb}{0.5,0,0}
+\definecolor{fuchsia}{rgb}{1.0, 0.0, 1.0}
+
+\newcommand{\blue}[1] {\textcolor{blue}{ #1} }
+\newcommand{\red}[1] {\textcolor{red}{ #1} }
+\newcommand{\green}[1] {\textcolor{green}{ #1} }
+\newcommand{\brown}[1] {\textcolor{brown}{ #1} }
+\newcommand{\fuchsia}[1] {\textcolor{fuchsia}{ #1} }
+\newcommand{\white}[1] {\textcolor{white}{ #1} }
+\newcommand{\grey}[1] {\textcolor{gray}{ #1} }
+
+
+
+%rules of inference
+\usepackage{fancybox}
+\newcommand{\Rule}[2]{\genfrac{}{}{0.7pt}{}{{\setlength{\fboxrule}{0pt}\setlength{\fboxsep}{3mm}\fbox{$#1$}}}{{\setlength{\fboxrule}{0pt}\setlength{\fboxsep}{3mm}\fbox{$#2$}}}}
+
+\newcommand{\Rulee}[3]{\genfrac{}{}{0.7pt}{}{{\setlength{\fboxrule}{0pt}\setlength{\fboxsep}{3mm}\fbox{$#1$}}}{{\setlength{\fboxrule}{0pt}\setlength{\fboxsep}{3mm}\fbox{$#2$}}}[#3]}
+
+
+\newenvironment{thmblock}[1]{%
+    \tcbset{colframe=yellow!50!black, colback=lightgray!10, coltitle=black, fonttitle=\bfseries}%
+    \begin{tcolorbox}[title=#1]%
+}{%
+    \end{tcolorbox}%
+}
+% colframe=blue!60, colback=blue!5
+
+% colframe=lightgray!80!black, colback=lightgray!10
+\newenvironment{definitionblock}[1]{%
+    \begin{tcolorbox}[
+        colframe=red!60,
+        colback=red!5, 
+        coltitle=black,
+        fonttitle=\bfseries,
+        title=#1
+    ]%
+}{%
+    \end{tcolorbox}%
+}
+
+\newenvironment{exampleblock}[1]{%
+    \begin{tcolorbox}[
+        colframe=lightgray!80!black,
+        colback=lightgray!10,
+        fonttitle=\bfseries,
+        title=#1
+    ]%
+}{%
+    \end{tcolorbox}%
+}
+
+
+\makeatletter
+\renewenvironment{proof}[1][Demostración]{%
+  \par\pushQED{\qed}%
+  \normalfont\topsep6pt \trivlist\item[\hskip\labelsep
+    \color{blue!70!black}\bfseries #1.]\ignorespaces
+}{%
+  \popQED\endtrivlist\@endpefalse
+}
+\makeatother
+
+
+\newcommand{\alert}[1]{\textbf{#1}}
+\newcommand{\impblock}[1]{\textbf{#1}}
+\newcommand{\stitle}[1]{\textit{#1}}
+
+\newcommand{\perm}[2]{\mathsf{P}\left(#1,#2\right)}
+\newcommand{\comb}[2]{\mathsf{C}\left(#1,#2\right)}
+
+\newcommand{\nat}{\mathbb{N}}
+\renewcommand{\int}{\mathbb{Z}}
+\newcommand{\real}{\mathbb{R}}
+
+
+\newcommand{\newboxquestion}[1]{\noindent \textbf{#1}} 
+
+
+\newcommand{\degin}[1]{\mathit{deg^{in}}\left(#1\right)}
+\newcommand{\degout}[1]{\mathit{deg^{out}}\left(#1\right)}
+
+\setlength{\parskip}{4pt} % Espacio de 10 puntos entre párrafos
+
+
+\newif\ifshowsolutions
+% \showsolutionstrue % cambiar a \showsolutionsfalse para ocultar soluciones
+\showsolutionsfalse
+
+
+
+\begin{document}
+
+\begin{titlepage}
+  % \vspace*{2cm}
+  \begin{minipage}{0.4\textwidth}
+    \includegraphics[width=\linewidth]{dcc_2019_cuadrado_blanco.png}
+  \end{minipage}
+  \hfill
+  \begin{minipage}{0.6\textwidth}
+    \centering
+    % {\scshape\Large Universidad de Chile \par}
+    % {\scshape\Large Departamento de Ciencias de la Computación \par}
+  \end{minipage}
+
+  \vspace{3cm}
+
+  \begin{center}
+    {\Huge\bfseries Apuntes de Matemáticas Discretas para la Computación \par}
+    \vspace{2cm}
+    {\Large Andrés Abeliuk \par}
+    \vspace{1cm}
+     {\large 2025 \par}
+  \end{center}
+
+  \vfill
+
+  \begin{center}
+    \small
+    Este apunte han sido elaborado a partir de las diapositivas del curso CC3101, Matemáticas Discretas, impartido por el DCC de la Universidad de Chile por Alejandro Hevia, Federico Olmedo y Jocelyn Simmonds.
+  \end{center}
+\end{titlepage}
+
+
+
+
+\setcounter{tocdepth}{1}  % Solo mostrar hasta \section en el índice
+% \maketitle
+\let\cleardoublepage\relax
+\let\clearpage\relax
+\tableofcontents
+\newpage
+
+\part{Fundamentos de La Lógica}
+\chapter{Lógica Proposicional}
+\input{clases/clase01}
+\input{clases/clase02}
+\include{clases/clase03}
+\chapter{Lógica de Predicados}
+\input{clases/clase04}
+\input{clases/clase05}
+
+\newpage
+\part{Técnicas de Demostración}
+\chapter{Inducción Matemática}
+\input{clases/clase06}
+\input{clases/clase07_08}
+
+\newpage
+\part{Relaciones y Funciones}
+\chapter{Relaciones}
+\input{clases/clase09}
+\chapter{Funciones}
+\input{clases/clase10}
+
+\newpage
+\part{Combinatoria}
+\input{clases/clase11}
+\input{clases/clase12}
+\input{clases/clase13}
+\input{clases/clase14}
+\input{clases/clase15}
+\input{clases/clase16}
+
+\newpage
+\part{Teoría de grafos}
+\input{clases/clase17}
+\input{clases/clase18}
+\input{clases/clase19}
+\input{clases/clase20}
+\input{clases/clase21}
+\input{clases/clase22}
+\input{clases/clase23}
+
+
+
+\end{document}

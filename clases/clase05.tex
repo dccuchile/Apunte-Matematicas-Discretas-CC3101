@@ -1,0 +1,274 @@
+\section{Equivalencia de Fórmulas}
+
+\begin{definitionblock}{Definición:}
+Dos fórmulas cerradas $\phi$ y $\psi$ se dicen \textbf{equivalentes}, notado como $\phi \equiv \psi$, si y solo si para cada estructura $\mathcal{A}$ se cumple:
+\begin{equation}
+    \mathcal{A} \models \phi \quad \text{si y solo si} \quad \mathcal{A} \models \psi.
+\end{equation}
+\end{definitionblock}
+Es decir, ambas fórmulas tienen el mismo valor de verdad en todas las interpretaciones posibles.
+
+\subsection{Ejemplos de equivalencia}
+Algunas equivalencias fundamentales en lógica de predicados incluyen:
+\begin{itemize}
+    \item $\lnot \exists x. P(x) \equiv \forall x. \lnot P(x)$ (Leyes de De Morgan para cuantificadores).
+    \item $\lnot \forall x. P(x) \equiv \exists x. \lnot P(x)$.
+    \item $\forall x. (P(x) \land Q(x)) \equiv (\forall x. P(x)) \land (\forall x. Q(x))$ (Distribución de cuantificadores).
+    \item $\exists x. (P(x) \lor Q(x)) \equiv (\exists x. P(x)) \lor (\exists x. Q(x))$ (Distribución de cuantificadores).
+\end{itemize}
+
+\subsection{Demostraciones}
+ En la lógica de predicado no podemos comprobar equivalencias con una tabla de verdad-como hacíamos en la lógica proposicional-ya que no hay proposiciones a partir de las cuales construir una tabla. Entonces, razonemos.
+
+\paragraph{Leyes de De Morgan para cuantificadores}
+\textbf{Demostración de} $\lnot \exists x. P(x) \equiv \forall x. \lnot P(x)$:
+
+Si $\lnot \exists x. P(x)$ es verdadero, significa que no hay ningún $x$ para el cual $P(x)$ sea verdadero, lo que equivale a decir que para todo $x$, $P(x)$ es falso, es decir, $\forall x. \lnot P(x)$.
+
+Recíprocamente, si $\forall x. \lnot P(x)$ es verdadero, entonces no hay ningún $x$ donde $P(x)$ sea verdadero, lo que implica $\lnot \exists x. P(x)$.
+
+\textbf{Demostración de} $\lnot \forall x. P(x) \equiv \exists x. \lnot P(x)$:
+
+Si $\lnot \forall x. P(x)$ es verdadero, significa que no es cierto que $P(x)$ sea verdadero para todos los valores de $x$, es decir, existe al menos un $x$ para el cual $P(x)$ es falso, lo que equivale a $\exists x. \lnot P(x)$.
+
+La demostración inversa sigue la misma lógica.
+
+\paragraph{Distribución de cuantificadores}
+\textbf{Demostración de} $\forall x. (P(x) \land Q(x)) \equiv (\forall x. P(x)) \land (\forall x. Q(x))$:
+
+\textbf{Dirección} ($\Rightarrow$): Suponemos que $\forall x. (P(x) \land Q(x))$ es verdadero. Esto significa que para cada $x$, tanto $P(x)$ como $Q(x)$ son verdaderos. Entonces, en particular, podemos afirmar que:
+\[
+\forall x. P(x) \quad \text{y} \quad \forall x. Q(x)
+\]
+por lo que $(\forall x. P(x)) \land (\forall x. Q(x))$ también es verdadero.
+
+\textbf{Dirección} ($\Leftarrow$): Si $(\forall x. P(x)) \land (\forall x. Q(x))$ es verdadero, significa que para cada $x$, $P(x)$ es verdadero y $Q(x)$ es verdadero, lo que implica que $P(x) \land Q(x)$ es verdadero para cada $x$, es decir:
+\[
+\forall x. (P(x) \land Q(x))
+\]
+
+\textbf{Demostración de} $\exists x. (P(x) \lor Q(x)) \equiv (\exists x. P(x)) \lor (\exists x. Q(x))$:
+
+\textbf{Dirección} ($\Rightarrow$): Si $\exists x. (P(x) \lor Q(x))$ es verdadero, significa que existe al menos un $x_0$ tal que $P(x_0) \lor Q(x_0)$ es verdadero. Esto implica que al menos uno de los dos ($P(x_0)$ o $Q(x_0)$) es verdadero. En cualquiera de los casos, se cumple $\exists x. P(x)$ o $\exists x. Q(x)$, lo que implica que $(\exists x. P(x)) \lor (\exists x. Q(x))$ es verdadero.
+
+\textbf{Dirección} ($\Leftarrow$): Si $(\exists x. P(x)) \lor (\exists x. Q(x))$ es verdadero, significa que existe un $x_1$ tal que $P(x_1)$ es verdadero, o bien existe un $x_2$ tal que $Q(x_2)$ es verdadero. En ambos casos, podemos decir que existe un $x$ tal que $P(x) \lor Q(x)$ es verdadero, es decir, $\exists x. (P(x) \lor Q(x))$.
+
+\subsection{Satisfacibilidad}
+\begin{definitionblock}{Definición:}
+Una fórmula $\phi$ es \textbf{satisfacible} si existe una estructura $\mathcal{A}$ tal que $\mathcal{A} \models \phi$, es decir, si al menos hay una interpretación en la que la fórmula es verdadera.
+\end{definitionblock}
+
+\subsubsection{Decidibilidad de la Satisfacibilidad}
+La satisfacibilidad es un concepto fundamental en lógica y computación. Su complejidad depende del sistema lógico en el que se enmarca:
+
+\begin{itemize}
+    \item En \textbf{lógica proposicional}, decidir si una fórmula es satisfacible es un problema NP-completo. Esto significa que encontrar la solución puede requerir tiempo exponencial.
+    \item En \textbf{lógica de primer orden}, el problema de satisfacibilidad es \textbf{indecidible}, según el Teorema de Church-Turing (1936). No existe un algoritmo general que pueda determinar, en todos los casos, si una fórmula de primer orden es satisfacible.
+\end{itemize}
+
+Este resultado tiene implicaciones profundas en la computabilidad y la teoría de modelos. Por ejemplo, no se puede construir un procedimiento automático que siempre determine si una afirmación matemática arbitraria es verdadera o falsa.
+
+\subsection{Consecuencia Lógica}
+
+Diremos que $\phi$ es una consecuencia lógica de $\Gamma$ si todo modelo de $\Gamma$ es un modelo de  $\phi$.
+
+\begin{definitionblock}{Consecuencia lógica}
+$\Gamma \models \phi$ quiere decir que para todo modelo $\mathcal{M}$, si  $\mathcal{M} \models \Gamma$ entonces  $\mathcal{M} \models \phi$
+\end{definitionblock}
+
+\section{Inferencia en Lógica de Predicados}
+
+La inferencia en lógica de predicados permite derivar conclusiones a partir de un conjunto de fórmulas bien formadas (fbf) llamadas \textbf{premisas}. Aplicando reglas de inferencia, obtenemos una nueva fbf, la \textbf{conclusión}.
+
+A diferencia de la lógica proposicional, la lógica de predicados introduce cuantificadores y variables, lo que la hace más expresiva. Como la lógica proposicional es un subconjunto de la lógica de predicados, sus reglas de inferencia también se aplican aquí. Además, existen reglas adicionales para manipular cuantificadores, permitiendo inferencias sobre conjuntos de elementos.
+
+A continuación, exploramos las reglas fundamentales de inferencia en lógica de predicados con ejemplos ilustrativos.
+
+
+\subsection{Eliminación de cuantificador universal}
+
+\textbf{Intuición:} Si $\phi (x)$ se cumple para todo $x$, podemos concluir que $\phi (x)$ se cumple para cualquier $t$ dado.
+\[
+\Rulee{\forall x \phi (x)}{\phi(t)}{\forall x\ e}
+\]
+
+\begin{exampleblock}{Ejemplo}
+$F(\textit{t}), \forall x ( F(x) \rightarrow \neg M(x)) \vdash \neg M(\textit{t})$
+\end{exampleblock}
+
+\begin{tabular}{p{4mm}p{60mm}p{40mm}}
+1 & $F(\textit{t})$ & premisa \\
+2 & $\forall x ( F(x) \rightarrow \neg M(x))$ & premisa \\
+3 & $F(\textit{t}) \rightarrow \neg M(\textit{t})$ & $\forall x\ e$ 2\\
+4 & $\neg M(\textit{t})$ & $\rightarrow e$ 3,1
+\end{tabular}
+
+\subsection{Introducción de cuantificador universal}
+
+\textbf{Intuición:} Podemos concluir que $\phi$ se cumple para todo $x$ si elegimos una variable $x_0$ arbitraria y nueva y demostramos $\phi(x)$.
+\[
+\Rulee{\ovalbox{\begin{tabular}{c}$x_0$\\  $\vdots$\\  $\phi(x_0)$
+                \end{tabular}
+               }}{\forall x \phi}{\forall x\ i}
+\]
+
+% \subsubsection*{Ejemplo}
+\begin{exampleblock}{Ejemplo}
+\[
+\forall x ( P(x) \rightarrow Q(x)),\forall x P(x) \vdash \forall x Q(x)
+\]
+\end{exampleblock}
+
+\begin{tabular}{p{4mm}p{4mm}p{40mm}p{25mm}}
+1 & & $\forall x (P(x) \rightarrow Q(x))$ & premisa \\
+2 & & $\forall x P(x)$ & premisa \\
+\framebox{\begin{tabular}{@{}p{4mm}p{4mm}p{40mm}p{30mm}}
+  3 & $x_0$ & $P(x_0) \rightarrow Q(x_0)$ & $\forall x\ e$ 1 \\
+  4 & & $P(x_0)$ & $\forall x\ e$ 2 \\
+  5 & & $Q(x_0)$ & $\rightarrow e$ 3,4 \\
+          \end{tabular}
+         } \\[5mm]
+6 & & $\forall x Q(x)$  & $\forall x\ i$ 3--5
+\end{tabular}
+
+\subsection{Reglas para la cuantificación existencial}
+
+
+\noindent \textbf{Introducción del cuantificador existencial:} Si podemos demostrar que un objeto específico $t$ cumple una propiedad $\phi(t)$, entonces podemos concluir que \textbf{existe} algún $x$ que también la cumple, es decir, $\exists x \phi(x)$. 
+\[
+\Rulee{\phi(t)}{\exists x \phi}{\exists x \ i}
+\]
+
+\textit{Ejemplo:} Si sabemos que ``Sócrates es mortal'' ($M(\text{Sócrates})$), entonces podemos afirmar que ``Existe alguien que es mortal'' ($\exists x M(x)$).
+
+\bigskip
+\noindent \textbf{Eliminación del cuantificador existencial:} Si sabemos que \textbf{existe} un $x$ que cumple $\phi(x)$, podemos razonar sobre un \textbf{elemento arbitrario} $t$ que cumple $\phi(t)$. La clave es que este $t$ debe ser tratado como un símbolo nuevo sin suposiciones previas. 
+\[
+\Rulee{\exists x \phi (x) \qquad
+\ovalbox{\begin{tabular}{lc}$t$ & $\phi(t)$\\ & $\vdots$\\ & $\chi$
+                \end{tabular}
+               }}{\chi}{\exists e}
+\]
+
+Para concluir algo que \textbf{no depende de $t$}, debemos demostrar que la afirmación resultante es válida sin importar qué elemento $t$ represente.
+
+\textit{Ejemplo:} Si sabemos que ``Existe una persona que es estudiante'', podemos asumir temporalmente que hay una persona arbitraria $t$ que es estudiante y usar esta suposición para demostrar otra propiedad.
+
+
+
+
+
+
+
+
+% \subsubsection*{Ejemplo}
+
+\begin{exampleblock}{Ejemplo}
+\[
+\forall x ( P(x) \rightarrow Q(x)), \exists x P(x) \;  \vdash \; \exists x Q(x)
+\]
+\end{exampleblock}
+
+\begin{tabular}{p{4mm}p{4mm}p{40mm}p{25mm}}
+1 & & $\forall x (P(x) \rightarrow Q(x))$ & premisa \\
+2 & & $\exists x P(x)$ & premisa \\
+\framebox{\begin{tabular}{@{}p{4mm}p{4mm}p{40mm}p{30mm}}
+  3 & $x_0$ & $P(x_0)$ & supuesto \\
+  4 & & $P(x_0) \rightarrow Q(x_0)$ & $\forall x\ e$ 1 \\
+  5 & & $Q(x_0)$ & $\rightarrow e$ 4,3 \\
+  6 & & $\exists x Q(x)$ & $\exists x\ i$ 5 \\
+          \end{tabular}
+         } \\[5mm]
+7 & & $\exists x Q(x)$  & $\exists x\ e$ 2,3--6
+\end{tabular}
+
+\subsection{Reglas para la igualdad}
+
+Recordar que la relación de igualdad, $x=y$, se incluye en todos los lenguajes de primer orden.
+\[
+\Rulee{}{t=t}{\text{Reflexividad*}}
+\qquad
+\Rulee{t_1 = t_2}{t_2=t_1}{\text{Simetría}}
+\]
+\[
+\Rulee{t_1 = t_2 \qquad t_2 = t_3}{t_1=t_3}{\text{Transitividad}}
+\qquad
+\Rulee{s = t \qquad \phi(s)}{\phi(t)}{\text{Sustitución*}}
+\]
+
+\begin{exampleblock}{Ejercicio}
+Demostrar que sólo las reglas con * son necesarias para derivar el resto.
+\end{exampleblock}
+
+
+
+\section{Robustez y Completitud}
+
+\subsection{Teorema de Completitud de Gödel (1930)} 
+
+La \textbf{completitud} establece que si una fórmula es lógicamente válida, entonces existe una prueba formal de ella en un sistema deductivo adecuado. En otras palabras, si $\Gamma \models \phi$, entonces también se tiene que $\Gamma \vdash \phi$. 
+
+La \textbf{Solidez} que afirma la dirección opuesta: si una fórmula es demostrable en un sistema formal ($\Gamma \vdash \phi$), entonces es válida en todos los modelos de $\Gamma$ ($\Gamma \models \phi$). Es decir, todo lo que se puede probar es necesariamente cierto en cualquier interpretación válida. 
+
+\begin{thmblock}{Teorema de Solidez y Completitud de Gödel (1929-1930)}
+Para cualquier conjunto de fórmulas $\Gamma$ y cualquier fórmula $\phi$, se cumple:
+\[
+\Gamma \vdash \phi \quad \text{si y solo si} \quad \Gamma \models \phi.
+\]
+\end{thmblock}
+
+Esto implica que la lógica de primer orden es tanto \textbf{completa} como \textbf{sólida}, estableciendo una correspondencia entre las pruebas sintácticas ($\vdash$) y la validez semántica ($\models$).
+
+Sin embargo, ningún sistema lógico que sea más expresivo que la lógica de primer orden puede tener simultáneamente un cálculo de pruebas que sea \textbf{tanto sólido como completo}. Esto significa que en sistemas más poderosos, como la lógica de segundo orden, siempre se sacrifica o bien la solidez o bien la completitud.
+
+
+\subsection{Demostración completitud de lógica de predicados }
+% \subsection{Teorema de la existencia del modelo de Henkin (1949)}
+
+Más tarde, Leon Henkin proporcionó otra prueba más simple, formulando el \textbf{Teorema de la existencia del modelo de Henkin (1949)}.
+
+\begin{thmblock}{Teorema de la existencia Henkin (1949)}
+Cada conjunto consistente de oraciones tiene un modelo.
+\end{thmblock}
+
+Un conjunto de oraciones $\Gamma$ es consistente si no se puede probar una contradicción de esas hipótesis, es decir, no puede ocurrir que $\Gamma \vdash \phi$ y $\Gamma \vdash \lnot \phi$.
+
+A partir de este teorema, es fácil deducir el \textbf{teorema de completitud}. Pero, primero necesitamos el siguiente Lema:
+% Suponga que no hay prueba de $\phi$ a partir de $\Gamma$. Entonces el conjunto $\Gamma \cup \lnot \phi$ es consistente. Según el teorema de existencia del modelo, eso significa que hay un modelo $\mathcal{M}$ de $\Gamma \cup \lnot \phi$. Pero este es un modelo de $\Gamma$ que no es un modelo de $\phi$, lo que significa que $\phi$ no es una consecuencia lógica de $\Gamma$.
+
+
+
+
+\begin{exampleblock}{Lema}
+Si $\Gamma \cup \{ \lnot \phi \}$ es inconsistente, entonces $\Gamma \vdash \phi$.\\
+
+\noindent \textbf{Demostración:} Asuma que $\Gamma \cup \{ \lnot \phi \}$ es inconsistente. Luego, existe una fórmula $\psi$ tal que
+\[
+\Gamma \cup \{ \lnot \phi \} \vdash \psi \quad \text{y} \quad \Gamma \cup \{ \lnot \phi \} \vdash \lnot \psi.
+\]
+Es decir, $\Gamma , \lnot \phi \vdash \bot$, lo que implica:
+\[
+\Gamma \vdash \lnot \phi \rightarrow \bot \quad \text{(regla de introducción de implicancia)}
+\]
+\[
+\Gamma \vdash \phi \quad \text{(contrapositiva de implicancia)}
+\]
+\end{exampleblock}
+
+
+\begin{thmblock}{Teorema de Completitud:}
+ $\Gamma \models \phi \;\;  \Rightarrow \;\; \Gamma \vdash \phi$ o equivalentemente,
+\[
+\Gamma \not \vdash \phi \quad \Rightarrow \quad \Gamma \not \models \phi
+\]
+
+\end{thmblock}
+\textbf{Demostración:}\\
+
+\begin{tabular}{p{4mm}p{4mm}p{40mm}p{40mm}}
+1 & & $\Gamma \not \vdash \phi$ & (supuesto) \\
+2 & & $\Gamma \cup \lnot \phi$ es consistente & (contraposición del lema) \\
+3 & & $\mathcal{M} \models \Gamma \cup \lnot \phi$ & (Teorema de Henkin) \\
+4 & & $\mathcal{M} \models \Gamma$ y $\mathcal{M} \models \lnot \phi$ & \\
+5 & & $\Gamma \not \models \phi$ & (definición de consecuencia lógica) \\
+\end{tabular}

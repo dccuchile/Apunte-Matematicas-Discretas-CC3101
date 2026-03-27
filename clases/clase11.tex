@@ -1,0 +1,400 @@
+
+% \title{Apunte de Matemáticas Discretas CC3101:\\ 
+% Conteo Básico y Principio del Palomar  Clase 11}
+% % \title{Ejercicios Lógica e Inducción}
+% \author{Andrés Abeliuk}
+% \date{}
+% \maketitle
+
+\section{Principios de Conteo}
+En muchos contextos cotidianos, nos enfrentamos a situaciones en las que debemos contar posibilidades: ¿cuántas combinaciones de ingredientes puede tener un sándwich? ¿cuántas claves distintas puede tener un sistema? ¿de cuántas maneras puedo organizar un grupo de estudiantes? 
+
+A este tipo de preguntas responde la \textbf{combinatoria}, una rama de la matemática dedicada al estudio de métodos sistemáticos de conteo.
+En general, busca responder preguntas del tipo:
+
+\begin{itemize}
+    \item ¿\textit{De cuántas maneras} se puede llevar a cabo un procedimiento dado?
+    \item ¿\textit{Cuántas configuraciones} distintas admite una estructura bajo ciertas restricciones?
+\end{itemize}
+
+
+\subsection{Principios de conteo básico}
+
+Para abordar problemas de conteo, existen dos principios fundamentales: la 	\textbf{regla del producto} y la \textbf{regla de la suma}. Ambas nos permiten descomponer problemas complejos en pasos más simples y sistemáticos.
+
+\subsection*{Regla del Producto}
+La regla del producto se utiliza cuando una tarea se puede descomponer en múltiples tareas secuenciales (independientes).
+
+\begin{definitionblock}{Regla del Producto:}  
+Si un procedimiento puede ser dividido en una secuencia de $m$ tareas $T_1,\dots,T_m$, y cada tarea $T_i$ puede ser realizada de $n_i$ maneras, sin importar cómo se han realizado las tareas anteriores, entonces el procedimiento puede ser realizado de $n_1 n_2 \cdots n_m$ maneras.
+\end{definitionblock}
+
+Esta regla refleja lo que hacemos al tomar decisiones sucesivas, cada una con varias opciones. Por ejemplo, si queremos formar un código con una letra seguida de un número, y hay 26 letras y 10 números posibles, entonces hay $26 \cdot 10 = 260$ combinaciones posibles.
+
+\medskip
+
+\textbf{Importante:} Para que la regla del producto sea válida, es indispensable que cada etapa pueda ser realizada de $n_i$ maneras \textbf{independientemente} de cómo se realizaron las tareas anteriores. Es decir, la elección en una etapa no debe restringir o afectar las posibilidades en las siguientes.
+
+% Este principio de independencia es crucial para aplicar correctamente la regla. Si las etapas están condicionadas entre sí, entonces es necesario analizar cada caso particular con más detalle, posiblemente dividiendo el conteo en varios subcasos donde sí se cumpla la independencia.
+
+
+\subsection*{Regla de la Suma}
+
+\begin{definitionblock}{\textbf{Regla de la Suma:}} 
+ Si que una tarea puede realizarse de $n_1$ o de $n_2$ \ldots o de $n_m$
+  maneras, donde ninguna de las $n_i$ maneras coincide con alguna de las $n_j$
+  maneras (para $i \neq j$ en $1\ldots m$). Entonces la tarea puede realizarse
+  de $n_1 + n_2 + \cdots + n_m$ maneras.
+\end{definitionblock}
+
+Esta regla corresponde a una elección entre alternativas mutuamente excluyentes. Es importante que los casos no se superpongan para evitar contar dos veces.
+
+
+
+\subsection{Aplicaciones de la Regla del Producto}
+
+Uno de los usos más inmediatos de esta regla es el conteo de permutaciones.
+
+\begin{exampleblock}{Permutaciones de $n$ elementos:}
+
+Al ordenar una lista de $n$ objetos distintos, el primer lugar puede ser ocupado por cualquiera de los $n$ elementos, el segundo por cualquiera de los $n-1$ restantes, y así sucesivamente. Entonces:
+\[
+n! = n \cdot (n-1) \cdots 1.
+\]
+\end{exampleblock}
+
+\begin{exampleblock}{Cantidad de funciones:} 
+¿Cuántas funciones existen desde $A = \{a_1, \ldots, a_n\}$ hacia $B = \{b_1, \ldots, b_m\}$?\\
+
+Para cada elemento $a_i$ de $A$, podemos elegir libremente una imagen en $B$, es decir, hay $m$ opciones. Como hay $n$ elementos en $A$, aplicamos la regla del producto:
+\[
+\text{Total de funciones} = m^n.
+\]
+\end{exampleblock}
+
+\begin{exampleblock}{Cantidad de subconjuntos:}
+
+Para cada elemento de un conjunto de $n$ elementos, podemos decidir si está o no en un subconjunto. Esta es una decisión binaria independiente por cada elemento, por lo tanto:
+\[
+2^n \, \text{ subconjuntos en total.}
+\]
+\end{exampleblock}
+
+\subsection{Forma Alternativa de la Regla del Producto}
+La regla del producto también puede verse como una propiedad de los productos cartesianos, lo que permite extender su aplicación desde procedimientos secuenciales hasta estructuras matemáticas más abstractas.
+
+\begin{definitionblock}{Regla del Producto}
+Dado $m$ conjuntos finitos $A_1, \dots, A_m$:
+\[
+|A_1 \times A_2 \times \cdots \times A_m| = |A_1| \cdot |A_2| \cdots |A_m|.
+\]
+\end{definitionblock}
+
+\medskip
+
+Para conectar esta formulación de la regla del producto con la definición original basada en tareas, debemos interpretar a cada conjunto $A_i$ como el \textbf{conjunto de maneras de realizar la tarea $T_i$}. Así, el producto cartesiano $A_1 \times \cdots \times A_m$ representa todas las combinaciones posibles de realizar las tareas $T_1$ hasta $T_m$, y su cardinalidad corresponde exactamente al número total de procedimientos posibles.
+
+% Este punto de vista es particularmente útil al modelar problemas combinatorios complejos, donde las decisiones pueden representarse como elecciones en distintos conjuntos y el procedimiento total como una tupla que combina todas esas elecciones.
+
+
+\subsection{Aplicaciones de la Regla de la Suma}
+
+\begin{exampleblock}{Ejemplo:} 
+¿Cuántos números de tres cifras comienzan con 3 o con 4?
+
+Los números de tres cifras que comienzan con 3 son 100 en total, y lo mismo los que comienzan con 4. Como no hay solapamiento entre ambos grupos:
+\[
+\text{Total} = 100 + 100 = 200.
+\]
+\end{exampleblock}
+
+\begin{exampleblock}{Ejemplo: Subcomités de senadores}
+Supongamos que hay $n$ senadores en un comité y queremos contar cuántos subcomités distintos pueden formarse.
+
+Podemos tener subcomités de tamaño 0 (ningún miembro) hasta tamaño $n$ (todos los senadores). La cantidad de subcomités de tamaño $k$ está dada por:
+\[ \binom{n}{k} \]
+
+Por la regla de la suma, el número total de subcomités posibles es:
+\[ \binom{n}{0} + \binom{n}{1} + \cdots + \binom{n}{n} = 2^n \]
+
+Esto coincide con el número total de subconjuntos del conjunto de senadores. Cada subconjunto representa un subcomité posible, lo cual establece una conexión directa entre la teoría de conjuntos y la combinatoria.
+
+\medskip
+
+\textbf{Observación:} También podríamos haber aplicado la regla del producto. Cada senador tiene dos opciones: o bien pertenece al subcomité o no. Por lo tanto, hay $2 \cdot 2 \cdot \cdots \cdot 2 = 2^n$ maneras de tomar esa decisión para todos, lo que nuevamente nos da $2^n$ subcomités posibles.
+\end{exampleblock}
+
+
+\subsection{Forma Alternativa de la Regla de la Suma}
+
+Una manera de entender la regla de la suma es a través de conjuntos disjuntos. En lugar de pensar en tareas o casos, podemos considerar colecciones de elementos que no se superponen. 
+
+\begin{exampleblock}{Forma alternativa de la regla de la suma}
+ Si $A_1, A_2, \ldots, A_m$ es una colección de conjuntos finitos y disjuntos dos a dos ($A_i \cap A_j = \emptyset$ para $i\neq j$), entonces
+ \[
+   | A_1 \cup A_2 \cup \ldots \cup A_m| ~~==~~ |A_1| + |A_2| + \cdots + |A_m|
+ \]
+\end{exampleblock}
+
+Esta formulación es equivalente a la regla de la suma que ya discutimos, pero expresada en términos de conjuntos. Así como antes sumábamos la cantidad de maneras de realizar tareas disjuntas, ahora sumamos la cantidad de elementos de conjuntos disjuntos.
+
+
+\begin{definitionblock}{Importante:} La regla de la suma solo aplica directamente si los casos son disjuntos. Si pueden solaparse, necesitamos una corrección: el principio de inclusión-exclusión.
+\end{definitionblock}
+
+
+\section{Principio de Inclusión-Exclusión}
+
+\begin{thmblock}{Principio de Inclusión-Exclusión (dos conjuntos):}
+
+Sean $A$ y $B$ conjuntos finitos:
+\[
+|A \cup B| = |A| + |B| - |A \cap B|.
+\]
+\end{thmblock}
+
+Este principio corrige la doble contabilidad de los elementos comunes al sumar $|A| + |B|$. 
+Luego generalizaremos el principio de inclusión-exclusión para más de dos
+conjuntos. 
+
+\subsection{Aplicaciones del Principio de Inclusión-Exclusión}
+
+\begin{exampleblock}{Ejemplo: ¿Cuántos números de tres dígitos comienzan con 3 o terminan en 4?}
+Sea $A$ el conjunto de números de tres dígitos que comienzan con 3, y $B$ el conjunto de números de tres dígitos que terminan en 4.
+
+\begin{itemize}
+  \item Hay 100 números que comienzan con 3: desde 300 hasta 399. Entonces $|A| = 100$.
+  \item Hay 90 números que terminan en 4: desde 104 hasta 994, en pasos de 10 (por ejemplo: 104, 114, ..., 994). Entonces $|B| = 90$.
+  \item Hay 10 números que comienzan con 3 y terminan en 4: 304, 314, 324, ..., 394. Entonces $|A \cap B| = 10$.
+\end{itemize}
+
+Aplicando el principio de inclusión-exclusión:
+\[
+|A \cup B| = |A| + |B| - |A \cap B| = 100 + 90 - 10 = 180.
+\]
+
+Por lo tanto, hay 180 números de tres dígitos que comienzan con 3 o terminan en 4.
+\end{exampleblock}
+
+\begin{exampleblock}{Ejemplo: ¿Cuántos números entre 1 y 100 no son múltiplos de 3 ni de 5?}
+Sea $U$ el conjunto de números del 1 al 100. Queremos contar los que no pertenecen al conjunto de múltiplos de 3 ni de 5.
+
+\begin{itemize}
+  \item Hay $\left\lfloor \frac{100}{3} \right\rfloor = 33$ múltiplos de 3.
+  \item Hay $\left\lfloor \frac{100}{5} \right\rfloor = 20$ múltiplos de 5.
+  \item Hay $\left\lfloor \frac{100}{15} \right\rfloor = 6$ múltiplos de 3 y 5, es decir, múltiplos de 15.
+\end{itemize}
+
+Entonces el número total de múltiplos de 3 o 5 es:
+\[
+|A \cup B| = 33 + 20 - 6 = 47.
+\]
+
+Por lo tanto, el número de enteros entre 1 y 100 que no son múltiplos de 3 ni de 5 es:
+\[
+|U \setminus (A \cup B)| = 100 - 47 = 53.
+\]
+\end{exampleblock}
+
+
+\begin{exampleblock}{Extensión a tres conjuntos}
+Demostremos usando el principio de inclusión-exclusión para dos conjuntos, la siguiente extensión a tres conjuntos: 
+\[
+|A \cup B \cup C| = |A| + |B| + |C| - |A \cap B| - |A \cap C| - |B \cap C| + |A \cap B \cap C|
+\]
+\end{exampleblock}
+
+
+\begin{proof}
+
+Llamemos $D = A \cup B$. Entonces podemos aplicar el principio de inclusión-exclusión para dos conjuntos dos veces:
+Primero aplicamos inclusión-exclusión para obtener $|D| = |A \cup B|$:
+\[
+|A \cup B| = |A| + |B| - |A \cap B|
+\]
+Ahora consideramos $D \cup C = (A \cup B) \cup C = A \cup B \cup C$, y aplicamos nuevamente inclusión-exclusión:
+\[
+|A \cup B \cup C| = |A \cup B| + |C| - |(A \cup B) \cap C|
+\]
+Para calcular $|(A \cup B) \cap C|$, usamos la propiedad distributiva de la intersección:
+\[
+(A \cup B) \cap C = (A \cap C) \cup (B \cap C)
+\]
+Entonces, aplicamos inclusión-exclusión a esta unión:
+\[
+|(A \cup B) \cap C| = |A \cap C| + |B \cap C| - |A \cap B \cap C|
+\]
+Sustituyendo todo en la fórmula general $|A \cup B \cup C|$, da el resultado esperado.
+Esto completa la demostración utilizando únicamente la versión del principio de inclusión-exclusión para dos conjuntos.
+\end{proof}
+
+\begin{exampleblock}{Ejercicio: combinaciones de billetes}
+Supongamos que existen sólo billetes de \$2, \$3 y \$5. Queremos saber cuántas cantidades enteras distintas entre \$1 y \$100 inclusive pueden pagarse usando sólo un único tipo de billete.
+
+\textbf{Solución:}
+\begin{itemize}
+  \item $A$: cantidades divisibles por 2: $\$2, \$4, ..., \$100$. Hay $\left\lfloor \frac{100}{2} \right\rfloor = 50$.
+  \item $B$: cantidades divisibles por 3: $\$3, \$6, ..., \$99$. Hay $\left\lfloor \frac{100}{3} \right\rfloor = 33$.
+  \item $C$: cantidades divisibles por 5: $\$5, \$10, ..., \$100$. Hay $\left\lfloor \frac{100}{5} \right\rfloor = 20$.
+
+  \item $|A \cap B| = \left\lfloor \frac{100}{6} \right\rfloor = 16$
+  \item $|A \cap C| = \left\lfloor \frac{100}{10} \right\rfloor = 10$
+  \item $|B \cap C| = \left\lfloor \frac{100}{15} \right\rfloor = 6$
+  \item $|A \cap B \cap C| = \left\lfloor \frac{100}{30} \right\rfloor = 3$
+\end{itemize}
+
+Aplicando la fórmula de inclusión-exclusión para tres conjuntos:
+\[
+|A \cup B \cup C| = 50 + 33 + 20 - 16 - 10 - 6 + 3 = 74.
+\]
+
+Hay 74 cantidades distintas entre \$1 y \$100 que pueden pagarse usando sólo un tipo de billete.
+\end{exampleblock}
+
+\subsection*{Ejercicios Propuestos}
+
+\begin{itemize}
+    \item ¿Cuántos strings de largo 7 sobre $\{0,1\}$ existen?
+    \ifshowsolutions
+    Cada posición puede ser 0 o 1 (2 opciones). Por la regla del producto:
+    \[2^7 = 128\text{ strings posibles.}\]
+    \fi
+
+    \item ¿Cuántos números de tres dígitos son pares?
+    \ifshowsolutions
+    Un número de tres cifras tiene forma $abc$:
+    \begin{itemize}
+        \item $a \in \{1,\dots,9\}$ (no puede ser 0): 9 opciones,
+        \item $b \in \{0,\dots,9\}$: 10 opciones,
+        \item $c \in \{0,2,4,6,8\}$ (debe ser par): 5 opciones.
+    \end{itemize}
+    Por la regla del producto:
+    \[9 \cdot 10 \cdot 5 = 450\text{ números pares de tres cifras.}\]
+    \fi
+
+    \item ¿Cuántas funciones inyectivas existen desde un conjunto de $n$ elementos a otro de $m$ elementos (con $m \geq n$)?
+    
+    \ifshowsolutions
+    Elegimos una imagen distinta en $B$ para cada uno de los $n$ elementos del dominio, sin repetir.
+
+    La elección del valor de la función para el primer elemento del dominio tiene $m$ posibilidades.
+    Para el segundo elemento, quedan $m - 1$ opciones, y así sucesivamente hasta $m - n + 1$ opciones para el último elemento.
+    
+    Por la regla del producto:
+    \[P(m,n) = m \cdot (m - 1) \cdot (m - 2) \cdots (m - n + 1) = \frac{m!}{(m - n)!} \text{ funciones inyectivas.}\]
+    \fi
+
+
+    \item ¿Cuántos strings de largo 10 sobre el alfabeto $\{0,1\}$ contienen 5 consecutivos 0s?
+    \ifshowsolutions
+    Se pueden colocar los cinco ceros consecutivos en posiciones $0$ a $5$ del string:
+    \begin{itemize}
+        \item Hay $10 - 5 + 1 = 6$ posiciones posibles para el bloque de cinco ceros.
+        \item Para las otras 5 posiciones restantes (no consecutivas), cada una puede ser 0 o 1: $2^5$ combinaciones.
+    \end{itemize}
+    Total:
+    \[6 \cdot 2^5 = 6 \cdot 32 = 192\text{ strings.}\]
+    \fi
+
+    \item ¿Cuántos palíndromos de longitud $n$ existen sobre $\{0,1\}$?
+    \ifshowsolutions
+    Un palíndromo se define por su mitad izquierda:
+    \begin{itemize}
+        \item Si $n$ es par, se define por $n/2$ posiciones.
+        \item Si $n$ es impar, se define por $\lfloor n/2 \rfloor + 1$ posiciones (incluye el dígito central).
+    \end{itemize}
+    En ambos casos:
+    \[\text{Cantidad} = 2^{\lceil n/2 \rceil}\text{ palíndromos.}\]
+    \fi
+
+    
+    \item  ¿Cuántos strings de largo 10 sobre el alfabeto
+$\{0,1\}$ contienen 5 consecutivos 0s o 5 consecutivos 1s?
+    \item ¿Cuántos strings de largo 8 sobre el alfabeto $\{0,1\}$
+contienen 3 consecutivos 0s o 4 consecutivos 1s? 
+
+\end{itemize}
+
+
+\section{Principio del Palomar}
+
+El \emph{principio del palomar} es una de las ideas más simples y poderosas de la combinatoria. También conocido como el \textit{principio de las cajas de Dirichlet }, establece que si tratamos de colocar más objetos que contenedores disponibles, al menos uno de los contenedores deberá tener más de un objeto. 
+
+Esta idea, aparentemente trivial, tiene una sorprendente variedad de aplicaciones en matemáticas, informática, teoría de números y lógica. Nos permite llegar a conclusiones inevitables sobre repeticiones, coincidencias o superposiciones, incluso cuando no tenemos información específica sobre la distribución.
+
+Más allá de su simplicidad, el principio del palomar juega un rol clave en la teoría de la computación. En particular, aparece en formulaciones fundamentales sobre la complejidad de ciertos problemas lógicos. Como lo explica Ben Brubaker en un artículo de \textit{Quanta Magazine}, el principio ha servido para definir nuevas clases de problemas computacionales y ha sido una herramienta esencial para mostrar que ciertos problemas no sólo tienen solución, sino que su existencia está garantizada de manera \textit{no constructiva}, es decir, sin que sepamos necesariamente cómo encontrarlas.
+
+
+Este tipo de razonamientos ha permitido a investigadores como Christos Papadimitriou y Oliver Korten explorar límites fundamentales de la teoría de la complejidad, revelando profundas conexiones entre el principio del palomar y el estudio formal de la dificultad computacional\footnote{Ver Ben Brubaker, "How a Problem About Pigeons Powers Complexity Theory," Quanta Magazine (2025). Disponible en: \url{https://www.quantamagazine.org/how-a-problem-about-pigeons-powers-complexity-theory-20250404/}}.
+
+
+
+\begin{definitionblock}{Principio del palomar}
+Sea $k \in \mathbb{N}$. Si $k+1$ objetos tienen que colocarse en $k$ cajas, entonces habrá al menos una caja que contenga al menos dos objetos.
+\end{definitionblock}
+
+\begin{exampleblock}{Ejemplo intuitivo}
+Si una bandada de 10 palomas vuela hasta un palomar que contiene sólo 9 agujeros, entonces al menos un agujero contendrá a dos palomas.
+\end{exampleblock}
+
+\subsection*{Aplicaciones básicas}
+
+\begin{exampleblock}{Cumpleaños compartido}
+En un grupo de 367 personas debe haber al menos dos con el mismo cumpleaños, ya que hay solo 366 días posibles (incluyendo años bisiestos).
+\end{exampleblock}
+
+\begin{exampleblock}{Diferencia múltiplo de 10}
+Dados 11 números enteros, siempre hay dos cuya diferencia es múltiplo de 10.
+\medskip
+
+Considere los restos de la division entera de los 11 números por 10.  Como sólo hay 10 restos posibles (0,1,\ldots,9), habrá (al menos) dos
+números que tienen el mismo resto, y su diferencia será múltiplo de 10.
+\end{exampleblock}
+
+\begin{exampleblock}{Divisibilidad entre números enteros}
+En cualquier conjunto de 51 números enteros entre 1 y 100, existe uno que divide a otro. 
+\medskip
+
+Recordar que todo natural puede escribirse de la forma $2^k \cdot b$ para algún
+ $k \in \nat_0$ y algún impar $b \in \nat$. 
+
+Como entre 1 y 100 hay sólo 50 números impares, dentro del conjunto de los 51
+enteros debe haber (al menos) dos comparten el mismo $b$ en la descomposición
+arriba descrita. Luego el que tiene asociado el menor $k$ divide al que tiene asociado el
+mayor $k$.
+\end{exampleblock}
+
+
+\subsection*{Principio del palomar generalizado}
+La versión clásica del principio del palomar nos asegura que si hay más objetos que recipientes, entonces alguno de ellos debe contener al menos dos objetos. Pero ¿qué sucede si tenemos aún más objetos, o si queremos estimar no sólo la colisión mínima sino cuántos deben coincidir como mínimo en un contenedor?
+
+Aquí entra en juego el \emph{principio del palomar generalizado}, que nos permite estimar el mínimo número de objetos que necesariamente compartirán al menos una caja en una partición.
+
+\begin{definitionblock}{Principio generalizado}
+Si $n$ objetos se colocan en $k$ cajas, entonces existe al menos una caja que contiene al menos $\lceil n/k \rceil$ objetos.
+\end{definitionblock}
+
+Este resultado es útil cuando el número de objetos y contenedores es arbitrario, y queremos una cota garantizada sobre cuántos deben agruparse juntos. Se usa, por ejemplo, en problemas de distribución, hash, codificación, pruebas de colisiones y razonamiento lógico.
+
+
+\begin{exampleblock}{Ejemplo: Personas por mes de nacimiento}
+Entre 100 personas hay al menos $\lceil 100 / 12 \rceil = 9$ personas que nacieron en el mismo mes.
+\end{exampleblock}
+
+
+
+\subsection*{Ejercicios Propuestos}
+\begin{itemize}
+\item Sea $\{(x_i,y_i,z_i) \mid i \in [1,9]\}$ un conjunto de 9 puntos distintos con coordenadas enteras en el espacio tridimensional. Demuestre que el punto medio de al menos un par de estos puntos tiene coordenadas enteras.
+ \item ¿Cuál es el mínimo número de alumnos que un curso debe tener para asegurarse de que al menos 6 alumnos reciban la misma nota, si hay 5 posibles notas?
+  \item ¿Cuál es el mínimo número de cartas que se deben tomar de un mazo estándar para asegurarse que al menos 3 tengan la misma pinta?
+\item (Ramsey) En un grupo de seis personas, cada par de personas son o amigos o enemigos. Demuestre que existen tres mutuos amigos o tres mutuos enemigos.
+
+\textbf{Sugerencia:} Fije una persona y observe las relaciones con las otras cinco. Luego use el principio del palomar para agruparlas como amigos o enemigos.
+
+\item En cualquier fiesta de al menos dos personas, demuestre que existen dos personas que conocen a la misma cantidad de gente en la fiesta.
+  
+\textbf{Sugerencia:} Piense en los posibles valores que puede tomar el número de conocidos de cada persona, y aplique el principio del palomar considerando restricciones por simetría.
+
+
+\end{itemize}

@@ -1,0 +1,288 @@
+\babel@toc {spanish}{}\relax 
+\contentsline {part}{I\hspace {1em}Fundamentos de La Lógica}{5}{part.1}%
+\contentsline {chapter}{\numberline {1}Lógica Proposicional}{7}{chapter.1}%
+\contentsline {section}{\numberline {1.1}¿Qué es la lógica?}{7}{section.1.1}%
+\contentsline {subsection}{\numberline {1.1.1}Breve Historia de la Lógica}{7}{subsection.1.1.1}%
+\contentsline {subsection}{\numberline {1.1.2}Aplicaciones de la Lógica en Ciencias de la Computación}{8}{subsection.1.1.2}%
+\contentsline {subsection}{\numberline {1.1.3}Tipos de Lógica}{8}{subsection.1.1.3}%
+\contentsline {section}{\numberline {1.2}Razonamiento Formal}{9}{section.1.2}%
+\contentsline {subsection}{\numberline {1.2.1}Definiciones B\'asicas}{9}{subsection.1.2.1}%
+\contentsline {subsection}{\numberline {1.2.2}Argumentos}{9}{subsection.1.2.2}%
+\contentsline {subsection}{\numberline {1.2.3}Validez de un Argumento}{9}{subsection.1.2.3}%
+\contentsline {subsection}{\numberline {1.2.4}Ejemplos de Argumentos y su Forma Lógica}{11}{subsection.1.2.4}%
+\contentsline {subsubsection}{Ejemplo 1: Argumento válido}{11}{section*.2}%
+\contentsline {subsubsection}{Ejemplo 2: Argumento no válido}{11}{section*.3}%
+\contentsline {subsubsection}{Ejemplo 3: Argumento válido}{12}{section*.4}%
+\contentsline {section}{\numberline {1.3}Lógica Proposicional}{12}{section.1.3}%
+\contentsline {subsection}{\numberline {1.3.1}Sintaxis}{13}{subsection.1.3.1}%
+\contentsline {subsubsection}{Conjunto de Fórmulas Bien Formadas}{13}{section*.5}%
+\contentsline {subsection}{\numberline {1.3.2}Semántica}{14}{subsection.1.3.2}%
+\contentsline {subsubsection}{Tabla de Verdad de la Negación ($\neg $)}{14}{section*.6}%
+\contentsline {subsubsection}{Tabla de Verdad de la Conjunción ($\land $)}{14}{section*.7}%
+\contentsline {subsubsection}{Tabla de Verdad de la Disyunción ($\lor $)}{15}{section*.8}%
+\contentsline {subsubsection}{Tabla de Verdad de la Implicancia ($\rightarrow $)}{15}{section*.9}%
+\contentsline {subsubsection}{Valor de Verdad de Fórmulas Compuestas}{15}{section*.10}%
+\contentsline {paragraph}{Ejemplo:}{15}{section*.11}%
+\contentsline {subsubsection}{Semántica de la Lógica Proposicional}{16}{section*.12}%
+\contentsline {subsection}{\numberline {1.3.3}Definición Formal de un Argumento Válido}{16}{subsection.1.3.3}%
+\contentsline {subsubsection}{Ejemplos}{16}{section*.13}%
+\contentsline {section}{\numberline {1.4}Clasificación de Fórmulas en Lógica Proposicional}{18}{section.1.4}%
+\contentsline {subsection}{\numberline {1.4.1}Satisfactibilidad}{18}{subsection.1.4.1}%
+\contentsline {subsection}{\numberline {1.4.2}Tautologías y Contradicciones}{19}{subsection.1.4.2}%
+\contentsline {subsection}{\numberline {1.4.3}Relación entre Contradicción e Insatisfactibilidad}{20}{subsection.1.4.3}%
+\contentsline {section}{\numberline {1.5}Equivalencia de fórmulas}{20}{section.1.5}%
+\contentsline {subsection}{\numberline {1.5.1}Algunas equivalencias útiles}{21}{subsection.1.5.1}%
+\contentsline {section}{\numberline {1.6}Consecuencia Lógica}{21}{section.1.6}%
+\contentsline {subsection}{\numberline {1.6.1}Ejemplos Clásicos de Consecuencia Lógica}{22}{subsection.1.6.1}%
+\contentsline {subsection}{\numberline {1.6.2}Definición Formal}{22}{subsection.1.6.2}%
+\contentsline {subsection}{\numberline {1.6.3}Propiedades Importantes}{23}{subsection.1.6.3}%
+\contentsline {section}{\numberline {1.7}Aplicaciones de Satisfactibilidad}{24}{section.1.7}%
+\contentsline {subsection}{\numberline {1.7.1}Programación de exámenes universitarios}{24}{subsection.1.7.1}%
+\contentsline {subsection}{\numberline {1.7.2}Juego del Gato}{25}{subsection.1.7.2}%
+\contentsline {section}{\numberline {1.8}Deducción Natural}{27}{section.1.8}%
+\contentsline {subsection}{\numberline {1.8.1}¿Qué es la Deducción Natural?}{27}{subsection.1.8.1}%
+\contentsline {subsection}{\numberline {1.8.2}Reglas Básicas de la Deducción Natural}{28}{subsection.1.8.2}%
+\contentsline {subsubsection}{Regla de la Conjunción (\(\wedge \))}{28}{section*.28}%
+\contentsline {subsubsection}{Regla de la Doble Negación}{29}{section*.29}%
+\contentsline {subsubsection}{Regla de Eliminación de la Implicación (Modus Ponens)}{29}{section*.30}%
+\contentsline {subsubsection}{Regla de Introducción de la Implicación}{30}{section*.31}%
+\contentsline {subsubsection}{Reglas de la Disyunción (\(\vee \))}{31}{section*.32}%
+\contentsline {subsubsection}{Regla de la Negación}{31}{section*.33}%
+\contentsline {subsection}{\numberline {1.6.4}Ejercicios}{24}{subsection.1.6.4}%
+\contentsline {chapter}{\numberline {2}Lógica de Predicados}{33}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Introducción a Lógica de Predicados}{33}{section.2.1}%
+\contentsline {subsection}{\numberline {2.1.1}Limitaciones de la Lógica Proposicional}{33}{subsection.2.1.1}%
+\contentsline {subsubsection}{Ejemplo con una Relación Binaria}{34}{section*.36}%
+\contentsline {subsubsection}{Diferencias Clave con la Lógica Proposicional}{34}{section*.37}%
+\contentsline {subsection}{\numberline {2.1.2}Sintaxis de la Lógica de Predicados}{35}{subsection.2.1.2}%
+\contentsline {subsubsection}{Ejemplos de Propiedades de Relaciones}{35}{section*.38}%
+\contentsline {subsubsection}{Alcance de los Cuantificadores}{35}{section*.39}%
+\contentsline {section}{\numberline {2.2}Semántica de la Lógica de Predicados}{36}{section.2.2}%
+\contentsline {subsection}{\numberline {2.2.1}Estructuras e Interpretaciones}{36}{subsection.2.2.1}%
+\contentsline {subsection}{\numberline {2.2.2}Ejemplos de Estructuras}{37}{subsection.2.2.2}%
+\contentsline {subsubsection}{Ejemplo 1: Grafos}{37}{section*.40}%
+\contentsline {subsubsection}{Ejemplo 2: Números Naturales}{37}{section*.41}%
+\contentsline {subsection}{\numberline {2.2.3}Definición Formal de Satisfacción}{38}{subsection.2.2.3}%
+\contentsline {subsection}{\numberline {2.2.4}Ejemplos de Satisfacción}{38}{subsection.2.2.4}%
+\contentsline {section}{\numberline {2.3}Equivalencia de Fórmulas}{39}{section.2.3}%
+\contentsline {subsection}{\numberline {2.3.1}Ejemplos de equivalencia}{40}{subsection.2.3.1}%
+\contentsline {subsection}{\numberline {2.3.2}Demostraciones}{40}{subsection.2.3.2}%
+\contentsline {paragraph}{Leyes de De Morgan para cuantificadores}{40}{section*.45}%
+\contentsline {paragraph}{Distribución de cuantificadores}{40}{section*.46}%
+\contentsline {subsection}{\numberline {2.3.3}Satisfacibilidad}{41}{subsection.2.3.3}%
+\contentsline {subsubsection}{Decidibilidad de la Satisfacibilidad}{41}{section*.47}%
+\contentsline {subsection}{\numberline {2.3.4}Consecuencia Lógica}{41}{subsection.2.3.4}%
+\contentsline {section}{\numberline {2.4}Inferencia en Lógica de Predicados}{42}{section.2.4}%
+\contentsline {subsection}{\numberline {2.4.1}Eliminación de cuantificador universal}{42}{subsection.2.4.1}%
+\contentsline {subsection}{\numberline {2.4.2}Introducción de cuantificador universal}{42}{subsection.2.4.2}%
+\contentsline {subsection}{\numberline {2.4.3}Reglas para la cuantificación existencial}{43}{subsection.2.4.3}%
+\contentsline {subsection}{\numberline {2.4.4}Reglas para la igualdad}{44}{subsection.2.4.4}%
+\contentsline {section}{\numberline {2.5}Robustez y Completitud}{44}{section.2.5}%
+\contentsline {subsection}{\numberline {2.5.1}Teorema de Completitud de Gödel (1930)}{44}{subsection.2.5.1}%
+\contentsline {subsection}{\numberline {2.5.2}Demostración completitud de lógica de predicados }{45}{subsection.2.5.2}%
+\contentsline {part}{II\hspace {1em}Técnicas de Demostración}{47}{part.2}%
+\contentsline {chapter}{\numberline {3}Inducción Matemática}{49}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Introducción a la Demostración}{49}{section.3.1}%
+\contentsline {subsection}{\numberline {3.1.1}Clasificación de Teoremas y Resultados Matemáticos}{49}{subsection.3.1.1}%
+\contentsline {subsection}{\numberline {3.1.2}Métodos de Demostración}{50}{subsection.3.1.2}%
+\contentsline {subsubsection}{Demostración Directa}{50}{section*.48}%
+\contentsline {subsubsection}{Demostración por Contraposición}{50}{section*.49}%
+\contentsline {subsubsection}{Demostración por Análisis de Casos}{50}{section*.50}%
+\contentsline {subsubsection}{Demostración por Contradicción}{51}{section*.51}%
+\contentsline {subsection}{\numberline {3.1.3}Conclusión}{51}{subsection.3.1.3}%
+\contentsline {subsection}{\numberline {3.1.4}Problemas Propuestos}{51}{subsection.3.1.4}%
+\contentsline {section}{\numberline {3.2}Principio de Inducción}{51}{section.3.2}%
+\contentsline {subsection}{\numberline {3.2.1}Definición del Principio de Inducción}{52}{subsection.3.2.1}%
+\contentsline {subsection}{\numberline {3.2.2}Generalización del Principio de Inducción}{53}{subsection.3.2.2}%
+\contentsline {subsection}{\numberline {3.2.3}Ejercicios propuestos}{55}{subsection.3.2.3}%
+\contentsline {section}{\numberline {3.3}Principio de Inducción Fuerte}{55}{section.3.3}%
+\contentsline {subsection}{\numberline {3.3.1}Ejercicio: Descomposición en Factores Primos}{55}{subsection.3.3.1}%
+\contentsline {subsection}{\numberline {3.3.2}Ejercicio: Cortando Barras de Chocolate}{56}{subsection.3.3.2}%
+\contentsline {section}{\numberline {3.4}Comparando los dos principios de inducción}{56}{section.3.4}%
+\contentsline {subsection}{\numberline {3.4.1}Principio del Buen Orden}{57}{subsection.3.4.1}%
+\contentsline {section}{\numberline {3.5}Introducción a la Inducción Estructural}{57}{section.3.5}%
+\contentsline {subsection}{\numberline {3.5.1}Definiciones Recursivas}{58}{subsection.3.5.1}%
+\contentsline {subsection}{\numberline {3.5.2}Definición Recursiva de Funciones}{58}{subsection.3.5.2}%
+\contentsline {subsubsection}{Factorial}{58}{section*.57}%
+\contentsline {subsubsection}{Números de Fibonacci}{58}{section*.58}%
+\contentsline {subsection}{\numberline {3.5.3}Conjuntos Definidos Recursivamente}{59}{subsection.3.5.3}%
+\contentsline {subsubsection}{Definiciones Recursivas de Operaciones sobre Strings}{60}{section*.61}%
+\contentsline {section}{\numberline {3.6}Inducción Estructural sobre Estructuras Recursivas}{61}{section.3.6}%
+\contentsline {subsection}{\numberline {3.6.1}Ejemplo: Longitud de Cadenas}{61}{subsection.3.6.1}%
+\contentsline {subsection}{\numberline {3.6.2}Definición Recursiva de Árboles Binarios}{62}{subsection.3.6.2}%
+\contentsline {subsubsection}{Ejercicio: Número de Vértices en un Árbol Binario}{62}{section*.63}%
+\contentsline {subsubsection}{Ejercicio: Altura de un Árbol Binario}{63}{section*.64}%
+\contentsline {subsubsection}{Ejercicio: Relación entre $n(T)$ y $h(T)$}{63}{section*.65}%
+\contentsline {subsection}{\numberline {3.6.3}Ejercicios Propuestos:}{63}{subsection.3.6.3}%
+\contentsline {section}{\numberline {3.7}Ejercicios Resueltos}{64}{section.3.7}%
+\contentsline {subsection}{\numberline {3.7.1}Ejercicio: Propiedad de la reversa de strings}{64}{subsection.3.7.1}%
+\contentsline {subsection}{\numberline {3.7.2}Ejercicio: Longitud par en un conjunto definido recursivamente}{65}{subsection.3.7.2}%
+\contentsline {part}{III\hspace {1em}Relaciones y Funciones}{66}{part.3}%
+\contentsline {chapter}{\numberline {4}Relaciones}{68}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Definición de relaciones}{68}{section.4.1}%
+\contentsline {subsection}{\numberline {4.1.1}¿Qué es una relación?}{68}{subsection.4.1.1}%
+\contentsline {paragraph}{Notación.}{68}{section*.66}%
+\contentsline {subsection}{\numberline {4.1.2}Representación de relaciones}{69}{subsection.4.1.2}%
+\contentsline {subsection}{\numberline {4.1.3}Relaciones sobre un conjunto}{70}{subsection.4.1.3}%
+\contentsline {paragraph}{Ejemplos.}{70}{section*.70}%
+\contentsline {subsection}{\numberline {4.1.4}Propiedades de las relaciones}{70}{subsection.4.1.4}%
+\contentsline {paragraph}{Ejemplo:}{70}{section*.71}%
+\contentsline {section}{\numberline {4.2}Relaciones de orden}{70}{section.4.2}%
+\contentsline {paragraph}{Ejemplo.}{71}{section*.72}%
+\contentsline {section}{\numberline {4.3}Relaciones de equivalencia}{71}{section.4.3}%
+\contentsline {paragraph}{Ejemplo: congruencia módulo $p$.}{71}{section*.73}%
+\contentsline {subsection}{\numberline {4.3.1}Clases de equivalencia}{71}{subsection.4.3.1}%
+\contentsline {paragraph}{Ejemplo: módulo 3.}{72}{section*.74}%
+\contentsline {section}{\numberline {4.4}Relaciones de equivalencia y particiones}{73}{section.4.4}%
+\contentsline {paragraph}{Ejemplo.}{73}{section*.75}%
+\contentsline {paragraph}{Ejemplo.}{74}{section*.76}%
+\contentsline {subsection}{\numberline {4.4.1}Relaciones n-arias}{74}{subsection.4.4.1}%
+\contentsline {paragraph}{Ejemplos.}{75}{section*.77}%
+\contentsline {chapter}{\numberline {5}Funciones}{76}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Operaciones sobre Relaciones}{76}{section.5.1}%
+\contentsline {subsection}{\numberline {5.1.1}Operaciones Cl\'asicas: Uni\'on, Intersecci\'on y Diferencia}{76}{subsection.5.1.1}%
+\contentsline {subsection}{\numberline {5.1.2}Operaciones Espec\'ificas sobre Relaciones}{76}{subsection.5.1.2}%
+\contentsline {section}{\numberline {5.2}Clausuras}{78}{section.5.2}%
+\contentsline {subsection}{\numberline {5.2.1}Clausura Reflexiva}{78}{subsection.5.2.1}%
+\contentsline {subsection}{\numberline {5.2.2}Clausura Sim\'etrica}{78}{subsection.5.2.2}%
+\contentsline {subsection}{\numberline {5.2.3}Clausura Transitiva}{79}{subsection.5.2.3}%
+\contentsline {section}{\numberline {5.3}Funciones}{80}{section.5.3}%
+\contentsline {subsection}{\numberline {5.3.1}Clasificaci\'on de funciones}{81}{subsection.5.3.1}%
+\contentsline {subsection}{\numberline {5.3.2}Operaciones con funciones}{81}{subsection.5.3.2}%
+\contentsline {section}{\numberline {5.4}Crecimiento de Funciones}{81}{section.5.4}%
+\contentsline {subsection}{\numberline {5.4.1}Composici\'on de funciones en t\'erminos de $O$}{82}{subsection.5.4.1}%
+\contentsline {part}{IV\hspace {1em}Combinatoria}{83}{part.4}%
+\contentsline {section}{\numberline {5.5}Principios de Conteo}{85}{section.5.5}%
+\contentsline {subsection}{\numberline {5.5.1}Principios de conteo básico}{85}{subsection.5.5.1}%
+\contentsline {subsection}{\numberline {5.5.2}Aplicaciones de la Regla del Producto}{86}{subsection.5.5.2}%
+\contentsline {subsection}{\numberline {5.5.3}Forma Alternativa de la Regla del Producto}{86}{subsection.5.5.3}%
+\contentsline {subsection}{\numberline {5.5.4}Aplicaciones de la Regla de la Suma}{87}{subsection.5.5.4}%
+\contentsline {subsection}{\numberline {5.5.5}Forma Alternativa de la Regla de la Suma}{88}{subsection.5.5.5}%
+\contentsline {section}{\numberline {5.6}Principio de Inclusión-Exclusión}{88}{section.5.6}%
+\contentsline {subsection}{\numberline {5.6.1}Aplicaciones del Principio de Inclusión-Exclusión}{89}{subsection.5.6.1}%
+\contentsline {section}{\numberline {5.7}Principio del Palomar}{91}{section.5.7}%
+\contentsline {section}{\numberline {5.8}Combinatoria}{93}{section.5.8}%
+\contentsline {subsection}{\numberline {5.8.1}Permutaciones y combinaciones}{94}{subsection.5.8.1}%
+\contentsline {subsection}{\numberline {5.8.2}Permutaciones y combinaciones con repetición}{95}{subsection.5.8.2}%
+\contentsline {section}{\numberline {5.9}Pruebas combinatoriales}{97}{section.5.9}%
+\contentsline {section}{\numberline {5.10}Relaciones de Recurrencia }{99}{section.5.10}%
+\contentsline {subsection}{\numberline {5.10.1}Introducción}{99}{subsection.5.10.1}%
+\contentsline {subsection}{\numberline {5.10.2}Sistemas de relaciones de recurrencia}{103}{subsection.5.10.2}%
+\contentsline {subsection}{\numberline {5.10.3}Ejercicios propuestos}{104}{subsection.5.10.3}%
+\contentsline {section}{\numberline {5.11}Recurrencias Lineales}{105}{section.5.11}%
+\contentsline {subsection}{\numberline {5.11.1}Definición General}{105}{subsection.5.11.1}%
+\contentsline {subsection}{\numberline {5.11.2}Estrategia de Resolución}{105}{subsection.5.11.2}%
+\contentsline {subsubsection}{Caso de Grado 2 con Raíces Distintas}{106}{section*.91}%
+\contentsline {subsection}{\numberline {5.11.3}Raíces Dobles}{107}{subsection.5.11.3}%
+\contentsline {subsection}{\numberline {5.11.4}Caso General: Grado Arbitrario}{108}{subsection.5.11.4}%
+\contentsline {subsection}{\numberline {5.11.5}Recurrencias No Homogéneas}{108}{subsection.5.11.5}%
+\contentsline {subsection}{\numberline {5.11.6}Soluciones Particulares: Método de coeficientes indeterminados}{110}{subsection.5.11.6}%
+\contentsline {subsection}{\numberline {5.11.7}Ejercicios Propuestos}{112}{subsection.5.11.7}%
+\contentsline {section}{\numberline {5.12}Funciones Generadoras}{112}{section.5.12}%
+\contentsline {subsection}{\numberline {5.12.1}Introducción}{112}{subsection.5.12.1}%
+\contentsline {subsection}{\numberline {5.12.2}Definición de Función Generadora}{113}{subsection.5.12.2}%
+\contentsline {subsection}{\numberline {5.12.3}Ejemplos Iniciales}{113}{subsection.5.12.3}%
+\contentsline {subsection}{\numberline {5.12.4}Resolución de Recurrencias}{114}{subsection.5.12.4}%
+\contentsline {subsection}{\numberline {5.12.5}Resolución de recurrencias: Receta General}{115}{subsection.5.12.5}%
+\contentsline {subsection}{\numberline {5.12.6}Propiedades y ejemplos clásicos de funciones generadoras}{116}{subsection.5.12.6}%
+\contentsline {subsubsection}{Operaciones básicas entre funciones generadoras}{116}{section*.94}%
+\contentsline {subsection}{\numberline {5.12.7}Catálogo clásico de funciones generadoras}{117}{subsection.5.12.7}%
+\contentsline {subsection}{\numberline {5.12.8}Ejemplo: sucesión de Fibonacci}{117}{subsection.5.12.8}%
+\contentsline {section}{\numberline {5.13}Más sobre funciones generadoras}{119}{section.5.13}%
+\contentsline {subsection}{\numberline {5.13.1}Coeficientes Binomiales}{119}{subsection.5.13.1}%
+\contentsline {subsection}{\numberline {5.13.2}Teorema del Binomio Extendido}{119}{subsection.5.13.2}%
+\contentsline {subsection}{\numberline {5.13.3}Aplicación: Números de Catalán}{120}{subsection.5.13.3}%
+\contentsline {subsection}{\numberline {5.13.4}Problemas de Conteo y Funciones Generadoras}{123}{subsection.5.13.4}%
+\contentsline {part}{V\hspace {1em}Teoría de grafos}{127}{part.5}%
+\contentsline {section}{\numberline {5.14}Introducción a los Grafos}{129}{section.5.14}%
+\contentsline {subsection}{\numberline {5.14.1}Motivación y Aplicaciones}{129}{subsection.5.14.1}%
+\contentsline {subsection}{\numberline {5.14.2}Historia}{129}{subsection.5.14.2}%
+\contentsline {subsection}{\numberline {5.14.3}Ejemplos de aplicaciones}{130}{subsection.5.14.3}%
+\contentsline {subsection}{\numberline {5.14.4}Clasificación de Grafos}{130}{subsection.5.14.4}%
+\contentsline {subsection}{\numberline {5.14.5}Terminología}{131}{subsection.5.14.5}%
+\contentsline {subsection}{\numberline {5.14.6}Ejemplos empíricos: Distribución de grado en redes reales}{131}{subsection.5.14.6}%
+\contentsline {section}{\numberline {5.15}Propiedades de los Grafos}{132}{section.5.15}%
+\contentsline {subsection}{\numberline {5.15.1}Ejemplos Clásicos de Grafos}{133}{subsection.5.15.1}%
+\contentsline {subsection}{\numberline {5.15.2}Ejercicios Propuestos}{135}{subsection.5.15.2}%
+\contentsline {section}{\numberline {5.16}Representación de grafos}{135}{section.5.16}%
+\contentsline {subsection}{\numberline {5.16.1}Listas de adyacencia}{136}{subsection.5.16.1}%
+\contentsline {subsection}{\numberline {5.16.2}Matriz de adyacencia}{136}{subsection.5.16.2}%
+\contentsline {subsection}{\numberline {5.16.3}Matriz de incidencia}{137}{subsection.5.16.3}%
+\contentsline {section}{\numberline {5.17}Subgrafos e Isomorfismo}{138}{section.5.17}%
+\contentsline {subsection}{\numberline {5.17.1}Subgrafos}{138}{subsection.5.17.1}%
+\contentsline {subsection}{\numberline {5.17.2}Isomorfismo de grafos}{138}{subsection.5.17.2}%
+\contentsline {subsection}{\numberline {5.17.3}Demostrando isomorfismo y no isomorfismo}{139}{subsection.5.17.3}%
+\contentsline {subsubsection}{Demostrando que dos grafos no son isomorfos}{139}{section*.105}%
+\contentsline {subsubsection}{Clases de isomorfismo}{140}{section*.106}%
+\contentsline {subsubsection}{Ejercicios sobre isomorfismo}{140}{section*.107}%
+\contentsline {section}{\numberline {5.18}Caminos en grafos}{141}{section.5.18}%
+\contentsline {subsection}{\numberline {5.18.1}Navegando grafos}{141}{subsection.5.18.1}%
+\contentsline {subsection}{\numberline {5.18.2}Definición de camino}{141}{subsection.5.18.2}%
+\contentsline {subsection}{\numberline {5.18.3}Conectividad de grafos no dirigidos}{142}{subsection.5.18.3}%
+\contentsline {paragraph}{Propiedades e implicancias}{142}{section*.108}%
+\contentsline {subsection}{\numberline {5.18.4}Componentes conexas}{142}{subsection.5.18.4}%
+\contentsline {subsection}{\numberline {5.18.5}Conectividad de grafos dirigidos}{143}{subsection.5.18.5}%
+\contentsline {subsubsection}{Conectividad fuerte y débil en grafos dirigidos}{143}{section*.109}%
+\contentsline {subsubsection}{Componentes fuertemente conexas}{144}{section*.110}%
+\contentsline {subsection}{\numberline {5.18.6}Caminos e isomorfismo}{144}{subsection.5.18.6}%
+\contentsline {subsection}{\numberline {5.18.7}Ejercicios}{144}{subsection.5.18.7}%
+\contentsline {section}{\numberline {5.19}Circuitos Eulerianos}{145}{section.5.19}%
+\contentsline {subsection}{\numberline {5.19.1}El Problema de los Puentes de Königsberg}{145}{subsection.5.19.1}%
+\contentsline {subsection}{\numberline {5.19.2}Modelado con Grafos}{145}{subsection.5.19.2}%
+\contentsline {subsection}{\numberline {5.19.3}Solución al problema de los puentes de Königsberg}{146}{subsection.5.19.3}%
+\contentsline {subsection}{\numberline {5.19.4}Demostración del Teorema de Euler}{147}{subsection.5.19.4}%
+\contentsline {subsection}{\numberline {5.19.5}Caminos eulerianos}{148}{subsection.5.19.5}%
+\contentsline {subsection}{\numberline {5.19.6}Caminos y circuitos eulerianos en grafos dirigidos}{149}{subsection.5.19.6}%
+\contentsline {section}{\numberline {5.20}Circuitos Hamiltonianos}{149}{section.5.20}%
+\contentsline {subsection}{\numberline {5.20.1}Introducción}{149}{subsection.5.20.1}%
+\contentsline {subsection}{\numberline {5.20.2}Definición}{150}{subsection.5.20.2}%
+\contentsline {subsection}{\numberline {5.20.3}Condiciones necesarias y suficientes}{150}{subsection.5.20.3}%
+\contentsline {subsubsection}{Condiciones necesarias para descartar hamiltonicidad}{151}{section*.111}%
+\contentsline {subsubsection}{Condiciones suficientes para circuitos hamiltonianos}{151}{section*.112}%
+\contentsline {subsubsection}{Ejercicios}{153}{section*.113}%
+\contentsline {section}{\numberline {5.21}Caminos más cortos sobre grafos}{153}{section.5.21}%
+\contentsline {subsection}{\numberline {5.21.1}Motivación}{153}{subsection.5.21.1}%
+\contentsline {section}{\numberline {5.22}Grafos con pesos}{154}{section.5.22}%
+\contentsline {subsection}{\numberline {5.22.1}Algoritmo de Dijkstra}{154}{subsection.5.22.1}%
+\contentsline {subsubsection}{Pseudocódigo comentado}{156}{section*.115}%
+\contentsline {subsection}{\numberline {5.22.2}Observaciones importantes}{156}{subsection.5.22.2}%
+\contentsline {section}{\numberline {5.23}Colorabilidad de grafos}{157}{section.5.23}%
+\contentsline {subsection}{\numberline {5.23.1}Número cromático}{157}{subsection.5.23.1}%
+\contentsline {subsection}{\numberline {5.23.2}Aplicación: Programación de exámenes}{158}{subsection.5.23.2}%
+\contentsline {subsection}{\numberline {5.23.3}Aplicación: Pintando mapas}{158}{subsection.5.23.3}%
+\contentsline {section}{\numberline {5.24}Grafos planares}{159}{section.5.24}%
+\contentsline {subsection}{\numberline {5.24.1}Aplicación: Diseño de circuitos eléctricos}{160}{subsection.5.24.1}%
+\contentsline {subsection}{\numberline {5.24.2}Fórmula de Euler}{160}{subsection.5.24.2}%
+\contentsline {subsection}{\numberline {5.24.3}Corolarios de la fórmula de Euler}{162}{subsection.5.24.3}%
+\contentsline {section}{\numberline {5.25}Teorema de los Cuatro Colores}{163}{section.5.25}%
+\contentsline {paragraph}{La idea de la demostración.}{163}{section*.119}%
+\contentsline {paragraph}{Segunda prueba (Robertson et al., 1997)}{163}{section*.120}%
+\contentsline {paragraph}{Estado actual.}{163}{section*.121}%
+\contentsline {subsection}{\numberline {5.25.1}Teoremas de coloración débil para grafos planares}{164}{subsection.5.25.1}%
+\contentsline {section}{\numberline {5.26}Árboles}{166}{section.5.26}%
+\contentsline {subsection}{\numberline {5.26.1}Motivación e historia}{166}{subsection.5.26.1}%
+\contentsline {subsection}{\numberline {5.26.2}¿Qué es un árbol?}{166}{subsection.5.26.2}%
+\contentsline {subsection}{\numberline {5.26.3}Ejemplos y contraejemplos}{167}{subsection.5.26.3}%
+\contentsline {subsection}{\numberline {5.26.4}Aplicaciones de los árboles}{167}{subsection.5.26.4}%
+\contentsline {subsection}{\numberline {5.26.5}Caracterizaciones alternativas}{168}{subsection.5.26.5}%
+\contentsline {paragraph}{1 $\Rightarrow $ 2:}{169}{section*.123}%
+\contentsline {paragraph}{2 $\Rightarrow $ 1:}{169}{section*.124}%
+\contentsline {paragraph}{1 $\Rightarrow $ 3:}{169}{section*.125}%
+\contentsline {paragraph}{3 $\Rightarrow $ 1:}{169}{section*.126}%
+\contentsline {subsection}{\numberline {5.26.6}Árboles con raíz}{170}{subsection.5.26.6}%
+\contentsline {subsection}{\numberline {5.26.7}Árboles $m$-arios}{170}{subsection.5.26.7}%
+\contentsline {paragraph}{\( \Rightarrow \)}{171}{section*.130}%
+\contentsline {paragraph}{ \( \Leftarrow \)}{171}{section*.131}%
+\contentsline {section}{\numberline {5.27}Árboles Generadores}{172}{section.5.27}%
+\contentsline {subsection}{\numberline {5.27.1}Motivación: Conectividad Mínima}{172}{subsection.5.27.1}%
+\contentsline {subsubsection}{Aplicación: Recorrido Eficiente}{173}{section*.132}%
+\contentsline {subsection}{\numberline {5.27.2}Caracterización de Grafos que Admiten Árbol Generador}{173}{subsection.5.27.2}%
+\contentsline {subsection}{\numberline {5.27.3}Construcción de Árboles Generadores}{174}{subsection.5.27.3}%
+\contentsline {subsubsection}{Búsqueda en Profundidad (DFS)}{174}{section*.133}%
+\contentsline {subsubsection}{Búsqueda a lo Ancho (BFS)}{175}{section*.135}%
+\contentsline {subsection}{\numberline {5.27.4}Ejercicios Propuestos}{176}{subsection.5.27.4}%
+\contentsline {section}{\numberline {5.28}Árboles Generadores de Costo Mínimo}{177}{section.5.28}%
+\contentsline {subsection}{\numberline {5.28.1}Definición y Motivación}{177}{subsection.5.28.1}%
+\contentsline {subsection}{\numberline {5.28.2}Algoritmo de Prim}{177}{subsection.5.28.2}%
+\contentsline {subsection}{\numberline {5.28.3}Algoritmo de Kruskal}{178}{subsection.5.28.3}%
+\contentsline {subsection}{\numberline {5.28.4}Correctitud de los algoritmos}{179}{subsection.5.28.4}%

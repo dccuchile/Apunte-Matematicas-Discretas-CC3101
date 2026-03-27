@@ -1,0 +1,214 @@
+\section{Clasificación de Fórmulas en Lógica Proposicional}
+
+En esta sección, estudiaremos cómo se pueden clasificar distintas fórmulas de la lógica proposicional según sus propiedades lógicas. Esto nos permitirá entender mejor la estructura de los enunciados lógicos y su comportamiento bajo distintas valuaciones.
+
+\subsection{Satisfactibilidad}
+
+En lógica proposicional, una de las propiedades fundamentales de un conjunto de fórmulas es su \textbf{satisfactibilidad}. Esta propiedad nos indica si existe al menos una asignación de valores de verdad a las variables proposicionales que haga verdaderas todas las fórmulas de un conjunto dado.
+
+\begin{thmblock}{Definición: Satisfactibilidad}
+  Un conjunto de fórmulas \( \Gamma = \{\alpha, \beta, \gamma, \ldots\} \subseteq \mathcal{L}(P) \) se dice \textbf{satisfactible} si y solo si existe al menos una valuación \( \sigma \colon P \to \{0,1\} \) tal que:
+  \[
+    \hat{\sigma}(\alpha) = \hat{\sigma}(\beta) = \hat{\sigma}(\gamma) = \dots = 1.
+  \]
+  En caso contrario, si no existe ninguna valuación que haga verdaderas todas las fórmulas del conjunto simultáneamente, se dice que \( \Gamma \) es \textbf{insatisfactible}.
+\end{thmblock}
+
+\subsubsection*{Ejemplos de Satisfactibilidad e Insatisfactibilidad}
+
+Para comprender mejor esta definición, consideremos algunos ejemplos concretos:
+
+\begin{itemize}
+  \item \( \{p \lor q\} \) es un conjunto satisfactible, ya que, por ejemplo, la valuación \( \sigma(p) = 1, \sigma(q) = 0 \) hace que la fórmula sea verdadera.
+  \item \( \{p \land q, p \land \lnot q\} \) es insatisfactible, porque no hay una valuación que pueda hacer ambas fórmulas verdaderas al mismo tiempo. En efecto, la primera exige que \( p \) y \( q \) sean verdaderos, mientras que la segunda requiere que \( p \) sea verdadero pero \( q \) sea falso, lo cual es contradictorio.
+\end{itemize}
+
+\subsubsection*{Aplicaciones de la Satisfactibilidad}
+
+El problema de satisfactibilidad proposicional (SAT) fue el primero en demostrarse \textbf{NP-completo} (Teorema de Cook, 1971). Ser NP-completo implica que la resolución de SAT en su forma general puede requerir un tiempo exponencial en función del número de variables, lo que hace que su solución sea computacionalmente difícil a gran escala. in embargo, en la práctica, existen algoritmos avanzados llamados \textbf{SAT-solvers} que pueden resolver muchas instancias grandes de manera eficiente mediante heurísticas y optimización.
+
+Tiene múltiples aplicaciones en diversas áreas de la informática y la matemática:
+
+\begin{itemize}
+  \item \textbf{Verificación de software y hardware:} Se utiliza en la verificación formal de circuitos digitales y programas para determinar si existen errores lógicos en su funcionamiento. 
+
+  \item \textbf{Optimización combinatoria:} La satisfactibilidad booleana es la base de problemas de optimización como el problema del corte mínimo, la asignación de tareas y la generación de horarios.
+
+\item \textbf{Criptografía y seguridad informática:} Problemas SAT se usan en el análisis de protocolos criptográficos para detectar vulnerabilidades. También se aplican en la recuperación de claves cifradas y en la verificación de la resistencia de sistemas de seguridad.
+
+
+\end{itemize}
+
+
+
+\subsection{Tautologías y Contradicciones}
+
+Otra clasificación importante en lógica proposicional es la de \textbf{tautologías} y \textbf{contradicciones}. Estas nociones permiten identificar fórmulas que son siempre verdaderas o siempre falsas, independientemente de la valuación que se elija.
+
+\begin{thmblock}{Definición: Tautología y Contradicción}
+  Una fórmula \( \alpha \in \mathcal{L}(P) \) es una \textbf{tautología} si y solo si es verdadera bajo \emph{todas} las valuaciones posibles, es decir, si para toda valuación \( \sigma \colon P \to \{0,1\} \) se cumple que:
+  \[
+    \hat{\sigma}(\alpha) = 1.
+  \]
+  
+  Una fórmula \( \alpha \in \mathcal{L}(P) \) es una \textbf{contradicción} si y solo si es falsa bajo \emph{todas} las valuaciones posibles, es decir, si para toda valuación \( \sigma \colon P \to \{0,1\} \) se cumple que:
+  \[
+    \hat{\sigma}(\alpha) = 0.
+  \]
+\end{thmblock}
+
+\subsubsection*{Ejemplos de Tautologías y Contradicciones}
+
+A continuación, se presentan algunos ejemplos para ilustrar estas definiciones:
+
+
+  \begin{itemize}
+    \item \( p \lor \lnot p \) es una tautología, ya que siempre será verdadera sin importar la valuación de \( p \).
+    \item \( p \rightarrow (p \lor q) \) es también una tautología, pues siempre que \( p \) sea verdadero, entonces $p \lor q$ también lo será.
+    \item \( p \land \lnot p \) es una contradicción, ya que nunca puede ser verdadera, sin importar la valuación de \( p \).
+  \end{itemize}
+
+
+\subsection{Relación entre Contradicción e Insatisfactibilidad}
+
+Una contradicción es una fórmula que es falsa bajo todas las valuaciones posibles. Por lo tanto, un conjunto que contenga al menos una contradicción es insatisfactible, ya que no existe ninguna valuación que lo haga verdadero.
+
+De manera más general, un conjunto de fórmulas es insatisfactible cuando la conjunción de todas sus fórmulas forma una contradicción. Esto significa que no hay una asignación de valores de verdad que satisfaga simultáneamente todas las fórmulas del conjunto.
+
+\begin{exampleblock}{Ejemplo} 
+  El conjunto \( \{p \lor q, \lnot p, \lnot q\} \) es insatisfactible, ya que su conjunción equivale a la contradicción \( (p \lor q) \land \lnot p \land \lnot q \), la cual es falsa bajo cualquier valuación.
+\end{exampleblock}
+
+
+\section{Equivalencia de fórmulas}
+
+Comprender la equivalencia de fórmulas es útil para la simplificación de expresiones lógicas y la verificación de argumentos. Nos permite transformar fórmulas en formas más manejables y demostrar propiedades de los sistemas lógicos.
+
+Informalmente, dos fórmulas $\alpha,\beta \in \mathcal{L}(P)$ se dicen \textbf{equivalentes} si tienen la misma tabla de verdad. Formalmente:
+
+\begin{thmblock}{Definición: Equivalencia}
+Dos fórmulas $\alpha,\beta \in \mathcal{L}(P)$ son (semánticamente) \textbf{equivalentes}, notado $\alpha \equiv \beta$, si y sólo si $$ \hat{\sigma}(\alpha) = \hat{\sigma}(\beta)$$ para toda valuación $\sigma \colon P \rightarrow \{0,1\}$.
+\end{thmblock}
+
+\subsubsection*{Ejemplo}
+
+Demostremos que $\lnot(p \lor q) \equiv \lnot p \land \lnot q$ mediante su tabla de verdad.
+
+\begin{center} 
+\begin{tabular}{|c|c||c|c|}
+\hline 
+p & q  &  $\lnot(p \lor q)$ & $ \lnot p \land \lnot q $ \\\hline 
+1 &  1 &   0  &  0 \\\hline 
+1 & 0 &  0  & 0  \\\hline 
+0 & 1 &  0  & 0  \\\hline 
+0 & 0 &  1  & 1  \\\hline 
+\end{tabular}
+\end{center}
+
+Se observa que ambas columnas son iguales, por lo que las fórmulas son equivalentes.
+
+\subsection{Algunas equivalencias útiles}
+
+Las siguientes equivalencias son herramientas esenciales en la manipulación de expresiones lógicas:
+
+\begin{thmblock}{Equivalencias útiles}
+\begin{align*}     
+\text{Leyes de De Morgan} \quad & \neg (p \wedge q)  \equiv  \neg p \vee \neg q \\
+& \neg (p \vee q)  \equiv  \neg p \wedge \neg q \\
+\\
+\text{Asociatividad de } \wedge \text{ y } \vee \quad & p \wedge (q \wedge r)  \equiv  (p \wedge q) \wedge r\\
+& p \vee (q \vee r) \equiv (p \vee q) \vee r\\
+\\
+\text{Caracterización alternativa de } \rightarrow \quad & p \rightarrow q  \equiv  \neg p \vee q
+\end{align*}
+\end{thmblock}
+
+\begin{exampleblock}{Ejercicio de Equivalencia}
+\begin{center}
+\textbf{¿Es el conectivo de implicación  ($\rightarrow$) asociativo?}
+\end{center}
+Para responder esta pregunta, basta con analizar la equivalencia:
+\[
+(p \rightarrow q ) \rightarrow r  \equiv   p \rightarrow (q  \rightarrow r ) 
+\]
+Que podemos verificar si son iguales usando las tablas de verdad.
+\end{exampleblock}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Consecuencia Lógica}
+
+La noción de \textbf{consecuencia lógica} es clave en lógica matemática, ya que permite formalizar cuándo una \textbf{conclusión} se \textbf{deriva} lógicamente de un \textbf{conjunto de premisas}. Esta noción subyace en el concepto de inferencia lógica y es clave para la validez de argumentos.
+
+Sea $\Gamma$ un conjunto de fórmulas (premisas) y $\alpha$ una fórmula (conclusión). Decimos que $\alpha$ es \textbf{consecuencia lógica} de $\Gamma$ si cada vez que todas las fórmulas en $\Gamma$ son verdaderas, entonces $\alpha$ también es verdadera. Escribimos esto como:
+\[ \Gamma \models \alpha. \]
+
+Es decir, si asumimos que las premisas son verdaderas, entonces la conclusión necesariamente también debe serlo. Si encontramos al menos una interpretación en la que todas las premisas son verdaderas y la conclusión es falsa, entonces no hay consecuencia lógica.
+
+En lógica, la \textbf{validez} es una propiedad que tienen los argumentos cuando las premisas implican la conclusión. Si la conclusión es una consecuencia lógica de las premisas, se dice que el argumento es \textbf{deductivamente válido}. En este contexto, consideraremos estas dos nociones como idénticas.
+
+
+\subsection{Ejemplos Clásicos de Consecuencia Lógica}
+
+Existen reglas clásicas de inferencia que ejemplifican el concepto de consecuencia lógica. Algunas de ellas son:
+
+\begin{itemize}
+    \item \textbf{Modus ponens}: \quad $\{p, p \rightarrow q\} \models q$
+    \item \textbf{Modus tollens}: \quad $\{\neg q, p \rightarrow q\} \models \neg p$
+    \item \textbf{Transitividad de la implicación}: \quad $\{p \rightarrow q, q \rightarrow r\} \models p \rightarrow r$
+\end{itemize}
+
+Estos esquemas de inferencia pueden verificarse mediante tablas de verdad como lo hicimos al verificar si un argumento es valido.
+
+
+\subsection{Definición Formal}
+
+\begin{thmblock}{Definición: Consecuencia lógica} Sea $\Gamma$ un conjunto de fórmulas en un lenguaje lógico $\mathcal{L}(P)$ y $\alpha$ una fórmula en el mismo lenguaje. Decimos que $\alpha$ es \textbf{consecuencia lógica} de $\Gamma$, denotado $\Gamma \models \alpha$, si y sólo si para toda valuación $\sigma : P \to \{0,1\}$,
+\[ \text{si } \hat{\sigma}(\Gamma) = 1, \text{ entonces } \hat{\sigma}(\alpha) = 1. \]
+
+Esto significa que $\alpha$ debe ser verdadero en toda valuación en la que todas las fórmulas de $\Gamma$ son verdaderas.
+\end{thmblock}
+
+Notar que no nos importan aquellas valuaciones $\sigma$ donde $\hat{\sigma}(\Gamma) \neq 1$. El valor de $\alpha$  en esas valuaciones es irrelevante.
+
+\subsection{Propiedades Importantes}
+
+La consecuencia lógica cumple con varias propiedades fundamentales que nos permiten derivar resultados de manera más estructurada y comprender mejor las relaciones entre distintas proposiciones. A continuación, presentamos algunas propiedades relevantes:
+
+
+Para todo conjunto de fórmulas $\Gamma$ y todas las fórmulas $\alpha, \beta$ se cumplen las siguientes propiedades:
+
+\begin{itemize}
+    \item \textbf{Equivalencia lógica:} $\alpha \equiv \beta$ si y sólo si $\{\alpha\} \models \beta$ y $\{\beta\} \models \alpha$. Esto significa que ambas fórmulas tienen el mismo valor de verdad en todas las interpretaciones.
+    
+    \item \textbf{Relación con insatisfactibilidad:} $\Gamma \models \alpha$ si y sólo si $\Gamma \cup \{\neg \alpha\}$ es insatisfactible. Esta propiedad es útil para demostrar la validez de inferencias mediante el método de reducción al absurdo.
+    
+    \item \textbf{Regla de deducción:} $\Gamma \models \alpha \rightarrow \beta$ si y sólo si $\Gamma \cup \{\alpha\} \models \beta$. Es un recurso esencial para derivar conclusiones en sistemas formales.
+    
+    \item \textbf{Monotonía:} Si $\Gamma \models \alpha$ entonces $\Gamma \cup \{ \beta \} \models \alpha$. Esto significa que al agregar más premisas a $\Gamma$, no se pierde la capacidad de inferir $\alpha$.
+\end{itemize}
+
+\subsubsection*{Ejemplo de Monotonía con un Conjunto Insatisfactible}
+
+\noindent\textbf{Pregunta:}\; Sabemos que $\{p,\ p \rightarrow q\} \models q$. Por la propiedad de monotonía de la consecuencia lógica, también se cumple:
+\[
+\{p,\ p \rightarrow q,\ \neg q\} \models q.
+\]
+\textbf{\emph{¿Cómo es esto posible?}}
+
+La respuesta radica en que $\{p, p \rightarrow q, \neg q\}$ es un conjunto \emph{insatisfactible}; no existe valuación que haga todas estas fórmulas verdaderas simultáneamente. En lógica proposicional, cuando un conjunto de premisas es insatisfactible, se sigue trivialmente que se puede derivar cualquier conclusión.
+
+\begin{itemize}
+\item Si un conjunto es insatisfactible, no hay asignaciones de verdad que satisfagan simultáneamente todas sus fórmulas.
+\item Por definición, en cada valuación que ``satisface'' el conjunto (no existe ninguna), la conclusión es verdadera de manera vacía o trivial.
+\end{itemize}
+
+Este hecho, aunque pueda parecer extraño, se desprende directamente de nuestras definiciones y pone de manifiesto por qué queremos evitar conjuntos insatisfactibles en el razonamiento lógico, ya que de ellos se podría derivar cualquier cosa.
+
+\subsection{Ejercicios}
+
+\textbf{Ejercicio 1:} Demuestre la relación con insatisfactibilidad: $\Gamma \models \alpha$ si y sólo si $\Gamma \cup \{\neg \alpha\}$ es insatisfactible.
+
+\textbf{Ejercicio 2:} Demuestre la regla de deducción: $\Gamma \models \alpha \rightarrow \beta$ si y sólo si $\Gamma \cup \{\alpha\} \models \beta$.
+
+\textbf{Ejercicio 3:} Explique por qué, a partir de un conjunto de premisas insatisfactible, se puede derivar cualquier conclusión.

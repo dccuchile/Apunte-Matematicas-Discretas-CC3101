@@ -1,0 +1,285 @@
+% \title{Apunte de Matemáticas Discretas CC3101:\\ 
+% Funciones Generadoras (Parte 1)  Clase 15}
+% % \title{Ejercicios Lógica e Inducción}
+% \author{Andrés Abeliuk}
+% \date{}
+% \maketitle
+
+
+\section{Funciones Generadoras}
+\subsection{Introducción}
+
+En muchas ocasiones, necesitamos describir secuencias de números, por ejemplo, el número de formas de resolver un problema de conteo o los términos definidos por una relación de recurrencia. Existen varias formas de describir una secuencia:
+
+\begin{itemize}
+    \item Por extensión: listar los primeros términos, como $0, 1, 3, 7, 15, 31, \ldots$
+    \item Por una relación de recurrencia: por ejemplo, $a_n = 2a_{n-1} + 1$
+    \item Por una fórmula cerrada: como $a_n = 2^n - 1$
+\end{itemize}
+
+Sin embargo, existe una herramienta aún más poderosa: asociar a la secuencia una \emph{función generadora}, que encapsula toda la información de la secuencia en una única expresión formal. Las funciones generadoras no sólo permiten representar una secuencia, sino también manipularla algebraicamente para obtener nuevas propiedades y resolver recurrencias.
+
+\subsection{Definición de Función Generadora}
+
+\begin{definitionblock}{Función Generadora}
+Sea $\{a_n\}_{n \geq 0}$ una secuencia de números reales o complejos. Su \textbf{función generadora ordinaria} (o simplemente función generadora) es la serie formal:
+\[
+A(x) = \sum_{n \geq 0} a_n x^n
+\]
+Aquí, $x$ se interpreta como un marcador formal, no como una variable real: lo que nos interesa no es el valor de la suma sino los coeficientes $a_n$.
+\end{definitionblock}
+
+
+\subsection{Ejemplos Iniciales}
+
+\begin{exampleblock}{Ejemplo secuencia constante:}
+La secuencia constante $a_n = 3$, para todo $n \geq 0$, tiene como función generadora:
+\[
+A(x) = \sum_{n \geq 0} 3x^n = 3(1 + x + x^2 + x^3 + \cdots)
+\]
+Pero puede escribirse en forma más sucinta: $A(x)$ es una \textbf{serie geométrica}, cuya suma conocemos si $|x| < 1$:
+\[
+A(x) = \frac{3}{1 - x}
+\]
+\end{exampleblock}
+
+\begin{exampleblock}{Ejemplo secuencia lineal:}
+Para $a_n = n+1$, tenemos:
+\[
+A(x) = \sum_{n \geq 0} (n+1)x^n = \frac{1}{(1 - x)^2}
+\]
+\end{exampleblock}
+
+
+
+\begin{exampleblock}{Ejemplo secuencia exponencial:}
+Para $a_n = c^n$, con $c$ constante:
+\[
+A(x) = \sum_{n \geq 0} (cx)^n = \frac{1}{1 - cx}
+\]
+\end{exampleblock}
+
+\begin{exampleblock}{Ejemplo secuencia binomio:}
+Para $a_n = \binom{m}{n}$ con $m$ fijo, entonces:
+\[
+A(x) = \sum_{n \geq 0} \binom{m}{n} x^n = (1 + x)^m
+\]
+\end{exampleblock}
+
+\subsection{Resolución de Recurrencias}
+
+Una de las principales aplicaciones de las funciones generadoras es resolver relaciones de recurrencia. Veremos cómo transformar una recurrencia en una expresión cerrada usando funciones generadoras.
+
+\subsubsection*{Ejemplo}
+Sea la secuencia definida recursivamente por $a_0 = 0$ y $a_{n+1} = 2a_n + 1$ para todo $n \geq 0$.
+
+Queremos encontrar una forma cerrada para $a_n$. Para ello, multiplicamos ambos lados de la recurrencia por $x^n$:
+\[
+a_{n+1}x^n = 2a_n x^n + x^n
+\]
+y luego sumamos para todo $n \geq 0$:
+\[
+\sum_{n \geq 0} a_{n+1} x^n = \sum_{n \geq 0} (2a_n + 1)x^n
+\]
+
+En el lado izquierdo tenemos \emph{casi} $A(x)$, excepto por el \'indice $n+1$ en vez de $n$. Podemos re-armar $A(x)$ ``multiplicando y dividiendo por $x$'':
+% El lado izquierdo se reescribe como:
+\[
+\sum_{n \geq 0} a_{n+1} x^n ={\frac{1}{x}\sum_{n\geq 0}{a_{n+1} x^{n+1}} }= \frac{A(x) - a_0}{x} = \frac{A(x)}{x}
+\]
+ En el lado derecho tenemos 
+\begin{align*}
+    \sum_{n\geq 0}{(2 a_n x^n + x^n)} &
+    ~=~ 2\sum_{n\geq 0}{a_n x^n} + \sum_{n\geq 0}{x^n} 
+    ~=~ 2 A(x) +\sum_{n\geq 0} x^n 
+    ~=~ 2A(x) + \frac{1}{1-x}
+\end{align*}     
+donde usamos la forma cerrada para la serie geom\'etrica (v\'alida para 
+   $|x|<1$, lo cual supondremos siempre en estas manipulaciones).\\
+Igualando ambas expresiones:
+\[
+\frac{A(x)}{x} = 2A(x) + \frac{1}{1 - x}
+\]
+Despejando $A(x)$:
+\[
+A(x) = \frac{x}{(1 - x)(1 - 2x)}
+\]
+
+\begin{exampleblock}{¿Cómo seguimos?} Si podemos transformar $A(x)$ de vuelta en una serie tipo $\sum_{n\geq 0}{a_nx^n}$, basta con identificar el coeficiente de $x^n$ para obtener una fórmula explícita para $a_n$.
+\end{exampleblock}
+
+Para ello, realizamos una expansión en fracciones parciales. Notamos que:
+\[
+\frac{x}{(1 - x)(1 - 2x)} = x\left(\frac{2}{1 - 2x} - \frac{1}{1 - x}\right)
+\]
+Y sabemos las series que representan las dos fracciones de la derecha:
+\[
+x \cdot \left(\frac{2}{1 - 2x}\right) - x \cdot \left(\frac{1}{1 - x}\right) = 2x \cdot \sum_{n\geq 0}(2x)^n - x \cdot \sum_{n\geq 0} x^n
+\]
+% Recordando que $\sum_{n\geq 0} x^n = \frac{1}{1 - x}$ para $|x| < 1$, 
+Obtenemos:
+\[
+2x \cdot \sum_{n\geq 0}(2^n x^n) = \sum_{n\geq 0} 2^{n+1} x^{n+1} = \sum_{n\geq 1} 2^n x^n
+\]
+\[
+x \cdot \sum_{n\geq 0} x^n = \sum_{n\geq 0} x^{n+1} = \sum_{n\geq 1} x^n
+\]
+
+Restando las dos series:
+\[
+\sum_{n\geq 1}(2^n - 1) x^n = \sum_{n\geq 0}(2^n - 1)x^n - (2^0 - 1) = \sum_{n\geq 0}(2^n - 1)x^n
+\]
+
+Por lo tanto, \textbf{la solución de la recurrencia es}:
+\[
+a_n = 2^n - 1
+\]
+
+
+\subsection{Resolución de recurrencias: Receta General}
+La técnica de funciones generadoras es especialmente útil para resolver relaciones de recurrencia y obtener formas cerradas de sus soluciones. A continuación presentamos una receta paso a paso que resume el proceso:
+
+\begin{enumerate}
+  \item \textbf{Transformar la relación de recurrencia en una función generadora:}
+  \begin{enumerate}[label=\alph*)]
+    \item Asegúrese de que la recurrencia esté bien definida, incluyendo condiciones iniciales claras y los valores de $n$ para los cuales se aplica.
+    \item Dé un nombre a la función generadora: por ejemplo, $A(x) = \sum_{n \geq 0} a_n x^n$.
+    \item Multiplique ambos lados de la relación por $x^n$.
+    \item Sume ambos lados para todos los valores de $n$ donde la relación es válida.
+    \item Exprese los resultados en términos de la función generadora $A(x)$.
+    \item Despeje $A(x)$.
+  \end{enumerate}
+
+  \item \textbf{Transformar $A(x)$ en una serie de potencias:}
+  \begin{enumerate}[label=\alph*)]
+    \item Si $A(x)$ es una función racional (es decir, cociente entre dos polinomios), intente expandirla mediante \emph{fracciones parciales}.
+    \item Utilice identidades conocidas de series geométricas para reescribir cada término como una serie de potencias.
+  \end{enumerate}
+
+  \item \textbf{Leer la solución:}
+  \begin{enumerate}[label=\alph*)]
+    \item Identifique el coeficiente de $x^n$ en la expansión final: eso corresponde al valor de $a_n$ en forma cerrada.
+  \end{enumerate}
+\end{enumerate}
+
+Este procedimiento ha sido ilustrado en el ejemplo del caso $a_{n+1} = 2a_n + 1$, donde finalmente llegamos a la forma cerrada $a_n = 2^n - 1$ a través de funciones generadoras.
+
+\subsection{Propiedades y ejemplos clásicos de funciones generadoras}
+
+Las funciones generadoras no solo sirven para resolver recurrencias, sino que también poseen propiedades algebraicas que facilitan su manipulación y permiten construir nuevas funciones a partir de otras ya conocidas. En esta sección reunimos varios resultados útiles y ejemplos clásicos.
+
+\subsubsection{Operaciones básicas entre funciones generadoras}
+
+\begin{thmblock}{Teorema (Serie de Potencias)}
+Si $A(x) = \sum_{n\geq 0} a_n x^n$ y $B(x) = \sum_{n\geq 0} b_n x^n$ son funciones generadoras y ambas series convergen, entonces:
+
+\begin{itemize}
+  \item Suma:
+  \[
+  A(x) + B(x) = \sum_{n\geq 0} (a_n + b_n) x^n
+  \]
+
+  \item Producto (convolución):
+  \[
+  A(x) \cdot B(x) = \sum_{n\geq 0} \left(\sum_{k=0}^{n} a_k b_{n-k} \right) x^n
+  \]
+  Esta operación se conoce como \emph{convolución}.
+\end{itemize}
+\end{thmblock}
+
+\begin{exampleblock}{Ejemplo: convolución de series geométricas}
+Sea $A(x)=\frac{1}{(1 - x)^2}$ una función generadora.
+Queremos obtener su expansión como serie de potencias.
+
+Primero, recordemos que:
+\[
+\frac{1}{1 - x} = \sum_{n\geq 0} x^n
+\]
+
+Multiplicando dos veces esta serie:
+\[
+\left(\frac{1}{1 - x}\right)^2 = \left(\sum_{n\geq 0} x^n\right)^2 = \sum_{n\geq 0} (n + 1) x^n
+\]
+
+Esto corresponde a la función generadora de la secuencia $1, 2, 3, 4, \dots$.
+\end{exampleblock}
+
+\subsection{Catálogo clásico de funciones generadoras}
+
+\begin{center}
+\def\arraystretch{1.3}
+\begin{tabular}{l|c|c}
+\hline
+\textbf{Secuencia} & \textbf{Función Generadora} & \textbf{Forma cerrada} \\
+\hline\hline
+$1, 0, 0, 0, \ldots$ & $\sum_{n\geq 0} [n = 0] x^n$ & $1$ \\
+$1, 1, 1, 1, \ldots$ & $\sum_{n\geq 0} x^n$ & $\frac{1}{1 - x}$ \\
+$1, -1, 1, -1, \ldots$ & $\sum_{n\geq 0} (-1)^n x^n$ & $\frac{1}{1 + x}$ \\
+$1, c, c^2, c^3, \ldots$ & $\sum_{n\geq 0} c^n x^n$ & $\frac{1}{1 - cx}$ \\
+$1, 2, 3, 4, \ldots$ & $\sum_{n\geq 0} (n + 1) x^n$ & $\frac{1}{(1 - x)^2}$ \\
+$\binom{c}{0}, \binom{c}{1}, \ldots$ & $\sum_{n\geq 0} \binom{c}{n} x^n$ & $(1 + x)^c$ \\
+$\binom{c - 1}{0}, \binom{c}{1}, \ldots$ & $\sum_{n\geq 0} \binom{c + n - 1}{n} x^n$ & $\frac{1}{(1 - x)^c}$ \\
+\hline
+\end{tabular}
+\end{center}
+
+Estas funciones generadoras permiten reconocer patrones y resolver rápidamente problemas de conteo o recurrencias.
+
+\bigskip
+
+\subsection{Ejemplo: sucesión de Fibonacci}
+\noindent \textbf{Paso 1.} A partir de la relación de recurrencia $F_{n+1} = F_n + F_{n-1}$, con $F_0 = 0$ y $F_1 = 1$, queremos obtener la función generadora $F(x) = \sum_{n \geq 0} F_n x^n$.
+
+\noindent Multiplicamos ambos lados por $x^n$ y sumamos desde $n = 1$:
+\[
+\sum_{n \geq 1} F_{n+1} x^n = \sum_{n \geq 1} F_n x^n + \sum_{n \geq 1} F_{n-1} x^n
+\]
+El lado izquierdo se transforma en:
+\[
+\sum_{n \geq 1} F_{n+1} x^n = \frac{1}{x}(F(x) - x)
+\]
+El lado derecho:
+\[
+\sum_{n \geq 1} F_n x^n + \sum_{n \geq 1} F_{n-1} x^n = F(x) + xF(x)
+\]
+Igualando ambos lados:
+\[
+\frac{1}{x}(F(x) - x) = F(x) + xF(x)
+\]
+Despejando:
+\[
+F(x) = \frac{x}{1 - x - x^2}
+\]
+
+\noindent \textbf{Paso 2.} Recuperamos la serie de potencias de:
+\[
+F(x) = \frac{x}{1 - x - x^2}
+\]
+Esto puede hacerse mediante fracciones parciales. Para ello factorizamos el denominador:
+\[
+1 - x - x^2 = (1 - r_0 x)(1 - r_1 x)
+\]
+donde $r_0 = \frac{1 + \sqrt{5}}{2}$ y $r_1 = \frac{1 - \sqrt{5}}{2}$.
+Así:
+\[
+F(x) = \frac{x}{(1 - r_0 x)(1 - r_1 x)} = \frac{1}{r_0 - r_1} \left(\frac{1}{1 - r_0 x} - \frac{1}{1 - r_1 x}\right)
+\]
+Como sabemos que:
+\[
+\frac{1}{1 - ax} = \sum_{n \geq 0} a^n x^n
+\]
+Podemos escribir:
+\[
+F(x) = \sum_{n \geq 0} \frac{1}{\sqrt{5}} (r_0^n - r_1^n) x^n
+\]
+Por lo tanto,
+\[
+F_n = \frac{1}{\sqrt{5}} (r_0^n - r_1^n)
+\]
+Esta es la conocida fórmula cerrada de los números de Fibonacci, también llamada fórmula de Binet.
+
+\section*{Referencias}
+\textbf{Libros de referencia:}
+\begin{itemize}
+  \item ``Concrete Mathematics'' de R.~Graham, D.~Knuth, y O.~Patashnik.
+\end{itemize}

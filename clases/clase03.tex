@@ -1,0 +1,483 @@
+
+
+\section{Aplicaciones de Satisfactibilidad}
+\subsection{Programación de exámenes universitarios}
+Se deben programar tres exámenes en dos franjas horarias disponibles: \textbf{mañana} (\(t1\)) y \textbf{tarde} (\(t2\)). Los exámenes son:
+
+\begin{itemize}
+    \item \textbf{Matemáticas} (\(\boldsymbol{M}\))
+    \item \textbf{Física} (\(\boldsymbol{P}\))
+    \item \textbf{Ciencias de la Computación} (\(\boldsymbol{C}\))
+\end{itemize}
+
+Las restricciones son:
+\begin{enumerate}
+    \item Cada examen debe programarse en \textbf{exactamente una} franja horaria.
+    \item Los exámenes de Matemáticas y Física \textbf{no pueden coincidir} en la misma franja.
+    \item El examen de Ciencias de la Computación \textbf{debe programarse antes} que el de Matemáticas.
+\end{enumerate}
+
+\subsubsection*{Definición de Variables Booleanas}
+Cada variable \( X_i \) indica si el examen \( X \) está programado en la franja \( ti \):
+
+\begin{itemize}
+    \item \( M_{1}, M_{2} \): Matemáticas en la franja $t1$ o $t2$.
+    \item \( P_{1}, P_{2} \): Física en la franja $t1$ o $t2$.
+    \item \( C_{1}, C_{2} \): Ciencias de la Computación en la franja $t1$ o $t2$.
+\end{itemize}
+
+\subsubsection*{Codificación en lógica proposicional}
+
+\begin{enumerate}
+\item Cada examen debe estar en una única franja
+\begin{align*}
+  (M_{1} \lor M_{2}) \land \neg (M_{1} \land M_{2}) \\
+    (P_{1} \lor P_{2}) \land \neg (P_{1} \land P_{2}) \\
+    (C_{1} \lor C_{2}) \land \neg (C_{1} \land C_{2})
+\end{align*}
+
+\item Matemáticas y Física no pueden coincidir
+\begin{align*}
+   \neg (M_{1} \land P_{1}), \quad \neg (M_{2} \land P_{2})\end{align*}
+
+\item Ciencias de la Computación antes que Matemáticas 
+\begin{align*}
+    &C_{2} \rightarrow \neg M_{1}.\\
+    &\text{(Si C está en $t2$, M no puede estar en $t1$)}
+\end{align*}
+
+\end{enumerate}
+
+
+\subsubsection*{Solución SAT}
+Una asignación válida que cumple todas las restricciones es:
+
+\begin{align*}
+    C_{1} &= \text{true}, \quad C_{2} = \text{false} \\
+    M_{2} &= \text{true}, \quad M_{1} = \text{false} \\
+    P_{2} &= \text{true}, \quad P_{1} = \text{false}
+\end{align*}
+
+\subsubsection*{Interpretación de la Solución:}
+\begin{itemize}
+    \item \textbf{Ciencias de la Computación} → Mañana (\(T1\))
+    \item \textbf{Matemáticas} → Tarde (\(T2\))
+    \item \textbf{Física} → Tarde (\(T2\))
+\end{itemize}
+
+La asignación respeta todas las restricciones, garantizando que \textbf{Ciencias de la Computación ocurre antes que Matemáticas} y que \textbf{Matemáticas y Física no coinciden}.
+
+
+
+
+
+\subsection{Juego del Gato}
+En este problema, modelamos el juego del Gato (\textit{Tic-Tac-Toe}) como un problema de \textbf{satisfactibilidad (SAT)} en lógica proposicional. El objetivo es verificar si el jugador \(X\) tiene una \textbf{jugada ganadora} en su próximo turno.
+
+\subsubsection*{Definición del Problema}
+
+Dado un tablero \(3 \times 3\), donde algunas casillas ya están ocupadas por \(X\) o \(O\), queremos determinar si existe una celda vacía donde \(X\) pueda jugar para ganar inmediatamente.
+
+\subsubsection*{Representación del Tablero}
+
+Definimos el estado de cada celda \((i,j)\) usando dos variables booleanas:
+
+\begin{itemize}
+    \item \( X_{i,j} \): La celda \((i,j)\) está ocupada por \(X\).
+    \item \( O_{i,j} \): La celda \((i,j)\) está ocupada por \(O\).
+\end{itemize}
+
+Las celdas vacías no se modelan explícitamente, sino que se deducen por la ausencia de \(X_{i,j}\) y \(O_{i,j}\).
+
+\subsubsection*{Restricciones del Problema}
+
+\begin{enumerate}
+\item Cada celda debe estar en exactamente un estado, lo que se expresa con la siguiente restricción:
+
+\begin{equation}
+    (\neg X_{i,j} \land \neg O_{i,j}) \lor \left( (X_{i,j} \lor O_{i,j})  \land 
+    \neg(X_{i,j} \land O_{i,j}) \right), \quad \forall i,j.
+\end{equation}
+
+Esta ecuación garantiza que cada celda la celda esté vacía o esté ocupada por \(X\) o \(O\), pero no por ambos a la vez.
+
+\item Condición 1: \(X\) debe jugar en una celda vacía
+
+Para que \(X\) pueda realizar una jugada, debe colocar su marca en una celda que aún no esté ocupada. Dado que las celdas vacías se identifican como aquellas donde \(X_{i,j}\) y \(O_{i,j}\) son falsas, la condición de jugada se expresa como:
+
+\begin{equation}
+    \bigvee_{i,j} ((\neg X_{i,j} \land \neg O_{i,j}) \rightarrow X_{i,j}).
+\end{equation}
+
+Esta ecuación establece que si una celda no está ocupada por \(X\) ni \(O\), entonces \(X\) puede colocar su marca en ella.
+
+\item Condición 2: \(X\) debe completar una fila, columna o diagonal.
+
+
+\begin{itemize}
+    \item \textbf{Fila completa:}
+    \begin{equation}
+        (X_{1,1} \land X_{1,2} \land X_{1,3}) \lor
+        (X_{2,1} \land X_{2,2} \land X_{2,3}) \lor
+        (X_{3,1} \land X_{3,2} \land X_{3,3}).
+    \end{equation}
+
+    \item \textbf{Columna completa:}
+    \begin{equation}
+        (X_{1,1} \land X_{2,1} \land X_{3,1}) \lor
+        (X_{1,2} \land X_{2,2} \land X_{3,2}) \lor
+        (X_{1,3} \land X_{2,3} \land X_{3,3}).
+    \end{equation}
+
+    \item \textbf{Diagonal completa:}
+    \begin{equation}
+        (X_{1,1} \land X_{2,2} \land X_{3,3}) \lor
+        (X_{1,3} \land X_{2,2} \land X_{3,1}).
+    \end{equation}
+\end{itemize}
+
+\end{enumerate}
+
+\subsubsection*{Ejemplo de Tablero y Evaluación}
+
+Supongamos que el tablero actual es:
+
+\begin{center}
+\begin{tabular}{|c|c|c|}
+    \hline
+    \(X\) & \(X\) & \(\emptyset\) \\ \hline
+    \(O\) & \(O\) & \(X\) \\ \hline
+    \(\emptyset\) & \(O\) & \(\emptyset\) \\ \hline
+\end{tabular}
+\end{center}
+
+En este caso:
+- \(X\) puede jugar en la celda \( (1,3) \) y completar la primera fila.
+- Como la fórmula es satisfactible, se confirma que \(X\) tiene una jugada ganadora.
+
+
+
+
+
+\section{Deducción Natural}
+
+
+
+\begin{tcolorbox}[colframe=blue!60, colback=blue!5, title=\textbf{Métodos de Demostración en Lógica Proposicional}]
+Cuando queremos demostrar que una afirmación es verdadera, podemos utilizar distintos enfoques. En lógica proposicional, los dos principales métodos son:
+\begin{itemize}
+    \item \textbf{Deducción Natural:} Un sistema de reglas que nos permite derivar proposiciones paso a paso a partir de premisas iniciales.
+    \item \textbf{Tablas de Verdad:} Un método exhaustivo que evalúa todas las combinaciones posibles de valores de verdad para determinar si una proposición es válida en todos los casos.
+\end{itemize}
+\end{tcolorbox}
+
+Ambos métodos tienen ventajas y limitaciones, y en esta sección nos centraremos en la \textbf{deducción natural}.
+
+\subsection{¿Qué es la Deducción Natural?}
+
+La \textbf{deducción natural} es un sistema formal que imita la forma en que razonamos de manera estructurada: partiendo de \textbf{premisas}, aplicamos \textbf{reglas de inferencia} para derivar conclusiones que serán correctas siempre que las premisas lo sean. Este proceso exige un enfoque \textbf{creativo y metódico}, parecido a la resolución de problemas en programación o demostración de teoremas, pues no siempre es evidente qué regla usar ni en qué orden. 
+
+A diferencia de las \textbf{tablas de verdad}, que comprueban la validez de una proposición al evaluar todas las combinaciones posibles de valores de verdad, la deducción natural construye el razonamiento paso a paso, ofreciendo una comprensión detallada de cómo se encadenan las inferencias hasta llegar a la conclusión.
+
+\subsubsection*{Ventajas y Desventajas de la Deducción Natural}
+\begin{itemize}
+    \item \textbf{Ventajas:}
+    \begin{itemize}
+        \item Permite demostrar teoremas de manera sistemática y organizada.
+        \item Es aplicable a lógica de primer orden y sistemas más complejos.
+        \item Es proceso generativo que permite descubrir nuevas conclusiones.
+        \item Es más eficiente que las tablas de verdad para proposiciones con muchas variables.
+    \end{itemize}
+
+    \item \textbf{Desventajas:}
+    \begin{itemize}
+        \item Requiere práctica y habilidad para construir demostraciones.
+        \item No proporciona una forma directa de comprobar si una proposición es una tautología.
+    \end{itemize}
+\end{itemize}
+
+\bigskip
+
+A continuación, exploraremos algunas reglas esenciales de la deducción natural, junto con ejemplos prácticos.
+
+
+\subsection{Reglas Básicas de la Deducción Natural}
+
+\subsubsection{Regla de la Conjunción (\(\wedge\))}
+
+\noindent \textbf{Ejemplo:} Supongamos que sabemos que:
+\begin{itemize}
+    \item \textbf{Pedro tiene una bicicleta.}
+    \item \textbf{Pedro tiene un casco.}
+\end{itemize}
+De esto, podemos concluir:
+\begin{center}
+    \textbf{Pedro tiene una bicicleta y un casco.}
+\end{center}
+Esto es un caso de la \textbf{introducción de la conjunción}.
+
+\begin{tcolorbox}[colframe=blue!60, colback=blue!5, title=\textbf{Regla de Introducción de la Conjunción}]
+Si tenemos dos afirmaciones \(\phi\) y \(\psi\), podemos combinarlas con \(\land\).
+\[
+\frac{\phi \quad \psi}{\phi \wedge \psi} (\wedge i)
+\]
+\end{tcolorbox}
+Sobre las líneas están las premisas de la regla.  Abajo de la línea se encuentra la conclusión.  
+A la derecha de la regla tenemos el nombre de la regla abreviado.
+
+\noindent \textbf{Ejemplo:}  
+Si sabemos que:
+\[
+\text{Ana es ingeniera y Ana es programadora.}
+\]
+Podemos concluir:
+\[
+\text{Ana es programadora.}
+\]
+\begin{tcolorbox}[colframe=red!60, colback=red!5, title=\textbf{Regla de Eliminación de la Conjunción}]
+Si sabemos que algo es cierto en conjunto (\(\phi \wedge \psi\)), podemos extraer cualquiera de sus partes.
+\[
+\frac{\phi \wedge \psi}{\phi} (\wedge e_1) \quad
+\frac{\phi \wedge \psi}{\psi} (\wedge e_2)
+\]
+\end{tcolorbox}
+
+\noindent \textbf{Ejercicio:} 
+Queremos probar:
+\[
+p \wedge q, r \vdash q \wedge r
+\]
+
+Representación gráfica de la demostración:
+\[
+\Rulee{\Rulee{p \wedge q}{q}{\wedge e_2} \qquad r}{
+q \wedge r}{\wedge i}
+\]
+
+
+\subsubsection{Regla de la Doble Negación}
+
+\textbf{Motivación:}  
+Si alguien dice:  
+\begin{center}
+    "\textbf{No es falso que Pedro es honesto.}"
+\end{center}
+¿Significa esto que Pedro es honesto?  
+Sí. Esto es un caso de eliminación de la doble negación.
+
+\begin{tcolorbox}[colframe=blue!60, colback=blue!5, title=\textbf{Regla de la Doble Negación}]
+Una afirmación es equivalente a su doble negación.
+\[
+\frac{\neg \neg \phi}{\phi} (\neg \neg e) \quad
+\frac{\phi}{\neg \neg \phi} (\neg \neg i)
+\]
+\end{tcolorbox}
+
+\subsubsection{Regla de Eliminación de la Implicación (Modus Ponens)}
+
+\noindent \textbf{Ejemplo:}  
+Sabemos que:
+\begin{itemize}
+    \item Si estudio, aprobaré el examen.
+    \item Estudié.
+\end{itemize}
+Podemos concluir:
+\begin{center}
+    \textbf{Aprobaré el examen.}
+\end{center}
+
+Esto es un caso del \textbf{Modus Ponens}.
+
+
+\begin{tcolorbox}[colframe=blue!60, colback=blue!5, title=\textbf{Modus Ponens (\(\rightarrow e\))}]
+Si tenemos \(\phi\) y \(\phi \rightarrow \psi\), podemos deducir \(\psi\).
+\[
+\frac{\phi \quad \phi \rightarrow \psi}{\psi} (\rightarrow e)
+\]
+\end{tcolorbox}
+
+\begin{tcolorbox}[colframe=red!60, colback=red!5, title=\textbf{Modus Tollens (MT)}]
+Si tenemos \(\phi \rightarrow \psi\) y \(\neg \psi\), podemos deducir \(\neg \phi\).
+\[
+\frac{\phi \rightarrow \psi \quad \neg \psi}{\neg \phi} (MT)
+\]
+\end{tcolorbox}
+
+
+
+\subsubsection{Regla de Introducción de la Implicación}
+
+\textbf{Ejemplo:}  
+Supongamos que queremos demostrar la siguiente afirmación:  
+\begin{center}
+    \textbf{Si Juan estudia, aprobará el examen.}
+\end{center}
+¿Cómo lo haríamos?  
+Podemos asumir temporalmente que Juan estudia, y si logramos demostrar que en ese caso aprueba el examen, entonces la afirmación original es válida.
+
+\begin{tcolorbox}[colframe=blue!60, colback=blue!5, title=\textbf{Regla de Introducción de la Implicación}]
+Para probar \(\phi \rightarrow \psi\), asumimos temporalmente \(\phi\) y demostramos \(\psi\).
+\[
+\frac{\ovalbox{\begin{tabular}{c}$\phi$\\ $\vdots$\\ $\psi$ \end{tabular}
+               }}{\phi \rightarrow \psi}{(\rightarrow i)}
+\]
+\end{tcolorbox}
+La regla expresa que para probar $\phi \rightarrow \psi$ debemos asumir temporalmente $\phi$ y  entonces probar $\psi$.  
+En la prueba de $\psi$ se pueden usar cualquiera de las fórmulas obtenidas hasta el momento,  como premisas y conclusiones provisionales.
+
+\noindent \textbf{Ejercicio:} 
+Queremos demostrar \[
+p \rightarrow q \vdash \neg q \rightarrow \neg p
+\]
+La mecánica de la regla es más complicada que las anteriores.
+\bigskip
+
+\begin{tabular}{p{4mm}p{40mm}p{25mm}}
+1    & $p \rightarrow q$                 & premisa \\
+\framebox{\begin{tabular}{@{}p{4mm}p{40mm}p{30mm}}
+  2   & $\neg q$       & supuesto \\
+  3   & $\neg p$       & MT 1,2\\
+          \end{tabular}
+         } \\[5mm]
+4     & $\neg q \rightarrow \neg p$  & $\rightarrow i$ 2--3
+\end{tabular}\\[4mm]
+
+El cuadro sirve para delimitar el alcance del supuesto temporal  $\neg q$.
+No podemos usar suposiciones dentro del cuadro en reglas fuera del cuadro.
+
+
+\subsubsection{Reglas de la Disyunción (\(\vee\))}
+
+\begin{tcolorbox}[colframe=blue!60, colback=blue!5, title=\textbf{Introducción de la Disyunción}]
+Podemos introducir una disyunción a partir de cualquier proposición:
+\[
+\frac{\phi}{\phi \vee \psi} (\vee i_1) \quad
+\frac{\psi}{\phi \vee \psi} (\vee i_2)
+\]
+\end{tcolorbox}
+
+\bigskip
+
+Supongamos que queremos probar una proposición $\chi$ asumiendo que $\phi \vee \psi$.
+Puesto que no sabemos que argumento de la disyunción es verdadero, debemos obtener dos pruebas por separado que deberemos combinar en un solo argumento:
+\begin{tcolorbox}[colframe=red!60, colback=red!5, title=\textbf{Eliminación de la Disyunción}]
+Si queremos probar \(\chi\) asumiendo \(\phi \vee \psi\), necesitamos dos pruebas separadas para cada caso:
+\[
+\frac{\phi \vee \psi \quad \ovalbox{\begin{tabular}{c}$\phi$\\ $\vdots$\\ $\chi$ 
+\end{tabular}
+} 
+\quad \ovalbox{\begin{tabular}{c}$\psi$\\ $\vdots$\\ $\chi$ 
+\end{tabular}
+}
+}{\chi}{(\vee e)}
+\]
+\end{tcolorbox}
+
+
+
+\subsubsection{Regla de la Negación}
+
+Una \textbf{contradicción} en lógica proposicional se expresa como \(\phi \land \neg \phi\), donde \(\phi\) es cualquier fórmula. A esta contradicción se le denomina \(\bot\). La regla de la negación describe cómo usar una contradicción y cómo introducir una negación al demostrar que un supuesto conduce a \(\bot\).
+
+\begin{tcolorbox}[colframe=blue!60, colback=blue!5, title=\textbf{Regla de la Negación}]
+\[
+\Rulee{\phi \quad \neg \phi}{\bot}{\neg e}
+\quad
+\Rulee{\bot}{\phi}{\bot e}
+\quad
+\Rulee{
+\boxed{
+\begin{matrix}
+\phi \\
+\vdots \\
+\bot
+\end{matrix}
+}
+}{\neg \phi}{\neg i}
+\]
+\end{tcolorbox}
+
+\begin{itemize}
+    \item \(\neg e\) (eliminación de la negación) nos dice que si \(\phi\) y \(\neg \phi\) se derivan simultáneamente, obtenemos \(\bot\). 
+    \item \(\bot e\) nos indica que, a partir de \(\bot\), podemos concluir \textit{cualquier} fórmula (principio de explosión).
+    \item \(\neg i\) (introducción de la negación) expresa que, si al suponer \(\phi\) derivamos una contradicción (\(\bot\)), entonces concluimos \(\neg \phi\). 
+\end{itemize}
+
+
+
+\bigskip
+
+\subsubsection*{Ejercicio Final: Demostración con Disyunciones y Conjunciones}
+
+Veamos un ejemplo que combina varias reglas de inferencia para demostrar:
+
+\[
+p \wedge (q \vee r) \;\;\vdash\;\; (p \wedge q) \;\vee\; (p \wedge r).
+\]
+
+La idea general es extraer \(p\) y la disyunción \(q \vee r\) de la premisa, y luego considerar \textbf{dos casos} (uno donde \(q\) es verdadero, y otro donde \(r\) es verdadero) para demostrar la disyunción final. La prueba se detalla a continuación:
+
+% \bigskip
+
+\begin{tabular}{p{4mm}p{50mm}p{25mm}}
+1 & $p \wedge ( q \vee r)$ & \textit{premisa} \\ 
+2 & $p$                    & $\wedge e_1$ (de 1)  \\
+3 & $q \vee r$             & $\wedge e_2$ (de 1)  \\
+\framebox{\begin{tabular}{@{}p{4mm}p{46mm}p{30mm}}
+4  & $q$              & \textit{supuesto}\\
+5  & $p \wedge q$     & $\wedge i$ (de 2,4)\\
+6  & $(p \wedge q) \vee (p \wedge r)$ & $\vee i_1$ (de 5)
+\end{tabular}
+} \\[5mm]
+\framebox{\begin{tabular}{@{}p{4mm}p{46mm}p{30mm}}
+7  & $r$             & \textit{supuesto}\\
+8  & $p \wedge r$    & $\wedge i$ (de 2,7)\\
+9  & $(p \wedge q) \vee (p \wedge r)$ & $\vee i_2$ (de 8)
+\end{tabular}
+} \\[5mm]
+10 & $(p \wedge q) \vee (p \wedge r)$ & $\vee e$ (3, 4--6, 7--9)
+\end{tabular}
+
+\subsection*{Conclusión}
+
+La deducción natural es más que un conjunto de reglas: se trata de un sistema de prueba que garantiza, por un lado, la \textbf{solidez} (no se puede demostrar algo falso) y, por otro, la \textbf{completitud} (todo lo que es válido puede probarse dentro del sistema), al menos en el contexto de la lógica proposicional. 
+Estas dos propiedades son cruciales para confiar en cualquier sistema lógico: nos aseguran que no probaremos fórmulas falsas y que no dejaremos sin demostrar las verdaderas.
+
+
+\begin{tcolorbox}[colframe=orange!60, colback=orange!5,  title=\textbf{Preguntas para Reflexionar}]
+\begin{itemize}
+    \item \textbf{Solidez (Soundness):}  
+    Si podemos derivar \(\alpha\) a partir de \(\Gamma\) mediante deducción natural, entonces \(\alpha\) es una consecuencia lógica de \(\Gamma\) en todas las interpretaciones.  
+    En términos formales:  
+    \[
+    \Gamma \vdash \alpha 
+    \quad \Longrightarrow \quad
+    \Gamma \models \alpha.
+    \]
+   
+
+    \item \textbf{Completitud (Completeness):}  
+    Si \(\alpha\) es una consecuencia lógica de \(\Gamma\) (es decir, verdadera en todas las interpretaciones donde \(\Gamma\) lo es), entonces también podemos derivar \(\alpha\) dentro del sistema de deducción natural.
+    En términos formales:  
+    \[
+    \Gamma \models \alpha 
+    \quad \Longrightarrow \quad
+    \Gamma \vdash \alpha.
+    \]
+\end{itemize}
+\end{tcolorbox}
+% Gracias a estas propiedades, la deducción natural logra un balance entre \emph{confiabilidad} y \emph{alcance}: su \textbf{consistencia} garantiza que no introducimos falsedades en nuestras derivaciones, mientras que su \textbf{completitud} nos asegura que, de existir un camino lógico para demostrar una proposición válida, podremos hallarlo dentro de este sistema.
+
+Este \textbf{enfoque riguroso y ordenado} para el razonamiento lógico tiene implicaciones tanto en el ámbito académico—donde se emplea para demostrar teoremas y validar argumentos formales—como en la vida diaria, al entrenar nuestras habilidades de \emph{pensamiento analítico}. Aun si no aplicamos conscientemente el lenguaje lógico en cada situación, los principios de consistencia y completitud ofrecen un horizonte de \emph{certeza} para saber que los razonamientos formales se construyen de forma sólida y exhaustiva.
+
+% \begin{tcolorbox}[colframe=orange!60, colback=orange!5, title=\textbf{Preguntas para Reflexionar}]
+% \begin{itemize}
+%     \item ¿Cómo aplicarías estas reglas a problemas de la vida real, donde las premisas no siempre están tan claras?
+%     \item ¿En qué ocasiones crees que la verificación exhaustiva (al estilo de las tablas de verdad) podría resultar más práctica que la deducción paso a paso?
+%     \item ¿De qué manera los conceptos de \emph{consistencia} y \emph{completitud} refuerzan la confianza en tus razonamientos formales?
+% \end{itemize}
+% \end{tcolorbox}
+
+
+
+

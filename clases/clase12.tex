@@ -1,0 +1,261 @@
+% \title{Apunte de Matemáticas Discretas CC3101:\\ 
+% Combinatoria  Clase 12}
+% % \title{Ejercicios Lógica e Inducción}
+% \author{Andrés Abeliuk}
+% \date{}
+% \maketitle
+
+
+
+
+
+\section{Combinatoria}
+
+
+Muchos problemas cotidianos e incluso científicos se reducen a contar de cuántas formas pueden ocurrir ciertos eventos. Desde generar contraseñas, planificar entrevistas, hasta calcular probabilidades: todos requieren herramientas de conteo.
+
+La \textbf{combinatoria} es la rama de las matemáticas que se encarga de estudiar las distintas formas en las que podemos seleccionar o disponer objetos de un conjunto. Dos conceptos fundamentales en este estudio son las \textbf{permutaciones} y las \textbf{combinaciones}.
+
+Comenzaremos explorando la diferencia entre estas dos ideas fundamentales.
+
+\subsection{Permutaciones y combinaciones}
+
+\begin{definitionblock}{Permutaciones}
+Una \emph{$r$-permutación} es una lista \textbf{ordenada} de $r$ objetos distintos tomados de un conjunto de $n$ elementos. El número de $r$-permutaciones se denota por:
+\[
+\perm{n}{r} = n \cdot (n - 1) \cdot \ldots \cdot (n - r + 1) = \frac{n!}{(n-r)!}
+\]
+\end{definitionblock}
+
+\begin{exampleblock}{Ejemplo}
+¿Cuántos ``podios'' distintos pueden haber en una competencia con 10 participantes, premiando 1º, 2º y 3º lugar?
+
+Aquí importa el orden, por lo que se trata de una permutación:
+\[
+\perm{10}{3} = 10 \cdot 9 \cdot 8 = 720
+\]
+\end{exampleblock}
+
+\begin{definitionblock}{Combinaciones}
+Una \emph{$r$-combinación} es un subconjunto \textbf{no ordenado} de $r$ objetos tomados de un conjunto de $n$ elementos. El número de combinaciones se denota por:
+\[
+\comb{n}{r} = \frac{n!}{r! \, (n - r)!}
+\]
+\end{definitionblock}
+
+\begin{thmblock}{Relación entre permutaciones y combinaciones}
+Cada combinación de $r$ elementos puede ordenarse de $r!$ maneras, por lo que:
+\[
+\perm{n}{r} = \comb{n}{r} \cdot r! \quad \Rightarrow \quad \comb{n}{r} = \frac{\perm{n}{r}}{r!}
+\]
+\end{thmblock}
+
+\subsection*{Aplicaciones de Permutaciones}
+
+\begin{exampleblock}{Ejemplo: ¿Cuántos números de tres dígitos con cifras impares distintas se pueden formar?}
+
+Tenemos 5 dígitos impares: 1, 3, 5, 7, 9. Buscamos permutaciones de 3 elementos:
+\[
+\perm{5}{3} = 5 \cdot 4 \cdot 3 = 60
+\]
+\end{exampleblock}
+
+\begin{exampleblock}{Ejemplo: ¿Cuántas placas de auto con 4 letras distintas se pueden formar?}
+
+Hay 27 letras disponibles. Buscamos $\perm{27}{4}$:
+\[
+\perm{27}{4} = 27 \cdot 26 \cdot 25 \cdot 24
+\]
+\end{exampleblock}
+
+\begin{exampleblock}{Ejemplo:} \textbf{¿Cuántas permutaciones de las letras $A,B,C,D,E,F,G,H$ contienen la subcadena $ABC$? }
+
+\medskip Aquí el truco está en considerar a ABC como un único
+elemento. Luego el problema se reduce a contar el número de 6-permutaciones
+sobre los elementos ABC,D,E,F,G,H, que son $\perm{6}{6} = 6!$.
+\end{exampleblock}
+
+\subsection*{Aplicaciones de Combinaciones}
+
+\begin{exampleblock}{Ejemplo: ¿Cuántos grupos distintos de 3 personas pueden formarse entre 10 participantes?}
+
+Como el orden no importa, se trata de una combinación:
+\[
+\comb{10}{3} = \frac{10 \cdot 9 \cdot 8}{3 \cdot 2 \cdot 1} = 120
+\]
+\end{exampleblock}
+
+\begin{exampleblock}{Ejemplo: ¿Cuántas manos distintas de póker (5 cartas) pueden formarse desde un mazo de 52 cartas?}
+
+\[
+\comb{52}{5} = \frac{52 \cdot 51 \cdot 50 \cdot 49 \cdot 48}{5!}
+\]
+\end{exampleblock}
+
+\begin{exampleblock}{Ejemplo: ¿Cuántos bitstrings de largo $n$ tienen exactamente $r$ 1s?}
+
+Esto corresponde a contar de cuántas maneras puedo elegir las $r$ posiciones
+para los 1s, ya que el bitstring queda completamente definido al rellenar las
+restantes posiciones con 0s.  Éstas son
+\[
+\comb{n}{r}
+\]
+\end{exampleblock}
+
+\subsection{Permutaciones y combinaciones con repetición}
+
+Hasta ahora hemos considerado casos donde los elementos no se repiten. Sin embargo, en muchos contextos (como contraseñas, combinaciones de sabores, códigos, etc.) es posible o incluso necesario permitir repeticiones. Estos casos también pueden analizarse de forma sistemática.
+
+\begin{definitionblock}{Permutaciones con repetición}
+Cuando los elementos pueden repetirse, usamos directamente la regla del producto:
+\[
+n^r
+\]
+que representa la cantidad de $r$-permutaciones con repetición de un conjunto de $n$ elementos.
+\end{definitionblock}
+
+\begin{exampleblock}{Ejemplo}
+¿Cuántas cadenas de 5 bits existen?
+
+Cada posición puede tomar dos valores (0 o 1), así que el total es:
+\[
+2 \times 2 \times 2 \times 2 \times 2 = 2^5 = 32
+\]
+\end{exampleblock}
+
+\begin{definitionblock}{Combinaciones con repetición}
+En un conjunto de $n$ elementos, la cantidad de $r$-combinaciones con repetición está dada por:
+\[
+\comb{n + r - 1}{r} = \frac{(n + r - 1)!}{r!(n - 1)!}
+\]
+\end{definitionblock}
+\begin{proof}
+Para contar cuántas formas hay de elegir $r$ elementos con repetición permitida entre $n$ tipos distintos (sin importar el orden), usamos una representación mediante el método de \emph{barras y estrellas}.
+
+Pensamos en el problema como distribuir $r$ bolas indistinguibles (los elementos elegidos) en $n$ cajas (los tipos). Cada configuración corresponde a una partición de $r$ elementos en $n$ grupos, donde los grupos pueden tener tamaño cero (porque podemos no elegir cierto tipo).
+
+Para representar esto visualmente, usamos:
+\begin{itemize}
+  \item $r$ estrellas \texttt{*} para representar los elementos seleccionados.
+  \item $n-1$ barras verticales \texttt{|} para separar los tipos.
+\end{itemize}
+
+Por ejemplo, la secuencia 
+\[\star \star | \star | | \star \star \star\]
+representa la combinación con repetición donde se eligen 2 del primer tipo, 1 del segundo, 0 del tercero y 4 del cuarto (si $n=4$ y $r=7$).
+
+ debemos contar cuántas maneras hay de reordenar 3 estrellas y 7 barras. En total, hay 
+3
++
+7
+=
+10
+3+7=10 símbolos, y debemos elegir cuáles 3 de ellos serán las estrellas
+
+Una configuración es una secuencia de estos símbolos. Debemos contar cuántas maneras hay de reordenar las estrellas y las barras. En total, hay $r + n-1$ símbolos, y debemos elegir cuáles $3$ de ellos serán las estrellas   La cantidad total de secuencias distintas de $r$ estrellas y $n-1$ barras es:
+\[
+\comb{r + (n - 1)}{r} = \comb{n + r - 1}{r}
+\]
+\end{proof}
+
+
+
+\begin{exampleblock}{Ejemplo: Helados}
+\textbf{Ejemplo:} Una tienda vende 8 sabores de helado. Queremos formar un cono con 3 bolas, permitiendo repeticiones. Entonces:
+\begin{itemize}
+  \item $n = 8$ tipos (sabores)
+  \item $r = 3$ bolas a elegir
+\end{itemize}
+
+Una configuración posible podría representarse así:
+\[
+| * * | | * | | | | |
+\]
+Esto indica 0 bolas del primer sabor, 2 del segundo, 0 del tercero, 1 del cuarto, y 0 de los sabores restantes.
+
+La cantidad total de configuraciones es:
+\[
+\comb{8 + 3 - 1}{3} = \comb{10}{3} = 120
+\]
+Por tanto, hay 120 formas distintas de elegir 3 bolas de helado entre 8 sabores, permitiendo repeticiones.
+\end{exampleblock}
+
+
+\section{Pruebas combinatoriales}
+
+En combinatoria, existen dos enfoques principales para justificar fórmulas o identidades:
+
+\begin{itemize}
+    \item \textbf{Demostraciones algebraicas:} se basan en manipular expresiones simbólicas, factoriales y fórmulas usando álgebra básica. Son precisas y sintéticas, pero pueden no entregar intuición sobre el significado de la identidad.
+    \item \textbf{Demostraciones combinatorias:} explican la identidad interpretándola como una forma de contar elementos de un conjunto desde dos perspectivas distintas. Este tipo de demostración suele ser más intuitiva, ya que da sentido a la fórmula en términos de objetos concretos y elecciones.
+\end{itemize}
+
+Ambos métodos son válidos y muchas veces se complementan: el algebraico da verificación formal, el combinatorio aporta comprensión.
+
+
+\subsection*{Identidades Combinatorias}
+
+\begin{thmblock}{Simetría del binomio}
+\[
+\comb{n}{r} = \comb{n}{n-r}
+\]
+\end{thmblock}
+\noindent \textbf{Demostración algebraica:} \\[0.5em]
+\[
+\comb{n}{r} = \frac{n!}{r! \, (n-r)!} = \frac{n!}{(n-r)! \, \underbrace{(n-(n-r))}_{=r}!} = \comb{n}{n-r}
+\]
+
+\noindent \textbf{Demostración combinatoria:} \\[0.5em]
+Elegir $r$ elementos de un conjunto de $n$ es equivalente a elegir cuáles $n-r$ se descartan. Por lo tanto, hay la misma cantidad de subconjuntos de tamaño $r$ que de tamaño $n - r$.
+
+\begin{thmblock}{Suma binomial}
+\[
+\sum_{k=0}^n \comb{n}{k} = 2^n
+\]
+\end{thmblock}
+\noindent \textbf{Demostración algebraica:} Esta identidad se deduce evaluando la expansión binomial con $x = y = 1$:
+\[
+(x + y)^n = \sum_{k=0}^n \comb{n}{k} x^k y^{n-k} \quad \Rightarrow \quad (1 + 1)^n = \sum_{k=0}^n \comb{n}{k}
+\]
+
+
+\noindent \textbf{Demostración combinatoria:} Cada término $\comb{n}{k}$ cuenta los subconjuntos de tamaño $k$ de un conjunto de $n$ elementos. La suma total cuenta todos los subconjuntos posibles, es decir, $2^n$ subconjuntos.
+
+
+\begin{thmblock}{Identidad de Pascal}
+\[
+\comb{n+1}{k} = \comb{n}{k-1} + \comb{n}{k}
+\]
+\end{thmblock}
+\noindent \textbf{Demostración algebraica:} Aplicando la fórmula:
+\[
+\comb{n}{k-1} + \comb{n}{k} = \frac{n!}{(k-1)! \, (n-k+1)!} + \frac{n!}{k! \, (n-k)!} = \frac{(n+1)!}{k! \, (n+1-k)!} = \comb{n+1}{k}
+\]
+
+\noindent\textbf{Demostración combinatoria:} Para formar un subconjunto de $k$ elementos desde $n+1$ elementos, se puede:
+\begin{itemize}
+  \item incluir un elemento fijo (e.g. el último), y elegir los $k-1$ restantes entre los primeros $n$, o
+  \item no incluirlo, y elegir todos los $k$ entre los primeros $n$.
+\end{itemize}
+La cantidad total es la suma de ambas posibilidades.
+
+
+
+
+
+\subsection*{Ejercicios Propuestos}
+
+\begin{itemize}
+\item Dadas 12 personas, ¿cuántos grupos de 5 personas se pueden formar si hay dos personas, llamemoslas A y B, que insisten en trabajar juntas?
+(En otros palabras, un grupo de 5 personas es válido si contiene a ambas o a ninguna).
+
+\item
+Demuestre la identidad de Vandermonde:
+\[
+\binom{m+n}{r} = \sum_{k=0}^r \binom{m}{r-k} \binom{n}{k}
+\]
+
+\item
+Reflexiona por qué $\comb{n}{i}$ es el coeficiente de $x^i y^{n-i}$ en $(x+y)^n$.
+
+\end{itemize}

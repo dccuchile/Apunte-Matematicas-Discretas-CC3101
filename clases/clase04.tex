@@ -1,0 +1,281 @@
+\section{Introducción a Lógica de Predicados}
+\subsection{Limitaciones de la Lógica Proposicional}
+La lógica proposicional es una herramienta poderosa para modelar razonamientos formales. Sin embargo, tiene ciertas limitaciones, ya que no puede expresar relaciones más complejas entre objetos ni generalizaciones. Consideremos el siguiente razonamiento:
+
+\begin{quote}
+    ``Todas las personas son mortales. Sócrates es una persona. Por lo tanto, Sócrates es mortal.''
+\end{quote}
+
+Este argumento parece válido, pero en lógica proposicional no tenemos forma de expresar la idea de que ``todas las personas'' tienen la propiedad de ser mortales.
+
+Para capturar este tipo de razonamiento necesitamos:
+
+\begin{itemize}
+    \item Describir \textbf{propiedades de} o \textbf{relaciones entre} los elementos del dominio en cuestión. Por ejemplo:
+    \begin{equation}
+        \mathit{persona}(x), \quad \mathit{mortal}(x)
+    \end{equation}
+    \item \textbf{Cuantificar} sobre los elementos del dominio, permitiendo generalizaciones como:
+    \begin{equation}
+        \forall x \; (\mathit{persona}(x) \rightarrow \mathit{mortal}(x))
+    \end{equation}
+\end{itemize}
+
+Así, podemos representar el argumento formalmente en lógica de predicados:
+\begin{align*}
+    &\forall x. \; \mathit{persona}(x) \rightarrow \mathit{mortal}(x)  &\text{(Premisa general)} \\
+    &\mathit{persona}(\text{Sócrates})  &\text{(Premisa específica)} \\
+    &\mathit{mortal}(\text{Sócrates})  &\text{(Conclusión)}
+\end{align*}
+
+Este tipo de lógica, llamada \textbf{lógica de predicados} o \textbf{lógica de primer orden}, permite expresar con mayor precisión una variedad de razonamientos que en lógica proposicional serían imposibles de representar.
+
+\subsubsection{Ejemplo con una Relación Binaria}
+No solo podemos representar propiedades individuales, sino también relaciones entre elementos. Consideremos el razonamiento:
+
+\begin{quote}
+    ``Si un usuario sigue a otro en una red social, entonces puede ver sus publicaciones. Alice sigue a Bob. Por lo tanto, Alice puede ver las publicaciones de Bob.''
+\end{quote}
+
+Este argumento puede expresarse en lógica de predicados como:
+
+\begin{align*}
+    &\forall x, y. \; \mathit{sigue}(x, y) \rightarrow \mathit{puedeVerPublicaciones}(x, y)  &\text{(Regla general)} \\
+    &\mathit{sigue}(\text{Alice}, \text{Bob})  &\text{(Hecho específico)} \\
+    &\mathit{puedeVerPublicaciones}(\text{Alice}, \text{Bob})  &\text{(Conclusión)}
+\end{align*}
+
+\subsubsection{Diferencias Clave con la Lógica Proposicional}
+Para resumir, la lógica de predicados introduce dos elementos clave que la diferencian de la lógica proposicional:
+
+\begin{enumerate}
+    \item \textbf{Predicados:} Nos permiten expresar propiedades y relaciones entre objetos.
+    \item \textbf{Cuantificadores:} Nos permiten hacer afirmaciones sobre todos los elementos de un dominio (\(\forall\)) o sobre la existencia de al menos un elemento que cumple una propiedad (\(\exists\)).
+\end{enumerate}
+
+Estos elementos hacen que la lógica de predicados sea mucho más expresiva y útil para modelar razonamientos matemáticos y computacionales.
+
+
+\subsection{Sintaxis de la Lógica de Predicados}
+Las fórmulas de la lógica de predicados se construyen a partir de un vocabulario compuesto por:
+
+\begin{itemize}
+   \item \textbf{Símbolos de relación} $P, Q, R, \dots$, cada uno con una \textbf{aridad} determinada, es decir, el número de argumentos que toma. Si un símbolo de relación $R$ tiene aridad $n$, se denota como $R(x_1, x_2, \dots, x_n)$.
+    \item \textbf{Cuantificadores}: universal ($\forall$) y existencial ($\exists$), que permiten expresar generalizaciones y la existencia de elementos en el dominio.
+    \item \textbf{Variables}: $x, y, z, \dots$, que representan elementos arbitrarios del dominio. Dos variables pueden referirse al mismo objeto si y solo si se cumple $x = y$.
+    \item \textbf{Conectivos lógicos}: $\lnot, \land, \lor, \rightarrow$
+\end{itemize}
+
+
+\subsubsection{Ejemplos de Propiedades de Relaciones}
+Las relaciones pueden cumplir distintas propiedades fundamentales:
+
+\begin{itemize}
+    \item \textbf{Reflexividad}: $\forall x \; R(x, x)$ (ejemplo: mayor o igual que)
+    \item \textbf{Simetría}: $\forall x \forall y (R(x, y) \rightarrow R(y, x))$ (ejemplo: igualdad)
+    \item \textbf{Antisimetría}: $\forall x \forall y ((R(x, y) \land R(y, x)) \rightarrow x = y)$ (ejemplo: mayor estricto que)
+    \item \textbf{Transitividad}: $\forall x \forall y \forall z ((R(x, y) \land R(y, z)) \rightarrow R(x, z))$
+\end{itemize}
+
+
+\subsubsection{Alcance de los Cuantificadores}
+Los cuantificadores determinan una "zona de influencia" de las variables, llamada \textbf{rango} o \textbf{alcance} del cuantificador:
+
+\begin{equation}
+    R(z) \land \exists y\ \forall x (S(\textcolor{OliveGreen}{x}) \implies T(\textcolor{OliveGreen}{x},\textcolor{Maroon}{y}))
+\end{equation}
+
+\begin{itemize}
+    \item Las ocurrencias \textcolor{OliveGreen}{verdes} de $x$ están dentro del alcance del cuantificador universal y son "capturadas" por éste.
+    \item La ocurrencia \textcolor{Maroon}{roja} de $y$ está dentro del alcance del cuantificador universal, pero no es capturada por éste.
+    \item La ocurrencia \textcolor{Maroon}{roja} de $y$ está dentro del alcance del cuantificador existencial y sí es capturada por éste.
+    \item La variable $z$ es \textbf{libre} porque no está en el alcance de ningún cuantificador.
+\end{itemize}
+
+Para entender mejor la importancia del alcance de los cuantificadores, consideremos dos expresiones aparentemente similares, pero con significados distintos:
+
+\begin{itemize}
+    \item $\forall x \exists y \; T(x, y)$ \quad (Para todo $x$, existe al menos un $y$ que cumple la relación $T(x, y)$).
+    \item $\exists y \forall x \; T(x, y)$ \quad (Existe un único $y$ tal que para todo $x$, se cumple la relación $T(x, y)$).
+\end{itemize}
+
+
+\section{Semántica de la Lógica de Predicados}
+
+En lógica, no solo nos interesa la \emph{forma} de las fórmulas (su \emph{estructura sintáctica}), sino también su \emph{significado} (su \emph{interpretación} en un dominio). Mientras que en la lógica proposicional basta con asignar valores de verdad a cada variable proposicional y evaluar la fórmula mediante conectivos lógicos, en la \textbf{lógica de primer orden} debemos dar significado a \emph{términos}, \emph{funciones} y \emph{relaciones} sobre algún conjunto de referencia, llamado \textbf{dominio}.
+
+\subsection{Estructuras e Interpretaciones}
+
+Para capturar el significado de las fórmulas de primer orden, trabajamos con objetos llamados \textbf{estructuras}:
+
+\[
+    \mathcal{A} = \bigl(A, P^{\mathcal{A}}, Q^{\mathcal{A}}, R^{\mathcal{A}}, \dots\bigr)
+\]
+
+donde:
+\begin{itemize}
+    \item $A$ es el \textbf{dominio} (o universo) de la estructura. Todas las variables de la fórmula tomarán valores en este conjunto.
+    \item $P^{\mathcal{A}}, Q^{\mathcal{A}}, R^{\mathcal{A}}, \dots$ son las \textbf{interpretaciones} de los símbolos de relación (o predicados) del lenguaje. Por ejemplo, si nuestro lenguaje incluye un predicado binario $P$, entonces $P^{\mathcal{A}} \subseteq A \times A$ especifica para qué pares de elementos de $A$ se considera verdadero $P(x,y)$.
+    \item Si el lenguaje tiene símbolos de función $f$, $g$, etc., sus interpretaciones $f^{\mathcal{A}}, g^{\mathcal{A}}, \dots$ son funciones definidas sobre $A$. Por ejemplo, si $f$ es una función de $n$ variables, entonces $f^{\mathcal{A}} : A^n \to A$.
+    \item Si el lenguaje incluye símbolos de constante como $c$, su interpretación $c^{\mathcal{A}}$ es un elemento concreto de $A$.
+\end{itemize}
+
+Para evaluar una fórmula con variables \emph{libres}, necesitamos además una \textbf{valuación} $\sigma$, que es una función:
+
+\[
+    \sigma : \{\text{variables}\} \longrightarrow A.
+\]
+
+La valuación asigna a cada variable un elemento concreto del dominio $A$. De esta forma, podemos “sustituir” cada variable por su valor en $A$ y verificar si una fórmula resulta verdadera o falsa bajo tal asignación.
+
+\subsection{Ejemplos de Estructuras}
+
+\subsubsection{Ejemplo 1: Grafos}
+Sea $H = (V, E)$ un grafo en el sentido usual (conjunto de vértices $V$ y conjunto de aristas $E$). Podemos representarlo como la estructura:
+
+\[
+    \mathcal{G} = (G, E^{\mathcal{G}})
+\]
+
+donde:
+\begin{itemize}
+    \item $G$ es el conjunto de vértices. Este será el \emph{dominio} de nuestra estructura.
+    \item $E^{\mathcal{G}} \subseteq G \times G$ es la \emph{interpretación} del símbolo de relación binaria $E$. Para $(u,v) \in E^{\mathcal{G}}$ decimos que hay arista entre $u$ y $v$.
+\end{itemize}
+
+\noindent
+\textbf{Ejemplo concreto.} Considere el siguiente grafo no dirigido con vértices \(A, B, C, D\) y aristas 
+$\{A,B\}$, $\{B,C\}$, $\{C,D\}$, $\{D,A\}$, $\{B,D\}$. 
+
+\begin{center}
+\begin{tikzpicture}[shorten >=1pt, node distance=2.0cm, on grid, auto]
+
+    % Estilo para los nodos
+    \tikzstyle{nodo}=[circle, draw, fill=gray!15, minimum size=9mm, inner sep=1pt]
+
+    % Definición de los vértices (nodos)
+    \node[nodo] (A) {A};
+    \node[nodo] (B) [right=of A] {B};
+    \node[nodo] (C) [below=of B] {C};
+    \node[nodo] (D) [below=of A] {D};
+
+    % Definición de las aristas (líneas) como no dirigidas: "-"
+    \path[-]
+        (A) edge (B)
+        (B) edge (C)
+        (C) edge (D)
+        (D) edge (A)
+        (B) edge (D);
+\end{tikzpicture}
+\end{center}
+
+\noindent
+\textbf{Interpretación como estructura:}
+\begin{itemize}
+    \item El \emph{dominio} de la estructura es \(G = \{A, B, C, D\}\).
+    \item La \emph{interpretación} de \(E\) se describe como:
+    \[
+      E^{\mathcal{G}} = \{(A,B), (B,A), (B,C), (C,B), (C,D), (D,C), (D,A), (A,D), (B,D), (D,B)\}.
+    \]
+    En otras palabras, si \((u,v)\in E^{\mathcal{G}}\), hay arista entre \(u\) y \(v\).  
+\end{itemize}
+
+
+\subsubsection{Ejemplo 2: Números Naturales}
+Consideremos el lenguaje de la aritmética de Peano, con símbolos de constante $0$, $1$, la función sucesor $s(\cdot)$, las operaciones $+$ y $\cdot$, y la relación $<$, entre otros. Podemos representar a los números naturales mediante la estructura:
+
+\[
+    \mathcal{N} = \bigl(\mathbb{N}, \,0^{\mathbb{N}}, \,1^{\mathbb{N}}, \,s^{\mathbb{N}}, \,+^{\mathbb{N}}, \,\cdot^{\mathbb{N}}, \,<^{\mathbb{N}}\bigr)
+\]
+
+donde:
+\begin{itemize}
+    \item El dominio es $A = \mathbb{N}$, el conjunto de los números naturales.
+    \item $0^{\mathbb{N}}$ y $1^{\mathbb{N}}$ son la interpretación de las constantes $0$ y $1$, respectivamente.
+    \item $s^{\mathbb{N}} : \mathbb{N} \to \mathbb{N}$ es la función sucesor, que asigna a cada natural $n$ el valor $n+1$.
+    \item $+^{\mathbb{N}} : \mathbb{N} \times \mathbb{N} \to \mathbb{N}$ y $\cdot^{\mathbb{N}} : \mathbb{N} \times \mathbb{N} \to \mathbb{N}$ son las interpretaciones de la suma y la multiplicación, respectivamente.
+    \item $<^{\mathbb{N}} \subseteq \mathbb{N} \times \mathbb{N}$ es la relación usual de orden sobre los naturales.
+\end{itemize}
+
+\subsection{Definición Formal de Satisfacción}
+
+Dado un lenguaje de primer orden y una estructura $\mathcal{A}$ para dicho lenguaje, decimos que \emph{una fórmula} $\phi$ es verdadera o se \textbf{satisface} en $\mathcal{A}$ bajo la valuación $\sigma$, y escribimos:
+
+\[
+    (\mathcal{A}, \sigma) \models \phi,
+\]
+
+si al “interpretar” todos los símbolos de relación y función como indica $\mathcal{A}$, y al asignar las variables según $\sigma$, la fórmula $\phi$ resulta verdadera. 
+
+La definición de “$\models$” se da inductivamente según la forma de la fórmula $\phi$. Algunos casos importantes:
+
+\begin{align*}
+    (\mathcal{A}, \sigma) &\models P(x_1,\dots,x_n) 
+    && \text{si y solo si } \bigl(\sigma(x_1),\dots,\sigma(x_n)\bigr) \in P^{\mathcal{A}}, \\
+    (\mathcal{A}, \sigma) &\models \phi \lor \psi 
+    && \text{si y solo si } (\mathcal{A},\sigma) \models \phi \text{ o } (\mathcal{A},\sigma) \models \psi, \\
+    (\mathcal{A}, \sigma) &\models \neg \phi 
+    && \text{si y solo si } (\mathcal{A},\sigma) \not\models \phi, \\
+    (\mathcal{A}, \sigma) &\models \forall x\, \phi(x) 
+    && \text{si y solo si } (\mathcal{A}, \sigma[x/a]) \models \phi(x) \text{ para todo } a \in A,
+\end{align*}
+
+donde $\sigma[x/a]$ es una nueva valuación que coincide con $\sigma$ en todas las variables excepto en $x$, a la que se le asigna el valor $a$.
+
+\begin{itemize}
+\item \textbf{Fórmulas cerradas (oraciones)}: Si $\phi$ no tiene variables libres, no es necesario especificar una valuación $\sigma$, pues no hay variables por asignar. En ese caso, escribimos simplemente $\mathcal{A} \models \phi$ para indicar que la estructura $\mathcal{A}$ satisface la oración $\phi$.
+\end{itemize}
+
+La semántica de la lógica de predicados nos dice cómo interpretar y evaluar la veracidad de fórmulas de primer orden en dominios concretos. Una \emph{estructura} fija tanto el conjunto de referencia (dominio) como la interpretación de los símbolos del lenguaje (relaciones, funciones, constantes). Para las variables libres, definimos una \emph{valuación} que determina a qué elemento del dominio corresponde cada variable. 
+
+\subsection{Ejemplos de Satisfacción}
+
+\subsubsection*{Ejemplo 1: Propiedad sobre una relación}
+Considera la fórmula:
+\[
+    \forall x \,\forall y \,\bigl(R(x,y) \rightarrow \exists z\,\bigl(R(x,z)\,\land\, R(z,y)\bigr)\bigr).
+\]
+Esta fórmula afirma, en términos informales, que “si hay relación entre $x$ e $y$, entonces existe un $z$ que se relaciona con ambos”. 
+
+En el dominio de los \textbf{números reales} con $R(x,y)$ interpretado como $x < y$, la afirmación puede leerse así: “si un número $x$ es menor que un número $y$, entonces existe otro número $z$ tal que $x < z$ y $z < y$”. Esto es verdadero en $\mathbb{R}$, porque siempre podemos encontrar un número intermedio entre $x$ e $y$.
+
+\textbf{Pregunta:} ¿Sucede lo mismo si cambiamos el dominio de discurso a los \textbf{enteros} $\mathbb{Z}$ con la misma interpretación ($<$)?  
+
+% \emph{No}, pues si $y = x + 1$, no existe un entero $z$ estrictamente entre $x$ e $y$. Por lo tanto, la fórmula no se satisface en $\mathbb{Z}$ bajo esa interpretación de $R$.
+
+\subsubsection*{Ejemplo 2: Asignaciones específicas}
+Sea la fórmula $R(x,y)$ en el dominio de los \textbf{reales}, con $R(x,y)$ interpretado como $x < y$. Bajo la valuación $\sigma$ definida por $\sigma(x)=1$ y $\sigma(y)=2$, tenemos:
+\[
+    (\mathcal{A}, \sigma) \models R(x,y) \quad \Longleftrightarrow \quad 1 < 2.
+\]
+Dado que $1 < 2$ es verdadero, la fórmula se satisface.
+
+\subsubsection*{Ejemplo 3: Propiedades en Grafos}
+Consideremos una estructura de grafo no dirigido $\mathcal{G} = (V, E)$, donde $V$ es el conjunto de vértices y $(u,v) \in E$ representa que hay una arista (sin dirección) entre $u$ y $v$. 
+
+\begin{itemize}
+\item La fórmula
+\[
+    \forall x \,\forall y \,\bigl(E(x, y) \rightarrow E(y, x)\bigr)
+\]
+expresa que el grafo es \textbf{no dirigido}. Si $(x,y)$ es una arista, entonces $(y,x)$ también lo es. Esta fórmula se satisface en todo grafo no dirigido, pero no en uno dirigido.
+
+\item Otra propiedad interesante es la \textbf{transitividad}:
+\[
+    \forall x \,\forall y \,\forall z\,\bigl(\bigl(E(x,y) \land E(y,z)\bigr) \rightarrow E(x,z)\bigr).
+\]
+Si hay una arista de $x$ a $y$ y de $y$ a $z$, entonces debe existir una arista de $x$ a $z$.  
+   - Esto es cierto, por ejemplo, en \emph{cliques completas} (todos los vértices están conectados con todos) y en cerraduras transitivas de un grafo.  
+   - En un grafo cualquiera, no suele cumplirse.
+\end{itemize}
+
+% Estos ejemplos muestran cómo la verdad o falsedad de una fórmula depende críticamente de:
+% \begin{enumerate}
+%     \item El dominio de la estructura.
+%     \item La interpretación de las funciones y relaciones.
+%     \item La valuación de las variables libres (si las hay).
+% \end{enumerate}
+
+
+
+

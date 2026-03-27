@@ -1,0 +1,334 @@
+\section{Introducción a la Inducción Estructural}
+
+La inducción es una técnica poderosa utilizada para demostrar propiedades de estructuras definidas recursivamente. Aunque la inducción matemática es útil para propiedades de los números naturales, la \textbf{inducción estructural} extiende esta idea a conjuntos definidos recursivamente.
+
+A veces es difícil definir un objeto explícitamente, pero no lo es tanto si lo definimos en términos de objetos de su mismo tipo. A este proceso lo llamamos \textbf{recursión}. Mediante recursión, podemos definir secuencias, funciones y conjuntos, especificando un caso base y reglas que permiten construir nuevos elementos a partir de los ya existentes.
+
+
+\subsection{Definiciones Recursivas}
+\begin{definitionblock}{Definición Recursiva}
+Un objeto puede definirse recursivamente especificando:
+\begin{itemize}
+    \item \textbf{Caso base}: Elementos iniciales del conjunto.
+    \item \textbf{Regla recursiva}: Forma de construir nuevos elementos a partir de los ya definidos.
+\end{itemize}
+\end{definitionblock}
+\subsubsection*{Ejemplo: Secuencia de Potencias de 2}
+\begin{itemize}
+    \item Caso base: $a_0 = 1$.
+    \item Regla recursiva: $a_{n+1} = 2a_n$.
+\end{itemize}
+\noindent Aplicando esta definición recursiva, obtenemos los términos de la secuencia que generan las potencias de 2: $1, 2, 4, 8, 16, 32, \dots$.
+
+La ventaja de definir una secuencia recursivamente es que no necesitamos conocer una fórmula explícita general desde el principio. En muchos casos, esto facilita la comprensión y el diseño de algoritmos que dependen de estructuras previas, como en el caso de la programación dinámica o la resolución de problemas combinatorios.
+
+
+\subsection{Definición Recursiva de Funciones}
+\subsubsection{Factorial}
+Un ejemplo clásico de función definida recursivamente es el factorial. La función $f(n) = n!$ puede ser definida recursivamente como:
+\[
+    f(0) = 1, \quad f(n+1) = (n+1)f(n).
+\]
+
+\bigskip
+\noindent \textbf{Ejercicio}: Defina recursivamente la función $S(n) = \sum_{k=0}^{n} a_k$.
+
+\subsubsection{Números de Fibonacci}
+Los números de Fibonacci están definidos por:
+\begin{align*}
+    f_0 &= 0, \quad f_1 = 1, \\
+    f_n &= f_{n-1} + f_{n-2}, \quad \text{para } n \geq 2.
+\end{align*}
+
+Ejemplo: $0, 1, 1, 2, 3, 5, 8, 13, 21, \dots$
+
+\subsubsection*{Ejercicio: Propiedad de Crecimiento de Fibonacci}
+Demuestre que para todo $n \geq 3$, si $\alpha = \frac{1 + \sqrt{5}}{2}$, entonces $f_n > \alpha^{n-2}$.
+\subsubsection*{Demostración por inducción:}
+\noindent \textbf{Caso Base:} Debemos demostrar el caso base tanto para $n=3$ como para $n=4$ (porque no podemos demostrar que $f_4 > \alpha^2$ desde la hipótesis inductiva).
+
+Esto no es difícil puesto que:
+\begin{align*}
+    f_3 &= 2 > \alpha = \frac{1 + \sqrt{5}}{2}, \\
+    f_4 &= 3 > \alpha^2 = \frac{3 + \sqrt{5}}{2}.
+\end{align*}
+
+\noindent \textbf{Caso Inductivo:} Considere un entero $n + 1$ tal que $n \geq 4$. Por hipótesis inductiva, $f_j > \alpha^{j-2}$ para todo $j \in [3, n]$.
+
+Dado que $f_{n+1} = f_n + f_{n-1}$, se tiene:
+\[
+    f_{n+1} > \alpha^{n-2} + \alpha^{n-3} = \alpha^{n-3} (1 + \alpha).
+\]
+
+Por tanto, para demostrar que $f_{n+1} > \alpha^{n-1}$ basta demostrar que:
+\[
+    (1 + \alpha) \geq \alpha^2.
+\]
+
+Esto es fácil, ya que:
+\[
+    (1 + \alpha) = \frac{3 + \sqrt{5}}{2} = \alpha^2.
+\]
+
+Así, la desigualdad se cumple y la demostración por inducción queda completada.
+
+\bigskip
+\noindent \textbf{Ejercicio}: Demuestre que para todo entero positivo $n$, 
+ $$ f_0 f_1 + f_1 f_2 + \cdots + f_{2n-1} f_{2n} = f_{2n}^2. $$
+
+
+\subsection{Conjuntos Definidos Recursivamente}
+Los conjuntos también pueden definirse de manera recursiva, siguiendo una estructura similar a la de las funciones. Un conjunto recursivamente definido se construye especificando un conjunto base y una regla que permite generar nuevos elementos a partir de los que ya están en el conjunto.
+
+La definición recursiva de conjuntos sigue la estructura:
+\begin{itemize}
+    \item \textbf{Caso base}: Elementos iniciales del conjunto.
+    \item \textbf{Regla recursiva}: Forma de construir nuevos elementos.
+\end{itemize}
+
+\begin{exampleblock} {Definición de $\Sigma^*$} 
+El conjunto de strings sobre un alfabeto $\Sigma$:
+\begin{itemize}
+    \item \textbf{Caso base}: La cadena vacía $\epsilon$ pertenece a $\Sigma^*$.
+    \item \textbf{Regla recursiva}: Si $w \in \Sigma^*$ y $x \in \Sigma$, entonces $wx \in \Sigma^*$.
+\end{itemize}
+\end{exampleblock}
+Este conjunto, denotado como $\Sigma^*$, representa todas las posibles cadenas (incluyendo la cadena vacía) que pueden formarse con los símbolos de $\Sigma$.
+
+\subsubsection{Definiciones Recursivas de Operaciones sobre Strings}
+Al igual que los conjuntos, las operaciones sobre strings pueden definirse de manera recursiva. Definir operaciones de esta manera nos permite formalizar algoritmos y probar propiedades sobre strings de manera estructurada.
+
+Una de las operaciones más importantes sobre strings es la concatenación, que une dos strings en un solo. La concatenación de dos strings $w_1$ y $w_2$ se define recursivamente de la siguiente manera:
+\begin{exampleblock}{Definición de concatenación}
+\begin{itemize}
+    \item \textbf{Regla base}: Si $w \in \Sigma^*$, entonces $w \cdot \epsilon = w$ (concatenar con la cadena vacía no cambia la cadena original).
+    \item \textbf{Regla inductiva}: Si $w_1, w_2 \in \Sigma^*$ y $x \in \Sigma$, entonces $w_1 \cdot (w_2x) = (w_1 \cdot w_2) x$ (concatenar un carácter a una cadena es equivalente a concatenar primero el prefijo y luego agregar el carácter final).
+\end{itemize}
+\end{exampleblock}
+
+Por ejemplo, si tenemos el alfabeto $\Sigma = \{a, b\}$ y las cadenas $w_1 = ab$, $w_2 = ba$, la concatenación $w_1 \cdot w_2$ sigue:
+\begin{align*}
+    ab \cdot ba &= (ab \cdot b)a \\
+    &= ((ab \cdot \epsilon)b)a \\
+    &= (ab)b)a \\
+    &= abb a.
+\end{align*}
+
+Otra propiedad importante de los strings es su longitud. Podemos definir recursivamente la función $l(w)$, que calcula la longitud de un string $w$:
+\begin{exampleblock}{Definición de longitud}
+\begin{itemize}
+    \item \textbf{Regla base}: $l(\epsilon) = 0$.
+    \item \textbf{Regla inductiva}: $l(w x) = l(w) + 1$, para $x \in \Sigma$ (cada vez que agregamos un carácter a la cadena, su longitud aumenta en uno).
+\end{itemize}
+\end{exampleblock}
+
+Por ejemplo, si $w = ab$:
+\begin{align*}
+    l(\epsilon) &= 0, \\
+    l(a) &= l(\epsilon) + 1 = 1, \\
+    l(ab) &= l(a) + 1 = 2.
+\end{align*}
+
+\section{Inducción Estructural sobre Estructuras Recursivas}
+La \textbf{inducción estructural} es un método para demostrar propiedades de conjuntos definidos de manera recursiva. Dado que estos conjuntos están construidos a partir de reglas que generan nuevos elementos a partir de los anteriores, la inducción estructural nos permite razonar sobre ellos en una forma natural y efectiva.
+La inducción estructural permite demostrar que una propiedad se cumple para todos los elementos del conjunto sin necesidad de verificarlos uno por uno.
+
+El método de inducción estructural sigue estos pasos:
+\begin{definitionblock}{Inducción Estructural}
+\begin{itemize}
+    \item \textbf{Caso base}:  Demostrar que la propiedad se cumple para cada caso base de
+la definición recursiva.
+    \item \textbf{Paso inductivo}: Se asume que la propiedad es cierta para los elementos ya definidos (hipótesis inductiva) y se prueba que debe ser cierta para los nuevos elementos generados por la regla recursiva.
+\end{itemize}
+\end{definitionblock}
+
+\subsection{Ejemplo: Longitud de Cadenas}
+
+\textbf{Ejercicio:} Demuestre que para todo par de strings $w_1, w_2 \in \Sigma^*$, se cumple:
+\[
+    l(w_1 w_2) = l(w_1) + l(w_2).
+\]
+
+\subsubsection*{Demostración}
+\noindent Definimos la proposición $P(y)$ como:
+\[
+    l(x y) = l(x) + l(y) \quad \text{para cualquier } x \in \Sigma^*.
+\]
+Queremos probar que $P(y)$ es cierta para todo $y \in \Sigma^*$ usando inducción estructural.
+
+\noindent \textbf{Caso base:} Si $y = \epsilon$ (cadena vacía), entonces:
+\[
+    l(x \epsilon) = l(x) = l(x) + 0 = l(x) + l(\epsilon).
+\]
+Esto muestra que la propiedad se cumple para el caso base.
+
+\noindent \textbf{Paso inductivo:} Supongamos que la propiedad es cierta para una cadena $w$, es decir, que:
+\[
+    l(x w) = l(x) + l(w).
+\]
+Ahora, consideremos una cadena extendida con un símbolo adicional $a \in \Sigma$, es decir, $w a$. Queremos demostrar que:
+\[
+    l(x w a) = l(x) + l(w a).
+\]
+Por la definición recursiva de la longitud de un string, sabemos que:
+\[
+    l(w a) = l(w) + 1.
+\]
+Aplicando la hipótesis inductiva:
+\begin{align*}
+    l(x w a) &= l(x w) + 1 \\
+    &= (l(x) + l(w)) + 1 \\
+    &= l(x) + (l(w) + 1) \\
+    &= l(x) + l(w a).
+\end{align*}
+Dado que hemos demostrado que la propiedad se mantiene en el caso base y en el paso inductivo, por el principio de inducción estructural, concluimos que la propiedad es cierta para toda cadena $y \in \Sigma^*$.
+
+\subsection{Definición Recursiva de Árboles Binarios}
+\begin{exampleblock}{Árbol Binario}
+Un árbol binario completo se define como:
+\begin{itemize}
+    \item \textbf{Caso base:} Un árbol con un único nodo raíz $r$.
+    \item \textbf{Regla recursiva:} Si $T_1$ y $T_2$ son árboles binarios completos, entonces $T = T_1 \cdot T_2$ es un árbol binario completo que consiste de una raíz r junto con arcos que unen a $r$ con la raíz del sub-árbol izquierdo $T_1$ y con la raíz del sub-árbol derecho $T_2$.
+\end{itemize}
+\end{exampleblock}
+
+\subsubsection{Ejercicio: Número de Vértices en un Árbol Binario}
+Defina recursivamente la función $n(T)$ que entrega el número de vértices de un árbol binario $T$.
+
+\textbf{Solución:}
+\begin{itemize}
+    \item \textbf{Caso base}: Si $T$ está formado sólo por una raíz $r$, entonces $n(T) = 1$.
+    \item \textbf{Regla inductiva}: Si $T_1$ y $T_2$ son árboles binarios completos, entonces el árbol binario completo $T = T_1 \cdot T_2$ tiene:
+    \[
+        n(T) = 1 + n(T_1) + n(T_2).
+    \]
+\end{itemize}
+
+\subsubsection{Ejercicio: Altura de un Árbol Binario}
+Defina la función $h(T)$ que entrega la distancia máxima entre la raíz de un árbol binario $T$ y una de sus hojas.
+
+\textbf{Solución:}
+\begin{itemize}
+    \item \textbf{Caso base}: Si $T$ está formado sólo por una raíz $r$, entonces $h(T) = 0$.
+    \item \textbf{Regla inductiva}: Si $T_1$ y $T_2$ son árboles binarios completos, entonces el árbol binario completo $T = T_1 \cdot T_2$ tiene:
+    \[
+        h(T) = 1 + \max(h(T_1), h(T_2)).
+    \]
+\end{itemize}
+
+\subsubsection{Ejercicio: Relación entre $n(T)$ y $h(T)$}
+Demuestre que para todo árbol binario completo $T$, se cumple que:
+\[
+    n(T) \leq 2^{h(T)+1} - 1.
+\]
+
+\textbf{Demostración por Inducción Estructural:}
+
+\textbf{Caso base:} Si $T$ está formado sólo por una raíz $r$, entonces $n(T) = 1$ y $h(T) = 0$, por lo que:
+\[
+    n(T) = 1 \leq 2^{0+1} - 1 = 1.
+\]
+
+\textbf{Paso inductivo:} Supongamos que la propiedad se cumple para los subárboles $T_1$ y $T_2$, es decir,
+\[
+    n(T_1) \leq 2^{h(T_1)+1} - 1, \quad n(T_2) \leq 2^{h(T_2)+1} - 1.
+\]
+
+% Por las fórmulas recursivas de $n(T)$ y $h(T)$, tenemos:
+% \[
+%     n(T) = 1 + n(T_1) + n(T_2),
+% \]
+% \[
+%     h(T) = 1 + \max(h(T_1), h(T_2)).
+% \]
+
+Utilizando la hipótesis inductiva:
+\begin{align*}
+n(T) &= 1 + n(T_1) + n(T_2) \quad  \\
+&\leq 1 + (2^{h(T_1)+1 }- 1) + (2^{h(T_2)+1} - 1) \quad \text{por H.I.} \\
+&\leq 2 \cdot \max(2^{h(T_1)+1} , 2^{h(T_2)+1}) - 1 \quad \text{suma es como máx 2 veces el mayor} \\
+&= 2 \cdot 2^{max(h(T_1),h(T_2))+1} - 1 \quad \text{ } max(2^x,2^y) = 2^{max(x,y)} \\
+&= 2 \cdot 2^{h(T)+1} - 1 \quad \text{por def. de } h(T) \\
+&= 2^{h(T)+1} - 1.
+\end{align*}
+
+
+Por lo tanto, la propiedad se cumple para todo árbol binario completo $T$, completando la demostración.
+
+
+% \section{Conclusión}
+% La inducción estructural es una técnica esencial en matemáticas discretas y ciencias de la computación. Permite demostrar propiedades de estructuras definidas recursivamente, como funciones, secuencias, conjuntos y árboles binarios.
+
+
+\subsection{Ejercicios Propuestos:}
+\begin{itemize}
+    % \item Demostrar que la concatenación de dos cadenas en $\Sigma^*$ es asociativa, es decir, para todo $x, y, z \in \Sigma^*$:
+    % \[
+    %     (x \cdot y) \cdot z = x \cdot (y \cdot z).
+    % \]
+     \item Definir recursivamente la función $rev(w)$ que invierte un string en $\Sigma^*$, y demostrar por inducción estructural que $rev(xy) = rev(y)rev(x)$ para todo $x, y \in \Sigma^*$.
+    \item Sea $A$ el conjunto definido recursivamente por: \textbf{(i)} $\epsilon \in A$; \textbf{(ii)} si $w \in A$ entonces $awa \in A$, para $a \in \Sigma$. Demostrar que toda cadena en $A$ tiene longitud par.
+
+    \item Definir recursivamente la función que cuenta el número de hojas en un árbol binario completo.
+    \item Probar por inducción estructural que el número de hojas en un árbol binario completo de altura $h$ es exactamente $2^h$.
+    \item Demostrar que en un árbol binario completo con $n$ nodos internos, hay exactamente $n+1$ hojas.
+    \item Probar que la altura de un árbol binario completo con $n$ nodos es al menos $\log_2(n+1) - 1$.
+\end{itemize}
+
+
+\section{Ejercicios Resueltos}
+
+\subsection{Ejercicio: Propiedad de la reversa de strings}
+
+Definir recursivamente la función $rev(w)$ que invierte un string $w \in \Sigma^*$. Luego, demostrar por inducción estructural que:
+\[
+    \text{rev}(xy) = \text{rev}(y)\text{rev}(x)
+\]
+para todo $x, y \in \Sigma^*$.
+
+\textbf{Definición recursiva de $\text{rev}(w)$:}
+\begin{itemize}
+    \item Caso base: $\text{rev}(\epsilon) = \epsilon$
+    \item Paso recursivo: Si $w \in \Sigma^*$ y $a \in \Sigma$, entonces $\text{rev}(wa) = a \cdot \text{rev}(w)$
+\end{itemize}
+
+\textbf{Demostración:} Fijamos un string $x \in \Sigma^*$. Demostraremos por inducción estructural sobre $y$ que:
+\[
+    \text{rev}(xy) = \text{rev}(y) \cdot \text{rev}(x)
+\]
+
+\textbf{Caso base:} $y = \epsilon$
+\[
+    \text{rev}(x\epsilon) = \text{rev}(x) = \epsilon \cdot \text{rev}(x) = \text{rev}(\epsilon) \cdot \text{rev}(x)
+\]
+
+\textbf{Paso inductivo:} Supongamos que $\text{rev}(xw) = \text{rev}(w)\text{rev}(x)$ para una cadena $w \in \Sigma^*$. Queremos demostrar que también se cumple para $wa$, donde $a \in \Sigma$.
+\begin{align*}
+\text{rev}(xwa) &= a \cdot \text{rev}(xw) \\
+                &= a \cdot (\text{rev}(w)\text{rev}(x)) \\
+                &= (a \cdot \text{rev}(w)) \cdot \text{rev}(x) \\
+                &= \text{rev}(wa) \cdot \text{rev}(x)
+\end{align*}
+Por lo tanto, se cumple la propiedad para todo $y \in \Sigma^*$.
+
+\subsection{Ejercicio: Longitud par en un conjunto definido recursivamente}
+
+Sea el conjunto $A$ definido por:
+\begin{itemize}
+    \item Caso base: $\epsilon \in A$
+    \item Paso recursivo: Si $w \in A$ y $a \in \Sigma$, entonces $awa \in A$
+\end{itemize}
+
+Demostrar que toda cadena en $A$ tiene longitud par.
+
+\textbf{Demostración por inducción estructural:}
+
+\textbf{Caso base:} $\epsilon \in A$, y su longitud es $0$, que es par.
+
+\textbf{Paso inductivo:} Supongamos que $|w|$ es par. Entonces $|awa| = |w| + 2$. Como $|w|$ es par, $|w| = 2k$ para algún $k$, por lo tanto:
+\[
+    |awa| = 2k + 2 = 2(k + 1)
+\]
+que es par.
+
+Por lo tanto, toda cadena en $A$ tiene longitud par.

@@ -1,0 +1,599 @@
+
+
+
+\section{¿Qué es la lógica?}
+
+
+La lógica es una disciplina fundamental para el razonamiento y la estructura del conocimiento. Se centra en determinar cuándo un argumento es válido, es decir, en la relación entre premisas y conclusión, sin importar el contenido específico de las afirmaciones.
+
+\subsection{Breve Historia de la Lógica}
+
+La lógica ha experimentado una evolución  a lo largo de la historia. Desde sus inicios en la antigua Grecia hasta su aplicación en la computación moderna, la lógica ha dejado una huella en diversas áreas del saber.
+
+Todo comenzó con \textbf{Aristóteles} en el siglo IV a.C., quien estableció los cimientos de la lógica formal al introducir el silogismo. Este método de razonamiento deductivo, basado en premisas y conclusiones, sentó las bases para el desarrollo de sistemas lógicos más complejos.
+
+Siglos después, la \textbf{lógica estoica} (siglos III a.C.-II d.C.) emergió con un enfoque innovador. Los estoicos desarrollaron un sistema lógico basado en operadores y reglas inferenciales, anticipando ideas esenciales que hoy son pilares de la lógica contemporánea.
+
+Avanzando en el tiempo, \textbf{George Boole} (1815-1864) revolucionó el campo con su lógica booleana. Este sistema algebraico para el razonamiento lógico no solo transformó la lógica, sino que también sentó las bases para la computación moderna.
+
+\textbf{Gottlob Frege} (1848-1925) llevó la lógica a otro nivel al introducir el cálculo de predicados y la cuantificación lógica. Estos conceptos se convirtieron en fundamentos esenciales para la computación, las matemáticas y la filosofía analítica.
+
+Finalmente, \textbf{Claude Shannon} (1937) aplicó la lógica booleana a circuitos eléctricos en su tesis de maestría, \textit{A Symbolic Analysis of Relay and Switching Circuits}. Este trabajo seminal marcó el inicio de la era de la computación digital, demostrando cómo la lógica puede ser utilizada para diseñar y optimizar sistemas electrónicos.
+
+Estos hitos históricos ilustran cómo la lógica ha evolucionado y se ha adaptado, proporcionando herramientas poderosas para el razonamiento y la innovación en diversas disciplinas.
+
+\subsection{Aplicaciones de la Lógica en Ciencias de la Computación}
+
+La lógica, en sus diversas formas, es una herramienta esencial en el campo de las ciencias de la computación. En el diseño de \textbf{lenguajes de programación}, la lógica formal proporciona las bases para definir sintaxis y semántica, asegurando que los programas sean coherentes y funcionales. 
+
+En la \textbf{verificación de software}, la lógica garantiza que los programas cumplan con sus especificaciones, detectando errores y mejorando la calidad del código. Las \textbf{bases de datos y los motores de búsqueda} también se benefician de la lógica, permitiendo la formulación de consultas eficientes y la extracción de información relevante de grandes volúmenes de datos.
+
+La lógica se utiliza en \textbf{ciberseguridad y criptografía} para analizar protocolos y detectar vulnerabilidades, asegurando la integridad y confidencialidad de la información. Además, en el desarrollo de \textbf{algoritmos y estructuras de datos}, la lógica proporciona un marco riguroso para diseñar soluciones eficientes y optimizadas. Finalmente,en la utilizainteligencia artificial se utiliza para modelar el razonamiento y la toma de decisiones, permitiendo la creación de sistemas autónomos y adaptativos. 
+
+En todos estos ámbitos, la lógica proporciona un marco riguroso para estructurar el conocimiento y alcanzar conclusiones fundamentadas.
+
+
+
+\subsection{Tipos de Lógica}
+
+El razonamiento formal se apoya en diversos sistemas lógicos, cada uno con su propia expresividad y aplicaciones. A continuación, se presentan algunos de los más importantes.
+
+La \textbf{lógica proposicional} es fundamental para el razonamiento lógico, utilizando proposiciones atómicas y conectivos lógicos para formar expresiones complejas. Se enfoca en las relaciones entre proposiciones y es esencial en matemáticas, computación y sistemas formales.
+
+La \textbf{lógica de primer orden, o lógica de predicados}, amplía la lógica proposicional al introducir cuantificadores y predicados, permitiendo afirmaciones más detalladas sobre objetos en un dominio. Es más expresiva y se usa ampliamente en matemáticas, filosofía y ciencias de la computación.
+
+La \textbf{lógica modal} introduce operadores para razonar sobre modalidades como la posibilidad y la necesidad, permitiendo considerar lo que es verdadero en diferentes contextos. Tiene aplicaciones en filosofía, inteligencia artificial y teoría de la información. La \textbf{lógica temporal} es una extension con operadores temporales para expresar conceptos como ``siempre'', ``eventualmente'' y ``hasta que'', lo que  permite modelar procesos dinámicos.
+
+En este curso, nos centraremos en la \textbf{lógica proposicional y de primer orden}, Estos sistemas son la base para construir modelos más avanzados de inferencia y representación del conocimiento.
+
+
+\section{Razonamiento Formal}
+La l\'ogica proposicional es una de las formas m\'as fundamentales de razonamiento formal, proporcionando una base estructurada para la inferencia y el análisis lógico de argumentos.
+
+
+\subsection{Definiciones B\'asicas}
+
+\begin{itemize}
+    \item Una \textbf{proposici\'on} es cualquier enunciado que puede ser verdadero o falso, pero no ambos simult\'aneamente.
+    \item Un \textbf{argumento} es una secuencia de proposiciones donde las primeras se llaman premisas y la \'ultima se llama conclusi\'on.
+    \item Un argumento es \textbf{v\'alido} si la verdad de sus premisas garantiza la verdad de su conclusi\'on.
+\end{itemize}
+
+
+\subsection{Argumentos}
+
+Un \textbf{argumento} es una secuencia de proposiciones que se estructuran de manera tal que una o más premisas conducen a una conclusión. Aristóteles fue pionero en el estudio de los argumentos, desarrollando la teoría del silogismo para analizar patrones lógicos de razonamiento.
+
+Un ejemplo clásico de silogismo es el siguiente:
+
+\begin{center}
+\begin{tabular}{l}
+Todas las personas son mortales.  \\
+Sócrates es una persona.  \\
+\cline{1-1}
+Por lo tanto, Sócrates es mortal. 
+\end{tabular}
+\end{center}
+
+Este es un ejemplo de \textit{razonamiento deductivo}, donde la conclusión se deduce necesariamente de las premisas. La validez del silogismo reside en que, si las premisas son verdaderas, la conclusión debe serlo también.
+En este caso, la inferencia se basa en el hecho de que todas las personas comparten la propiedad de ser mortales, y Sócrates pertenece a este grupo.
+
+\subsection{Validez de un Argumento}
+La \textbf{validez} de un argumento se refiere a la relación lógica entre las premisas y la conclusión. Un argumento es válido si, bajo la suposición de que todas sus premisas son verdaderas, la conclusión también debe ser necesariamente verdadera. Es decir, un argumento válido garantiza que no es posible que las premisas sean verdaderas y la conclusión falsa al mismo tiempo.
+
+Por ejemplo, consideremos el siguiente argumento:
+
+\begin{center}
+\begin{tabular}{l}
+Todas las especies de aves pueden volar. \\
+Un pingüino es un ave. \\
+\cline{1-1}
+Por lo tanto, un pingüino puede volar. 
+\end{tabular}
+\end{center}
+
+Aunque la primera premisa es falsa, la estructura lógica del argumento sigue siendo válida, ya que la conclusión se deriva formalmente de las premisas. Es importante resaltar que la validez no implica que las premisas sean realmente ciertas en el mundo real, sino que la inferencia es correcta desde un punto de vista lógico.\\
+
+\begin{tcolorbox}[colback=yellow!20, colframe=black, sharp corners=south]
+Un argumento \textbf{válido} es aquel en el que, si todas las premisas son verdaderas, la conclusión necesariamente también lo es. Esto garantiza que no puede haber un caso en el que las premisas sean verdaderas y la conclusión falsa.
+\end{tcolorbox}
+
+\bigskip
+
+\textbf{Ejemplo de argumento válido:}
+\begin{center}
+\begin{tabular}{l}
+Si llueve, entonces el suelo estará mojado. \\
+Está lloviendo. \\
+\cline{1-1}
+Por lo tanto, el suelo está mojado.
+\end{tabular}
+\end{center}
+
+
+Un argumento tiene una \textbf{forma lógica}, es decir, una representación simbólica que abstrae su estructura subyacente mediante variables y conectores lógicos. En esta representación, las proposiciones se representan con letras (por ejemplo, $p$, $q$, $r$) y los conectores lógicos (como $\rightarrow$ para implicación, $\vee$ para disyunción, $\wedge$ para conjunción, y $\lnot$ para negación) se utilizan para mostrar las relaciones entre las proposiciones.
+
+
+El argumento anterior tiene la siguiente forma lógica:
+\begin{center}
+\begin{tabular}{l}
+$p \rightarrow q$ \\
+$p$ \\
+\hline
+$q$
+\end{tabular}
+\end{center}
+
+
+Este razonamiento sigue la estructura del \textit{modus ponens}, una regla de inferencia fundamental en lógica proposicional. Dado que la primera premisa establece una implicación (``si llueve, entonces el suelo estará mojado'') y la segunda premisa afirma la verdad de su antecedente (``está lloviendo''), la conclusión (``el suelo está mojado'') se sigue necesariamente.\\
+
+En contraste, un \textbf{argumento inválido} es aquel en el que, aunque las premisas sean verdaderas, la conclusión no necesariamente lo es. 
+
+\textbf{Ejemplo de argumento inválido:}
+\begin{center}
+\begin{tabular}{l}
+Si llueve, entonces el suelo estará mojado. \\
+El suelo está mojado. \\
+\cline{1-1}
+Por lo tanto, está lloviendo.
+\end{tabular}
+\end{center}
+
+Este argumento es inválido porque, aunque la premisa ``el suelo está mojado'' sea verdadera, existen otras posibles causas para que el suelo esté mojado, como el riego de un jardín. Por lo tanto, la conclusión ``está lloviendo'' no necesariamente se sigue de las premisas.
+
+Comprender la distinción entre un argumento válido e inválido es fundamental para el análisis lógico. Un argumento válido garantiza que, si las premisas son verdaderas, la conclusión también será verdadera, pero no asegura la verdad de las premisas. La validez, por lo tanto, se refiere únicamente a la relación lógica entre las premisas y la conclusión, no a la veracidad de las afirmaciones contenidas en las premisas.
+
+\subsection{Ejemplos de Argumentos y su Forma Lógica}
+
+En esta sección analizaremos diferentes tipos de argumentos y su representación lógica.
+Los argumentos en los \textbf{ejemplos 1 y 2} pueden expresarse utilizando únicamente \textbf{proposiciones atómicas} y \textbf{conectivos lógicos}.
+El argumento en el \textbf{ejemplo 3} requiere una lógica más expresiva, incorporando \textbf{predicados} y \textbf{cuantificadores}.
+
+
+
+\subsubsection{Ejemplo 1: Argumento válido}
+\textbf{Argumento:}
+
+\begin{center}
+\begin{tabular}{l}
+Si Ana estudia en el DCC o en el DIM, entonces tomará CC3101.\\
+Ana estudia en el DCC.\\
+\hline
+Por lo tanto, Ana tomará CC3101.
+\end{tabular}
+\end{center}
+
+\textbf{Forma lógica:}
+
+\begin{center}
+\begin{tabular}{l}
+$(p \vee q) \rightarrow r$ \\
+$p$ \\
+\hline
+$r$
+\end{tabular}
+\end{center}
+
+\textbf{Análisis:} Este argumento es válido porque la conclusión se sigue necesariamente de las premisas. La estructura lógica muestra que si Ana estudia en el DCC ($p$), entonces tomará CC3101 ($r$).
+
+\subsubsection{Ejemplo 2: Argumento no válido}
+\textbf{Argumento:}
+
+\begin{center}
+\begin{tabular}{l}
+Si llueve, entonces se moja el suelo.\\
+No llovió.\\
+\hline
+Por lo tanto, no se mojó el suelo.
+\end{tabular}
+\end{center}
+
+\textbf{Forma lógica:}
+
+\begin{center}
+\begin{tabular}{l}
+$p \rightarrow q$ \\
+$\lnot p$ \\
+\hline
+$\lnot q$
+\end{tabular}
+\end{center}
+
+\textbf{Análisis:} 
+Este argumento comete la \textbf{falacia de la negación del antecedente}, ya que de \( p \rightarrow q \) y \( \lnot p \) no se sigue necesariamente \( \lnot q \). La implicación solo garantiza que si \( p \) ocurre, entonces \( q \) también; sin embargo, \( q \) podría darse por otras razones. En este caso, el suelo podría mojarse de otra forma (por ejemplo, con una manguera), por lo que la conclusión no es válida.  
+
+
+
+
+
+
+
+
+\subsubsection{Ejemplo 3: Argumento válido}
+\textbf{Argumento:}
+
+\begin{center}
+\begin{tabular}{l}
+Todas las personas son mortales.\\
+Sócrates es una persona.\\
+\hline
+Por lo tanto, Sócrates es mortal.
+\end{tabular}
+\end{center}
+
+\textbf{Forma lógica:}
+
+\begin{center}
+\begin{tabular}{l}
+$\forall x.~~\mathit{persona}(x) \rightarrow \mathit{mortal}(x)$ \\
+$\mathit{persona}(\mathsf{Socrates})$ \\
+\hline
+$ \mathit{mortal}(\mathsf{Socrates})$
+\end{tabular}
+\end{center}
+
+\textbf{Análisis:} Este argumento es válido porque la conclusión se sigue necesariamente de las premisas. La estructura lógica muestra que si Sócrates es una persona ($\mathit{persona}(\mathsf{Socrates})$), entonces Sócrates es mortal ($\mathit{mortal}(\mathsf{Socrates})$).
+
+
+
+
+% \newpage
+
+
+
+\section{Lógica Proposicional}
+
+La lógica proposicional es el punto de partida en el estudio del razonamiento lógico. Este enfoque se centra en las \textbf{proposiciones}, que son enunciados que pueden ser verdaderos o falsos, pero no ambos simultáneamente.
+
+Una \textbf{proposición} es cualquier enunciado que puede ser evaluado como verdadero o falso. Por ejemplo, las siguientes son proposiciones:
+\begin{itemize}
+    \item Ana estudia en el DCC.
+    \item Santiago es la capital de Chile.
+    \item $2 > 4$.
+\end{itemize}
+En contraste, las siguientes no son proposiciones porque no pueden ser evaluadas como verdaderas o falsas:
+\begin{itemize}
+    \item ¿Qué hora es?
+    \item $x == 2$.
+\end{itemize}
+
+La validez de un argumento en la lógica proposicional puede ser determinada mediante dos métodos principales: \textbf{tablas de verdad} y \textbf{sistemas de inferencia}. Las tablas de verdad permiten evaluar todas las combinaciones posibles de valores de verdad para las proposiciones involucradas, mientras que los sistemas de inferencia proporcionan reglas para derivar nuevas proposiciones a partir de las conocidas.
+
+\subsection{Sintaxis}
+
+La sintaxis en lógica proposicional define las reglas que determinan cuándo una secuencia de símbolos constituye una \textbf{fórmula bien formada}. 
+
+La sintaxis es fundamental porque establece las reglas que deben seguirse para construir expresiones lógicas válidas. Estas reglas aseguran que las proposiciones sean claras y sin ambigüedades, lo cual es crucial para el razonamiento lógico.
+
+\bigskip
+
+\begin{tabular}{ll}
+    \stitle{Fórmulas bien formadas:} & $p \land q$, $\lnot p \rightarrow p$, $q$ \\
+    \stitle{Fórmulas no bien formadas:} & $p\: \land$, $q\; p\; \lnot\; p$, $\lor$ \\
+\end{tabular}
+
+\subsubsection{Conjunto de Fórmulas Bien Formadas}
+
+Una fórmula bien formada es o bien una \textbf{fórmula atómica}, formada por una proposición, o bien una \textbf{fórmula compuesta}, formada combinando proposiciones a través de conectivos lógicos.
+
+\bigskip
+
+\begin{thmblock}{Definición (sintaxis de la lógica proposicional)}
+    Dado un conjunto $P=\{p,q,r,\ldots\}$ de proposiciones, el conjunto de \textbf{fórmulas bien formadas} sobre $P$, notado \textbf{$\mathcal{L}(P)$}, se define inductivamente de la siguiente manera:\\
+
+    \textbf{Caso base:} Si $p \in P$, entonces $p \in \mathcal{L}(P)$. \\
+    \textbf{Caso inductivo:} Si $\alpha,\beta \in \mathcal{L}(P)$, entonces $(\lnot \alpha)$, $(\alpha \land \beta)$, $(\alpha \lor \beta)$, $(\alpha \rightarrow \beta) \in \mathcal{L}(P)$.
+\end{thmblock}
+
+% \subsubsection{Supresión de Paréntesis}
+
+Para evitar el aglutinamiento de paréntesis en las fórmulas nos permitimos omitir el par de paréntesis más externos e introducimos un orden de precedencia sobre los conectivos lógicos: $\lnot$, $\land$, $\lor$, $\rightarrow$.
+
+\bigskip
+
+\stitle{Ejemplo:}
+
+\begin{center}
+    \begin{tabular}{@{} lr @{}}
+        \toprule
+        Fórmula & Forma Abreviada\\
+        \midrule
+        $( (\lnot p) \rightarrow q)$ & $\lnot p \rightarrow q$ \\
+        $((p \land q) \lor r)$ & $p \land q \lor r$\\
+        \bottomrule
+    \end{tabular}
+\end{center}
+
+
+
+\subsection{Semántica}
+
+% \subsubsection{Objetivo de la Semántica}
+
+La semántica de un lenguaje lógico define las reglas que permiten determinar cuándo una fórmula bien formada es verdadera o falsa. Es decir, establece el significado preciso de las expresiones del lenguaje y cómo su veracidad depende de los valores asignados a sus componentes.
+
+Una herramienta clave en esta definición es la \textbf{función de verdad}, que asigna a cada combinación de valores de las proposiciones atómicas un valor de verdad para la fórmula completa:
+
+\[
+\textbf{Función de verdad: }\{0,1\}^n \rightarrow \{0,1\}
+\]
+
+El valor de verdad de una fórmula $\alpha \in \mathcal{L}(P)$ depende únicamente del valor de verdad de las proposiciones en $\mathcal{L}(P)$ y del significado de los conectivos lógicos, dado por su \alert{tabla de verdad}.
+
+\bigskip
+
+Para ilustrar, consideremos la fórmula $\alpha = p \land q$. Su tabla de verdad es:
+\begin{center}
+\begin{tabular}{c|c|c}
+    $p$ & $q$ & $p \land q$ \\
+    \hline
+    V & V & V \\
+    V & F & F \\
+    F & V & F \\
+    F & F & F \\
+\end{tabular}
+\end{center}
+
+\bigskip
+
+La función de verdad asigna un valor de verdad (0 para falso, 1 para verdadero) a cada combinación de valores de verdad de las proposiciones atómicas. Esto se realiza mediante la tabla de verdad correspondiente a la fórmula $\alpha$.
+
+% \bigskip
+
+% La semántica es esencial porque permite evaluar la validez de los argumentos lógicos. Al asignar valores de verdad a las proposiciones atómicas y utilizar las tablas de verdad, podemos verificar si un argumento es válido. Esto asegura que nuestros razonamientos sean coherentes y basados en principios lógicos sólidos.
+
+% \bigskip
+
+% En resumen, la semántica proporciona las herramientas necesarias para interpretar y evaluar las fórmulas lógicas, garantizando que nuestros argumentos sean consistentes y válidos.
+
+
+
+
+\subsubsection{Tabla de Verdad de la Negación ($\neg$)}
+
+\begin{center}
+    \begin{tabular}{|c||c|}
+        \hline
+        $\alpha$ & $\neg \alpha$ \\
+        \hline
+        1 & 0 \\
+        \hline
+        0 & 1 \\
+        \hline
+    \end{tabular}
+\end{center}
+
+\impblock{El valor de verdad de $\lnot \alpha$ es opuesto al de $\alpha$.}
+
+\subsubsection{Tabla de Verdad de la Conjunción ($\land$)}
+
+\begin{center}
+    \begin{tabular}{|c|c||c|}
+        \hline
+        $\alpha$ & $\beta$ & $\alpha \land \beta$ \\
+        \hline
+        1 & 1 & 1 \\
+        \hline
+        1 & 0 & 0 \\
+        \hline
+        0 & 1 & 0 \\
+        \hline
+        0 & 0 & 0 \\
+        \hline
+    \end{tabular}
+\end{center}
+
+\impblock{$\alpha \land \beta$ es verdadero si y sólo si $\alpha$ y $\beta$ son verdaderos.}
+
+\subsubsection{Tabla de Verdad de la Disyunción ($\lor$)}
+
+\begin{center}
+    \begin{tabular}{|c|c||c|}
+        \hline
+        $\alpha$ & $\beta$ & $\alpha \lor \beta$ \\
+        \hline
+        1 & 1 & 1 \\
+        \hline
+        1 & 0 & 1 \\
+        \hline
+        0 & 1 & 1 \\
+        \hline
+        0 & 0 & 0 \\
+        \hline
+    \end{tabular}
+\end{center}
+
+\impblock{$\alpha \lor \beta$ es verdadero si y sólo si $\alpha$ o $\beta$ son verdaderos.}
+
+\subsubsection{Tabla de Verdad de la Implicancia ($\rightarrow$)}
+
+\begin{center}
+    \begin{tabular}{|c|c||c|}
+        \hline
+        $\alpha$ & $\beta$ & $\alpha \rightarrow \beta$ \\
+        \hline
+        1 & 1 & 1 \\
+        \hline
+        1 & 0 & 0 \\
+        \hline
+        0 & 1 & 1 \\
+        \hline
+        0 & 0 & 1 \\
+        \hline
+    \end{tabular}
+\end{center}
+
+\impblock{$\alpha \rightarrow \beta$ es siempre verdadero, excepto cuando $\alpha$ (el antecedente) es verdadero y $\beta$ (el consecuente) es falso.}
+
+\subsubsection{Valor de Verdad de Fórmulas Compuestas}
+
+El valor de verdad de una fórmula lógica compuesta se determina a partir de los valores de verdad de sus proposiciones atómicas y de las reglas establecidas por los conectivos lógicos.  
+
+\bigskip
+
+\paragraph{Ejemplo:} Determinar el valor de verdad de la siguiente fórmula para cada valuación de las proposiciones \( p \) y \( q \):  
+
+\[
+(p \lor q) \rightarrow (p \land q)
+\]
+
+\bigskip
+
+\begin{center}
+    \begin{tabular}{|c|c||c|c|c|}
+        \hline
+        \( p \) & \( q \) & \( p \lor q \) & \( p \land q \) & \( (p \lor q) \rightarrow (p \land q) \) \\
+        \hline
+        1 & 1 & 1 & 1 & 1 \\
+        1 & 0 & 1 & 0 & 0 \\
+        0 & 1 & 1 & 0 & 0 \\
+        0 & 0 & 0 & 0 & 1 \\
+        \hline
+    \end{tabular}
+\end{center}
+
+\bigskip
+
+En la tabla de verdad anterior, se observa cómo el valor de la fórmula se obtiene paso a paso aplicando las definiciones de los conectivos lógicos. Esto nos permite verificar su comportamiento en todas las posibles valuaciones de \( p \) y \( q \).
+
+
+\subsubsection{Semántica de la Lógica Proposicional}
+
+Alternativamente, podemos formalizar lo anterior de la siguiente manera:
+
+\begin{thmblock}{Definición (semántica de la lógica proposicional)}
+    Sea $$\sigma \colon P \rightarrow \{0,1\}$$ una \alert{valuación} de las proposiciones en $P=\{p,q,r,\ldots\}$, es decir una función que le asigna un valor de verdad a las proposiciones en $P$.
+
+    La función $$\hat{\sigma} \colon \mathcal{L}(P) \rightarrow \{0,1\}$$ le asigna un valor de verdad a cada fórmula en $\mathcal{L}(P)$ de la siguiente manera:
+    $$
+    \begin{array}{l c l}
+        \hat{\sigma}(p) &=& \sigma(p) \quad \text{para } p \in P\\
+        \hat{\sigma}(\lnot \alpha) &=& 1 - \hat{\sigma}(\alpha) \\
+        \hat{\sigma}(\alpha \land \beta) &=& \min\,\{\hat{\sigma}(\alpha), \hat{\sigma}(\beta) \} \\
+        \hat{\sigma}(\alpha \lor \beta) &=& \max\,\{\hat{\sigma}(\alpha), \hat{\sigma}(\beta) \} \\
+        \hat{\sigma}(\alpha \rightarrow \beta) &=& \max\,\{1-\hat{\sigma}(\alpha), \hat{\sigma}(\beta) \}
+    \end{array}
+    $$
+\end{thmblock}
+
+\subsection{Definición Formal de un Argumento Válido}
+
+Un \textbf{argumento} es válido si y solo si, dado un conjunto de premisas \( P_1, P_2, \dots, P_n \) y una conclusión \( C \), siempre que todas las premisas sean verdaderas, la conclusión también debe ser verdadera. Formalmente, esto se expresa de la siguiente manera:
+
+\[
+(P_1 \land P_2 \land \dots \land P_n) \rightarrow C
+\]
+
+Es decir, un argumento \( \langle P_1, P_2, \dots, P_n, C \rangle \) es válido si y solo si, en cualquier interpretación donde todas las premisas \( P_1, P_2, \dots, P_n \) sean verdaderas, la conclusión \( C \) también es verdadera. Si existe una interpretación en la que todas las premisas sean verdaderas y la conclusión falsa, entonces el argumento no es válido.
+
+\subsubsection{Ejemplos}
+
+\bigskip
+
+\textbf{Ejemplo 1: Modus Ponens}  
+
+\begin{center}
+\begin{tabular}{l}
+$p \rightarrow q$ \\
+$p$ \\
+\hline
+$q$
+\end{tabular}
+\end{center}
+
+Para determinar la validez de este argumento, construimos su tabla de verdad:
+
+\begin{center}
+\begin{tabular}{|c|c|c|c|}
+\hline
+$p$ & $q$ & $p \rightarrow q$ & $q$ \\
+\hline
+1 & 1 & 1 & 1 \\
+1 & 0 & 0 & 0 \\
+0 & 1 & 1 & 1 \\
+0 & 0 & 1 & 0 \\
+\hline
+\end{tabular}
+\end{center}
+
+En este caso, observamos que siempre que \( p \) es verdadero y \( p \rightarrow q \) también es verdadero, \( q \) debe ser verdadero. Por lo tanto, el argumento es válido.
+
+
+\bigskip  
+
+\textbf{Ejemplo 2: Silogismo Hipotético}  
+
+Consideremos el siguiente argumento:
+
+\begin{center}
+\begin{tabular}{l}
+$p \rightarrow q$ \\
+$q \rightarrow r$ \\
+\hline
+$p \rightarrow r$
+\end{tabular}
+\end{center}
+
+Para determinar si este argumento es válido, construimos su tabla de verdad:
+
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|c|c|}
+\hline
+$p$ & $q$ & $r$ & $p \rightarrow q$ & $q \rightarrow r$ & $p \rightarrow r$ \\
+\hline
+1 & 1 & 1 & 1 & 1 & 1 \\
+1 & 1 & 0 & 1 & 0 & 0 \\
+1 & 0 & 1 & 0 & 1 & 1 \\
+1 & 0 & 0 & 0 & 1 & 0 \\
+0 & 1 & 1 & 1 & 1 & 1 \\
+0 & 1 & 0 & 1 & 0 & 1 \\
+0 & 0 & 1 & 1 & 1 & 1 \\
+0 & 0 & 0 & 1 & 1 & 1 \\
+\hline
+\end{tabular}
+\end{center}
+
+En la tabla de verdad, observamos que, en todas las filas en las que tanto \( p \rightarrow q \) como \( q \rightarrow r \) son verdaderos, \( p \rightarrow r \) también es verdadero. Esto significa que siempre que las premisas son verdaderas, la conclusión también es verdadera. Por lo tanto, el argumento es válido.
+
+
+Este tipo de razonamiento, conocido como \textbf{Silogismo Hipotético} se basa en la propiedad transitiva de las implicaciones en la lógica proposicional.
+
+
+
+\bigskip  
+
+
+\textbf{Ejemplo 3: Argumento No Válido}
+
+Considere el siguiente argumento:
+
+\begin{center}
+\begin{tabular}{l}
+$p \rightarrow r$ \\
+$\lnot p$ \\
+\hline
+$\lnot r$
+\end{tabular}
+\end{center}
+
+
+Para determinar si este argumento es válido, construimos su tabla de verdad:
+
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+$p$ & $r$ & $p \rightarrow r$ & $\lnot p$ & $\lnot r$ \\
+\hline
+1 & 1 & 1 & 0 & 0 \\
+1 & 0 & 0 & 0 & 1 \\
+0 & 1 & 1 & 1 & 0 \\
+0 & 0 & 1 & 1 & 1 \\
+\hline
+\end{tabular}
+\end{center}
+
+En este caso, observamos que en la tercera fila, donde \( p \) es falso, \( p \rightarrow r \) es verdadero, y \( \lnot p \) es verdadero, pero la conclusión \( \lnot r \) es falsa. Esto muestra que es posible que todas las premisas sean verdaderas mientras que la conclusión sea falsa. Por lo tanto, este argumento no es válido.
+
+\bigskip
+
+En resumen, un argumento es válido si y solo si, en todas las interpretaciones donde las premisas son verdaderas, la conclusión también lo es. Si existe una interpretación en la que las premisas sean verdaderas y la conclusión falsa, entonces el argumento no es válido.

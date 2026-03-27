@@ -1,0 +1,424 @@
+% \title{Apunte de Matemáticas Discretas CC3101:\\ 
+% Soluciones de relaciones de recurrencia  Clase 14}
+% % \title{Ejercicios Lógica e Inducción}
+% \author{Andrés Abeliuk}
+% \date{}
+% \maketitle
+
+
+
+\section{Recurrencias Lineales}
+
+\subsection{Definición General}
+
+\begin{definitionblock}{Recurrencia lineal homogénea con coeficientes constantes}
+Una relación de recurrencia es \textbf{lineal, homogénea y con coeficientes constantes} si tiene la forma:
+\[
+a_n = c_1 a_{n-1} + c_2 a_{n-2} + \cdots + c_k a_{n-k},
+\]
+donde $c_1, c_2, \dots, c_k \in \mathbb{R}$ y $c_k \neq 0$. Decimos que la recurrencia es de \textbf{grado $k$}.
+\end{definitionblock}
+
+\begin{exampleblock}{Ejemplos}
+\begin{itemize}
+    \item $a_n = 3a_{n-1} + 2a_{n-3}$ es una recurrencia lineal, homogénea, con coeficientes constantes, de grado $3$.
+    \item $a_n = a_{n-1}^2$ \textbf{no} es lineal.
+    \item $a_n = a_{n-1} + 1$ \textbf{no} es homogénea.
+    \item $a_n = n a_{n-1}$ \textbf{no} tiene coeficientes constantes.
+\end{itemize}
+\end{exampleblock}
+
+\subsection{Estrategia de Resolución}
+
+La idea central para resolver estas recurrencias es asumir que las soluciones tienen la forma $a_n = r^n$. Sustituyendo esta forma en la ecuación de recurrencia se obtiene la llamada \textbf{ecuación característica}:
+
+\begin{align*}
+ &  r^n = c_1 r^{n-1} + c_2 r^{n-2} + \cdots + c_k r^{n-k} \\
+& \hspace{-3ex} \Leftrightarrow\\
+&  r^k = c_1 r^{k-1} + c_2 r^{k-2} + \cdots + c_k
+\end{align*}
+
+Resolver esta ecuación polinomial nos da las raíces $r_i$, y la solución general de la recurrencia se construye a partir de estas raíces, dependiendo de su multiplicidad.
+
+\subsubsection{Caso de Grado 2 con Raíces Distintas}
+
+\begin{thmblock}{Solución con raíces distintas}
+Sea la recurrencia:
+\[
+a_n = c_1 a_{n-1} + c_2 a_{n-2}
+\]
+y supongamos que la ecuación característica $r^2 = c_1 r + c_2$ tiene dos raíces reales distintas $r_1$ y $r_2$. Entonces, la solución general es:
+\[
+a_n = \alpha_1 r_1^n + \alpha_2 r_2^n,
+\]
+donde $\alpha_1$ y $\alpha_2$ se determinan usando las condiciones iniciales.
+\end{thmblock}
+\begin{proof}
+Por hipótesis, sabemos que $r_1^2 = c_1 r_1 + c_2$ y $r_2^2 = c_1 r_2 + c_2$. Entonces:
+\begin{align*}
+c_1 a_{n-1} + c_2 a_{n-2} &= c_1(\alpha_1 r_1^{n-1} + \alpha_2 r_2^{n-1}) + c_2(\alpha_1 r_1^{n-2} + \alpha_2 r_2^{n-2}) \\
+&= \alpha_1 r_1^{n-2}(c_1 r_1 + c_2) + \alpha_2 r_2^{n-2}(c_1 r_2 + c_2) \\
+&= \alpha_1 r_1^n + \alpha_2 r_2^n \\
+&= a_n
+\end{align*}
+Concluimos que $a_n = \alpha_1 r_1^n + \alpha_2 r_2^n$ es solución para cualquier par de constantes $\alpha_1, \alpha_2$.
+
+Si además se conocen las condiciones iniciales $a_0$ y $a_1$, entonces las constantes $\alpha_1, \alpha_2$ se determinan unívocamente resolviendo el sistema lineal:
+\[
+\begin{cases}
+a_0 = \alpha_1 r_1^0 + \alpha_2 r_2^0 \\
+a_1 = \alpha_1 r_1^1 + \alpha_2 r_2^1
+\end{cases}
+\]
+\end{proof}
+
+\begin{exampleblock}{Ejemplo}
+Considere la relación de recurrencia,
+\[
+\begin{cases}
+a_n = 2a_{n-1} + 3a_{n-2}, \quad \text{para } n \geq 2 \\
+a_0 = a_1 = 1
+\end{cases}
+\]
+La ecuación característica es $r^2 = 2r + 3 \Rightarrow r^2 - 2r - 3 = 0$, con raíces $r_1 = 3$, $r_2 = -1$.
+
+Solución general:
+\[
+a_n = \alpha_1 3^n + \alpha_2 (-1)^n
+\]
+Usamos condiciones iniciales para determinar:
+\[
+\begin{cases}
+1 = \alpha_1 + \alpha_2 \\
+1 = 3\alpha_1 - \alpha_2
+\end{cases}
+\Rightarrow \alpha_1 = \frac{1}{2}, \quad \alpha_2 = \frac{1}{2}
+\]
+Solución final:
+\[
+a_n = \tfrac{1}{2} 3^n + \tfrac{1}{2} (-1)^n
+\]
+\end{exampleblock}
+
+\subsection{Raíces Dobles}
+
+\begin{thmblock}{Solución con raíz doble}
+Si la ecuación característica tiene una raíz doble $r_*$, es decir, $r^2 = c_1 r + c_2$ con $r_1 = r_2 = r_*$, entonces la solución general es:
+\[
+a_n = \alpha_1 r_*^n + \alpha_2 n r_*^n.
+\]
+\end{thmblock}
+\begin{proof}
+Por hipótesis, sabemos que $r_*^2 = c_1 r_* + c_2$. Por lo tanto:
+\begin{align*}
+c_1 a_{n-1} + c_2 a_{n-2} &= c_1(\alpha_1 r_*^{n-1} + \alpha_2 (n-1) r_*^{n-1}) + c_2(\alpha_1 r_*^{n-2} + \alpha_2 (n-2) r_*^{n-2}) \\
+&= \alpha_1 r_*^{n-2} (c_1 r_* + c_2) + \alpha_2 r_*^{n-2} ((n-1) c_1 r_* + (n-2) c_2) \\
+&= \alpha_1 r_*^n + \alpha_2 r_*^{n-2} (n c_1 r_* - c_1 r_* + n c_2 - 2 c_2) \\
+&= \alpha_1 r_*^n + \alpha_2 r_*^{n-2} (n(c_1 r_* + c_2) - c_1 r_* - 2c_2) \\
+&= \alpha_1 r_*^n + \alpha_2 n r_*^n - \alpha_2 r_*^{n-2}(c_1 r_* + 2c_2) \\
+&= a_n - \alpha_2 r_*^{n-2}(c_1 r_* + 2c_2)
+\end{align*}
+Para que la expresión sea igual a $a_n$, basta establecer que $c_1 r_* + 2c_2 = 0$.
+
+\noindent \textit{Nota:} Como $r_*$ es raíz doble, esto significa que la ecuación característica
+\[
+r^2 - c_1 r - c_2 = 0
+\]
+tiene un discriminante nulo:
+\[
+\Delta = c_1^2 + 4c_2 = 0.
+\]
+Aplicando la fórmula general de las raíces cuadráticas:
+\[
+r = \frac{c_1 \pm \sqrt{c_1^2 + 4c_2}}{2},
+\]
+obtenemos que:
+\[
+r_* = \frac{c_1}{2}
+\]
+cuando el discriminante es cero. Reemplazando en $c_1 r_* + 2c_2$ se obtiene:
+\[
+c_1 r_* + 2c_2 = \frac{c_1^2}{2} + 2c_2 = 2\Delta =  0,
+\]
+por lo tanto, se verifica la igualdad y concluimos que
+\[
+a_n = \alpha_1 r_*^n + \alpha_2 n r_*^n
+\]
+es solución para cualquier par de constantes $\alpha_1, \alpha_2$.
+\end{proof}
+
+
+\subsection{Caso General: Grado Arbitrario}
+
+\begin{thmblock}{Solución general de grado $k$}
+Sea
+\[
+a_n = c_1 a_{n-1} + \cdots + c_k a_{n-k}
+\]
+una recurrencia con ecuación característica que tiene $t$ raíces distintas $r_1, \dots, r_t$ con multiplicidades $m_1, \dots, m_t$. Entonces, la solución general es:
+
+\[
+a_n = \sum_{i=1}^t \left( \sum_{j=0}^{m_i - 1} \alpha_{i,j} n^j \right) r_i^n
+\]
+\end{thmblock}
+
+% \subsection*{Ejercicio: Recurrencias simultáneas}
+% \noindent Resuelva el siguiente sistema de recurrencias:
+% \[
+% \begin{cases}
+% a_n = 3 a_{n-1} + 2 b_{n-1} \\
+% b_n = a_{n-1} + 2 b_{n-1} \\
+% a_0 = 1,\ b_0 = 2
+% \end{cases}
+% \]
+% \textbf{Paso 1:} Resolvamos la segunda ecuación. Se puede reescribir como una recurrencia lineal para $b_n$:
+% \[
+% b_n = a_{n-1} + 2b_{n-1}.
+% \]
+% Pero aún depende de $a_{n-1}$, así que intentemos eliminar $a_n$ utilizando la diferencia:
+% Restamos la primera y la segunda ecuación:
+% \[
+% a_n - b_n = 2(a_{n-1} - b_{n-1})
+% \]
+% Definamos $d_n = a_n - b_n$. Entonces:
+% \[
+% d_n = 2 d_{n-1}, \quad d_0 = a_0 - b_0 = 1 - 2 = -1.
+% \]
+% Esto nos da:
+% \[
+% d_n = -1 \cdot 2^n = -2^n.
+% \]
+% Ahora usamos que $a_n = b_n + d_n = b_n - 2^n$ en la ecuación de $b_n$:
+% \[
+% b_n = a_{n-1} + 2 b_{n-1} = (b_{n-1} - 2^{n-1}) + 2 b_{n-1} = 3b_{n-1} - 2^{n-1}
+% \]
+% Entonces $b_n$ cumple:
+% \[
+% b_n = 3b_{n-1} - 2^{n-1}, \quad b_0 = 2.
+% \]
+% Esta es una recurrencia no homogénea. Propongamos una solución particular de la forma $A 2^n$. Probamos:
+% \[
+% A 2^n = 3A 2^{n-1} - 2^{n-1} \Rightarrow A 2^n = (3A - 1) 2^{n-1} \Rightarrow A = 3A - 1 \Rightarrow A = \frac{1}{2}.
+% \]
+% Solución particular: $b_n^{(p)} = \frac{1}{2} 2^n$.\
+% Solución general de la homogénea: $b_n^{(g)} = \alpha 3^n$.\
+% Entonces:
+% \[
+% b_n = \alpha 3^n + \frac{1}{2} 2^n.
+% \]
+% Con $b_0 = 2$ obtenemos $\alpha = \frac{3}{2}$, así que:
+% \[
+% b_n = \frac{3}{2} 3^n + \frac{1}{2} 2^n.
+% \]
+% Finalmente, usamos que $a_n = b_n - 2^n$:
+% \[
+% a_n = \frac{3}{2} 3^n + \frac{1}{2} 2^n - 2^n = \frac{3}{2} 3^n - \frac{1}{2} 2^n.
+% \]
+% \textbf{Solución final:}
+% \[
+% \boxed{a_n = \frac{3}{2} 3^n - \frac{1}{2} 2^n, \quad b_n = \frac{3}{2} 3^n + \frac{1}{2} 2^n.}
+% \]
+
+
+
+\subsection{Recurrencias No Homogéneas}
+\begin{definitionblock}{Recurrencia lineal no homogénea}
+Una relación de recurrencia lineal, a coeficientes constantes de grado $k$, se dice \textbf{no homogénea} si es de la forma:
+\[
+a_n = c_1 a_{n-1} + c_2 a_{n-2} + \cdots + c_k a_{n-k} + f(n),
+\]
+donde $c_1, c_2, \dots, c_k$ son números reales, $c_k \neq 0$, y $f(n)$ es una función arbitraria. \\
+Definimos la \textbf{recurrencia homogénea asociada}:
+\[
+a_n = c_1 a_{n-1} + c_2 a_{n-2} + \cdots + c_k a_{n-k}
+\]
+\end{definitionblock}
+
+\begin{exampleblock}{Ejemplos}
+\begin{itemize}
+  \item $a_n = 2a_{n-1} + 1$ \hfill (no homogénea de grado 1)
+  \item $a_n = 2a_{n-1} - 3a_{n-3} + 5n^2 + 2^n$ \hfill (no homogénea de grado 3)
+\end{itemize}
+\end{exampleblock}
+
+\begin{thmblock}{Teorema de la solución general}
+La solución general de una recurrencia no homogénea es:
+\[
+a_n = a_n^{(g)} + a_n^{(p)},
+\]
+donde $a_n^{(g)}$ es la solución general de la homogénea asociada, y $a_n^{(p)}$ es una solución particular de la no homogénea.
+\end{thmblock}
+
+% \noindent \textit{¿Qué es una solución particular?}\\
+\noindent Una \textbf{solución particular} $a_n^{(p)}$ es una función concreta que satisface la relación de recurrencia completa, es decir, incluyendo el término no homogéneo $f(n)$. A diferencia de la solución general, que contiene constantes libres, una solución particular es un caso específico. Se utiliza como complemento a la solución general de la parte homogénea para construir la solución total.\\
+Por ejemplo, si tenemos:
+\[
+a_n = 2a_{n-1} + 1,
+\]
+la recurrencia homogénea asociada es $a_n^{(g)} = \alpha 2^n$. Una solución particular válida es $a_n^{(p)} = -1$, ya que satisface:
+\[
+-1 = 2(-1) + 1.
+\]
+Entonces, la solución general completa es:
+\[
+a_n = \alpha 2^n - 1.
+\]
+
+\begin{proof}
+Como $a_n^{(p)}$ es una solución particular de la relación de recurrencia no homogénea, se cumple que:
+\[
+a^{(p)}_n = c_1a^{(p)}_{n-1} + c_2a^{(p)}_{n-2} + \dots + c_ka^{(p)}_{n-k} + f(n)
+\]
+Supongamos ahora que $b_n$ es otra solución de la misma relación no homogénea, entonces también se cumple:
+\[
+b_n = c_1b_{n-1} + c_2b_{n-2} + \dots + c_kb_{n-k} + f(n)
+\]
+Restando ambas expresiones:
+\[
+b_n - a^{(p)}_n = c_1(b_{n-1} - a^{(p)}_{n-1}) + c_2(b_{n-2} - a^{(p)}_{n-2}) + \dots + c_k(b_{n-k} - a^{(p)}_{n-k})
+\]
+Esto implica que la diferencia $b_n - a_n^{(p)}$ satisface la relación de recurrencia homogénea asociada. Es decir, $b_n - a_n^{(p)} = a_n^{(g)}$ para alguna solución homogénea $a_n^{(g)}$.\
+Por lo tanto:
+\[
+b_n = a_n^{(p)} + a_n^{(g)},
+\]
+como se quería demostrar.
+\end{proof}
+
+\begin{exampleblock}{Ejemplo: Torres de Hanoi}
+La mínima cantidad de movimientos $h_n$ necesarios para resolver el problema de las Torres de Hanoi con $n$ discos satisface:
+\[
+\begin{cases}
+h_1 = 1 \\
+h_n = 2 h_{n-1} + 1 \quad (n \geq 2)
+\end{cases}
+\]
+
+\textbf{Paso 1:} Se trata de una recurrencia no homogénea de primer orden con $f(n)=1$.
+
+La recurrencia homogénea asociada es:
+\[
+h_n = 2 h_{n-1},
+\]
+cuyo comportamiento general es:
+\[
+h_n^{(g)} = \alpha 2^n.
+\]
+
+\textbf{Paso 2:} Buscamos una solución particular $h_n^{(p)}$ tal que:
+\[
+h_n^{(p)} = 2 h_{n-1}^{(p)} + 1.
+\]
+Probamos con una constante $h_n^{(p)} = C$:
+\[
+C = 2C + 1 \Rightarrow C = -1.
+\]
+Entonces, una solución particular es $h_n^{(p)} = -1$.
+
+\textbf{Paso 3:} La solución general es:
+\[
+h_n = h_n^{(g)} + h_n^{(p)} = \alpha 2^n - 1.
+\]
+Usamos la condición inicial $h_1 = 1$:
+\[
+1 = \alpha 2^1 - 1 \Rightarrow 1 = 2\alpha - 1 \Rightarrow \alpha = 1.
+\]
+
+\textbf{Solución cerrada:}
+\[
+\boxed{h_n = 2^n - 1}
+\]
+\end{exampleblock}
+
+\subsection{Soluciones Particulares: Método de coeficientes indeterminados}
+
+Obtener la solución general $a_n^{(g)}$ de la recurrencia homogénea asociada es fácil (vimos cómo hacerlo).  Sin embargo no hay ningún mecanismo general para obtener una solución particular $a_n^{(p)}$ de una
+recurrencia no homogénea. 
+Para una clase particular de $f$'s tenemos el siguiente teorema:
+
+
+\begin{thmblock}{Teorema}
+Sea la recurrencia $a_n = c_1 a_{n-1} + c_2 a_{n-2} + \cdots + c_k a_{n-k} + f(n)$, donde
+\[ f(n) = (b_t n^t + b_{t-1} n^{t-1} + \cdots + b_1 n + b_0) s^n, \]
+y $b_0, b_1, \dots, b_t$ y $s$ son números reales. Entonces:
+
+\begin{itemize}
+  \item Si $s$ \textbf{no es raíz} de la ecuación característica asociada, entonces existe una solución particular de la forma:
+  \[ (p_t n^t + p_{t-1} n^{t-1} + \cdots + p_1 n + p_0) s^n. \]
+
+  \item Si $s$ \textbf{es raíz} de la ecuación característica con multiplicidad $m$, entonces existe una solución particular de la forma:
+  \[ n^m (p_t n^t + p_{t-1} n^{t-1} + \cdots + p_1 n + p_0) s^n. \]
+
+\end{itemize}
+\end{thmblock}
+
+\subsection*{Ejercicio resuelto}
+
+\begin{exampleblock}{Ejercicio: recurrencia con término lineal}
+Encuentre la solución general de la recurrencia:
+\[
+a_n = 3 a_{n-1} - 4n
+\]
+\end{exampleblock}
+
+\noindent \textbf{Paso 1:} Estudiamos la recurrencia homogénea asociada:
+\[
+a_n^{(g)} = 3 a_{n-1}^{(g)} \Rightarrow a_n^{(g)} = \alpha 3^n
+\]
+
+\noindent \textbf{Paso 2:} Como el término no homogéneo es $f(n) = -4n$, un polinomio de grado 1, proponemos una solución particular de la forma:
+\[
+a_n^{(p)} = cn + d
+\]
+Sustituimos en la ecuación original:
+\[
+cn + d = 3(c(n-1) + d) - 4n
+\]
+Expandimos el lado derecho:
+\[
+cn + d = 3cn - 3c + 3d - 4n
+\]
+Agrupamos términos:
+\[
+cn + d = (3c - 4)n + (3d - 3c)
+\]
+Igualando coeficientes de ambos lados:
+\[
+\begin{cases}
+c = 3c - 4 \\
+d = 3d - 3c
+\end{cases} \Rightarrow 
+\begin{cases}
+2c = 4 \Rightarrow c = 2 \\
+3d - 3c = d \Rightarrow 2d = 3c \Rightarrow d = \frac{3c}{2} = 3
+\end{cases}
+\]
+
+\noindent \textbf{Paso 3:} Por lo tanto, una solución particular es:
+\[
+a_n^{(p)} = 2n + 3
+\]
+\textbf{Solución general:}
+\[
+a_n = a_n^{(g)} + a_n^{(p)} = \alpha 3^n + 2n + 3
+\]
+\textbf{Nota:} Para determinar $\alpha$ se requiere una condición inicial adicional, como $a_0$ o $a_1$.
+
+
+\subsection{Ejercicios Propuestos}
+
+\begin{itemize}
+    \item Resolver $a_n = a_{n-1} + 2a_{n-2}$, con $a_0 = 2$, $a_1 = 7$.
+    \item Encontrar una fórmula explícita para los números de Fibonacci.
+    % \item Hallar la solución de $a_n = 3 a_{n-1} - 4n$.
+    \item Encontrar una solución particular para: $a_n = 6 a_{n-1} - 9 a_{n-2} + n 3^n$ y $a_n = 6 a_{n-1} - 9 a_{n-2} + (n^2 + 1) 2^n$.
+    \item Defina una recurrencia $s_n$ para la suma de los primeros $n$ naturales, y resuélvala.
+    \item Resolver el sistema:
+    \[
+    \begin{cases}
+    a_n = 3a_{n-1} + 2b_{n-1} \\
+    b_n = a_{n-1} + 2b_{n-1} \\
+    a_0 = 1,\ b_0 = 2
+    \end{cases}
+    \]
+\end{itemize}
